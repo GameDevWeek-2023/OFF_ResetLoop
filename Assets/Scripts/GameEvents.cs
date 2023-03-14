@@ -18,6 +18,8 @@ public class GameEvents : MonoBehaviour
         {
             Instance = this;
         }
+
+        Debug.Log("GameEvents Instance done");
         DontDestroyOnLoad(gameObject);
     }
 }

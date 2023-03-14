@@ -7,9 +7,8 @@ namespace Interaction
             throw new System.NotImplementedException();
         }
 
-        public override void OnTimeChanged()
+        public override void OnTimeChanged(int time)
         {
-            throw new System.NotImplementedException();
         }
     }
 }

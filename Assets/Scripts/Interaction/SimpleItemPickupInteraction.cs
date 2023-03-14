@@ -6,7 +6,7 @@ namespace Interaction
     {
 
         [SerializeField] private Item item;
-
+        
         public override void SpecificMouseDownBehaviour()
         {
             if (clickable)
@@ -17,9 +17,12 @@ namespace Interaction
             
         }
 
-        public override void OnTimeChanged()
+        public override void OnTimeChanged(int time)
         {
-            throw new System.NotImplementedException();
+            if (time == 5)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

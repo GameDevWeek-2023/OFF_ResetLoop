@@ -13,11 +13,12 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnItemFound += OnItemFound;
         GameEvents.Instance.OnDialogueOpened += StopTime;
         GameEvents.Instance.OnDialogueClosed += StartTime;
+        StartTime();
     }
 
     private void StartTime()
     {
-        InvokeRepeating(nameof(Tick), 0f, 1f);
+        InvokeRepeating(nameof(Tick), 1f, 1f);
     }
         
     private void StopTime()
