@@ -1,20 +1,23 @@
 using System;
+using Interaction;
+using JetBrains.Annotations;
 using UnityEngine;
 
-namespace DefaultNamespace
+public class GameEvents : MonoBehaviour
 {
-    public class GameEvents : MonoBehaviour
-    {
-        public Action<int> OnTimeChanged;
-        public static GameEvents Instance;
-        public Action<ItemInteraction.Interaction> OnMouseOverItem;
+    public static GameEvents Instance;
+    [CanBeNull] public Action<int> OnTimeChanged;
+    [CanBeNull] public Action<ItemInteraction.Item> OnItemFound;
+    [CanBeNull] public Action OnDialogueOpened;
+    [CanBeNull] public Action OnDialogueClosed;
+    [CanBeNull] public Action OnWorldReset;
 
-        private void Awake()
+    private void Awake()
+    {
+        if (Instance == null)
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
+            Instance = this;
         }
+        DontDestroyOnLoad(gameObject);
     }
 }
