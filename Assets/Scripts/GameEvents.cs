@@ -7,7 +7,10 @@ namespace DefaultNamespace
     {
         public Action<int> OnTimeChanged;
         public static GameEvents Instance;
-        public Action<ItemInteraction.Interaction> OnMouseOverItem;
+        public Action<ItemInteraction.Item> OnItemFound;
+        public Action OnDialogueOpened;
+        public Action OnDialogueClosed;
+        public Action OnWorldReset;
 
         private void Awake()
         {
@@ -15,6 +18,7 @@ namespace DefaultNamespace
             {
                 Instance = this;
             }
+            DontDestroyOnLoad(gameObject);
         }
     }
 }

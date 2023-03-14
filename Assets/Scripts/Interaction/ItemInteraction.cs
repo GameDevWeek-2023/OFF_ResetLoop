@@ -15,7 +15,21 @@ public abstract class ItemInteraction : MonoBehaviour
         KIO_RADIO, KIO_OWNER, KIO_COFFEE, 
         TEL_PHONE, TEL_PHONEBOOK, TEL_MONEY
     }
+    //BED_VASE, BED_WALKSTICK,  BED_STOCK, STR_ALCOHOL, TEL_MONEY
+    
+    //STR_NEWSPAPER, KIO_RADIO, KIO_COFFEE
+    
+    // DIALOGUE
+  //  BED_TEETH, STR_HOMELESS, STR_BUSINESSMAN, KIO_OWNER
+        
+        
+        
+    // MORE COMPLICATED
+//        STR_DOG, TEL_PHONE, TEL_PHONEBOOK, 
+        
 
+    
+    
     public enum Item
     {
         VASE_NO_FLOWER, VASE_WTH_WATER, FLOWERS, WALKING_STICK_NO_BALLS, WALKING_STICK_WITH_BALLS, BALLS, 
@@ -55,7 +69,7 @@ public abstract class ItemInteraction : MonoBehaviour
 
     public void AddToInventory(Item item)
     {
-        
+        GameEvents.Instance.OnItemFound(item);
     }
     
     public abstract void SpecificMouseDownBehaviour();
