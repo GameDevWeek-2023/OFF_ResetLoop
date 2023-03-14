@@ -1,0 +1,39 @@
+{
+    "title": "Teeths",
+    "data": {
+        "stitches": {
+            "ghhhhhn": {
+                "content": ["Gääähhhhhn! ", {
+                        "option": "Puh, das letzte Glas gestern war nicht gut!",
+                        "linkPath": "haltDieKlappeIch",
+                        "ifConditions": null,
+                        "notIfConditions": null
+                    }, {
+                        "option": "Guten Morgen!",
+                        "linkPath": "vonWegenGutenMor",
+                        "ifConditions": null,
+                        "notIfConditions": null
+                    }, {
+                        "pageNum": 1
+                    }
+                ]
+            },
+            "haltDieKlappeIch": {
+                "content": ["Halt die Klappe, ich möchte weiterschlafen!"]
+            },
+            "vonWegenGutenMor": {
+                "content": ["Von wegen guten Morgen! Vor meinem ersten Kaffee, gibt es keinen guten Morgen!"]
+            }
+        },
+        "initial": "ghhhhhn",
+        "optionMirroring": true,
+        "allowCheckpoints": false,
+        "editorData": {
+            "playPoint": "haltDieKlappeIch",
+            "libraryVisible": false,
+            "authorName": "Sabrina",
+            "textSize": 0
+        }
+    },
+    "url_key": 152933
+}
