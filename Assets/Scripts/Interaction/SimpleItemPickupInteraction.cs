@@ -10,6 +10,7 @@ namespace DefaultNamespace
         public override void SpecificMouseDownBehaviour()
         {
             AddToInventory(item);
+            Destroy(gameObject);
         }
 
         public override void OnTimeChanged()

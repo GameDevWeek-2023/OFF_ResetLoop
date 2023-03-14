@@ -40,12 +40,12 @@ public abstract class ItemInteraction : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        throw new NotImplementedException();
+        
     }
 
     private void OnMouseExit()
     {
-        throw new NotImplementedException();
+        
     }
 
     private void OnMouseDown()
