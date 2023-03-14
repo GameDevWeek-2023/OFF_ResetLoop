@@ -1,15 +1,16 @@
 using System;
 using Interaction;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class GameEvents : MonoBehaviour
 {
-    public Action<int> OnTimeChanged;
     public static GameEvents Instance;
-    public Action<ItemInteraction.Item> OnItemFound;
-    public Action OnDialogueOpened;
-    public Action OnDialogueClosed;
-    public Action OnWorldReset;
+    [CanBeNull] public Action<int> OnTimeChanged;
+    [CanBeNull] public Action<ItemInteraction.Item> OnItemFound;
+    [CanBeNull] public Action OnDialogueOpened;
+    [CanBeNull] public Action OnDialogueClosed;
+    [CanBeNull] public Action OnWorldReset;
 
     private void Awake()
     {
@@ -17,6 +18,6 @@ public class GameEvents : MonoBehaviour
         {
             Instance = this;
         }
-        // DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 }
