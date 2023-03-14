@@ -18,15 +18,15 @@ public abstract class ItemInteraction : MonoBehaviour
 
     public enum Item
     {
-        VASE_NO_FLOWER, VASE_WTH_WATER, FLOWERS, WALKING_STICK_NO_BALLS, WALKING_STICK_WITH_BALLS, BALLS, 
+        VASE_WITH_FLOWER, VASE_NO_FLOWER, VASE_WTH_WATER, FLOWERS, WALKING_STICK_NO_BALLS, WALKING_STICK_WITH_BALLS, BALLS, 
         NEWSPAPER, STOCK, ALCOHOL, COFFEE, MONEY
     }
 
-    [SerializeField] private Interaction interactionId;
-    [SerializeField] private bool clickable;
+    [SerializeField] protected Interaction interactionId;
+    [SerializeField] protected bool clickable;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         GameEvents.Instance.OnTimeChanged += delegate(int i) {
             OnTimeChanged();

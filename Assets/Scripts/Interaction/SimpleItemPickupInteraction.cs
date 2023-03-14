@@ -6,11 +6,15 @@ namespace DefaultNamespace
     {
 
         [SerializeField] private Item item;
-        
+
         public override void SpecificMouseDownBehaviour()
         {
-            AddToInventory(item);
-            Destroy(gameObject);
+            if (clickable)
+            {
+                AddToInventory(item);
+                Destroy(gameObject);
+            }
+            
         }
 
         public override void OnTimeChanged()
