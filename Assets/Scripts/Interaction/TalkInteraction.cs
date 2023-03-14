@@ -1,4 +1,4 @@
-namespace DefaultNamespace
+namespace Interaction
 {
     public class TalkInteraction : ItemInteraction
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Interaction
 {
     public class SimpleItemPickupInteraction : ItemInteraction
     {

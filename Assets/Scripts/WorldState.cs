@@ -1,46 +1,43 @@
 using System.Collections.Generic;
+using Interaction;
 using UnityEngine;
-using static ItemInteraction;
 
-namespace DefaultNamespace
+public class WorldState : MonoBehaviour
 {
-    public class WorldState : MonoBehaviour
+    private int _time = 0;
+        
+    private List<ItemInteraction.Item> _inventory = new List<ItemInteraction.Item>();
+
+    private void Start()
     {
-        private int _time = 0;
-        
-        private List<Item> _inventory = new List<Item>();
+        GameEvents.Instance.OnItemFound += OnItemFound;
+        GameEvents.Instance.OnDialogueOpened += StopTime;
+        GameEvents.Instance.OnDialogueClosed += StartTime;
+    }
 
-        private void Start()
-        {
-            GameEvents.Instance.OnItemFound += OnItemFound;
-            GameEvents.Instance.OnDialogueOpened += StopTime;
-            GameEvents.Instance.OnDialogueClosed += StartTime;
-        }
-
-        private void StartTime()
-        {
-            InvokeRepeating(nameof(Tick), 0f, 1f);
-        }
+    private void StartTime()
+    {
+        InvokeRepeating(nameof(Tick), 0f, 1f);
+    }
         
-        private void StopTime()
-        {
-            CancelInvoke(nameof(Tick));
-        }
+    private void StopTime()
+    {
+        CancelInvoke(nameof(Tick));
+    }
 
-        private void OnItemFound(Item item)
-        {
-            _inventory.Add(item);
-        }
+    private void OnItemFound(ItemInteraction.Item item)
+    {
+        _inventory.Add(item);
+    }
         
-        public void Tick()
+    public void Tick()
+    {
+        _time++;
+        if (_time == 60)
         {
-            _time++;
-            if (_time == 60)
-            {
-                GameEvents.Instance.OnWorldReset();
-                _time = 0;
-            }
-            GameEvents.Instance.OnTimeChanged(_time);
+            GameEvents.Instance.OnWorldReset();
+            _time = 0;
         }
+        GameEvents.Instance.OnTimeChanged(_time);
     }
 }

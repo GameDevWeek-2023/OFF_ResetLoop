@@ -1,24 +1,22 @@
 using System;
+using Interaction;
 using UnityEngine;
 
-namespace DefaultNamespace
+public class GameEvents : MonoBehaviour
 {
-    public class GameEvents : MonoBehaviour
-    {
-        public Action<int> OnTimeChanged;
-        public static GameEvents Instance;
-        public Action<ItemInteraction.Item> OnItemFound;
-        public Action OnDialogueOpened;
-        public Action OnDialogueClosed;
-        public Action OnWorldReset;
+    public Action<int> OnTimeChanged;
+    public static GameEvents Instance;
+    public Action<ItemInteraction.Item> OnItemFound;
+    public Action OnDialogueOpened;
+    public Action OnDialogueClosed;
+    public Action OnWorldReset;
 
-        private void Awake()
+    private void Awake()
+    {
+        if (Instance == null)
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            DontDestroyOnLoad(gameObject);
+            Instance = this;
         }
+        // DontDestroyOnLoad(gameObject);
     }
 }
