@@ -4,7 +4,7 @@
         "stitches": {
             "ghhhhhn": {
                 "content": ["Gääähhhhhn! ", {
-                        "option": "Puh, das letzte Glas gestern war nicht gut!",
+                        "option": "Puh, das letzte Glas gestern war nicht gut!{KAFFEE}",
                         "linkPath": "haltDieKlappeIch",
                         "ifConditions": null,
                         "notIfConditions": null

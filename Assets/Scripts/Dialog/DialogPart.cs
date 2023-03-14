@@ -14,4 +14,9 @@ public class DialogOption
     public string dropItem;
 
     public string nextDialogPartKey;
+
+    public override string ToString()
+    {
+        return $"optionText: {optionText}, dropItem: {dropItem}, nextDialogPartKey: {nextDialogPartKey}";
+    }
 }
