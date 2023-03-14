@@ -14,7 +14,7 @@ namespace DefaultNamespace
 
         public void newspaperGone()
         {
-            gameObject.GetComponent<SpriteRenderer>().sprite = newspaper;
+            
         }
     }
 }
