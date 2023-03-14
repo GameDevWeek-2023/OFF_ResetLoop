@@ -5,14 +5,12 @@ namespace DefaultNamespace
 {
     public class TeethInteraction : ItemInteraction
     {
-        
-        
         public override void SpecificMouseDownBehaviour()
         {
 
         }
 
-        public void newspaperGone()
+        public override void OnTimeChanged()
         {
             
         }

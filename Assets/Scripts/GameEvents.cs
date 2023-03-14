@@ -7,7 +7,7 @@ namespace DefaultNamespace
     {
         public Action<int> OnTimeChanged;
         public static GameEvents Instance;
-        public Action<ItemInteraction.Item> OnMouseOverItem;
+        public Action<ItemInteraction.Interaction> OnMouseOverItem;
 
         private void Awake()
         {
