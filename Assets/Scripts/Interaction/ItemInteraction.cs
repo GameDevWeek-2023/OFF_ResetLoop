@@ -24,13 +24,11 @@ public abstract class ItemInteraction : MonoBehaviour
 
     [SerializeField] protected Interaction interactionId;
     [SerializeField] protected bool clickable;
-
+    
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        GameEvents.Instance.OnTimeChanged += delegate(int i) {
-            OnTimeChanged();
-        };
+        GameEvents.Instance.OnTimeChanged += OnTimeChanged;
     }
 
     // Update is called once per frame
@@ -60,5 +58,5 @@ public abstract class ItemInteraction : MonoBehaviour
     
     public abstract void SpecificMouseDownBehaviour();
 
-    public abstract void OnTimeChanged();
+    public abstract void OnTimeChanged(int time);
 }

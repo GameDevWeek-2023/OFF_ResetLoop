@@ -11,7 +11,7 @@ namespace DefaultNamespace
 
         }
 
-        public override void OnTimeChanged()
+        public override void OnTimeChanged(int time)
         {
             
         }
