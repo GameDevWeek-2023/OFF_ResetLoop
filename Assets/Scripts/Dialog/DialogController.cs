@@ -9,8 +9,9 @@ namespace Dialog
 {
 
 /// <summary>
-/// Parser f�r Dialoge, die mit dem Online-Editor inklewriter erstellt wurden:
+/// Parser für Dialoge, die mit dem Online-Editor inklewriter erstellt wurden:
 /// https://www.inklewriter.com/
+/// Um Items zu Droppen, in dem Optionstext am Ende ergänzen {ITEM_NAME}
 /// </summary>
 public class DialogController : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class DialogController : MonoBehaviour
     string startKey = "";
     string activeKey;
 
+    [SerializeField] private GameObject dialogPanel;
     [SerializeField] private TMP_Text messageText;
     [SerializeField] private Button[] optionButtons;
 
@@ -30,14 +32,15 @@ public class DialogController : MonoBehaviour
 
     public void StartNewDialog(string dialogJSON)
     {
+        Debug.Log("Start Dialog");
         ParseDialog(dialogJSON);
         activeKey = startKey;
         UpdateUI(activeKey);
+        dialogPanel.SetActive(true);
     }
 
     private void ParseDialog(string dialogJSON)
     {
-        Debug.Log("Parse Dialog");
         dialog = new Dictionary<string, DialogPart>();
 
         JObject parent = JObject.Parse(dialogJSON);
@@ -95,10 +98,11 @@ public class DialogController : MonoBehaviour
     }
 
     private void UpdateUI(string key)
-    {
+    { 
         DialogPart dialogPart = dialog[key];
         messageText.text = dialogPart.message;
-        for(int i = 0; i < optionButtons.Length; i++)
+        
+        for (int i = 0; i < optionButtons.Length; i++)
         {
             if (i < dialogPart.options.Count)
             {
@@ -106,16 +110,34 @@ public class DialogController : MonoBehaviour
                 Button button = optionButtons[i].GetComponent<Button>();
                 optionButtons[i].GetComponentInChildren<TMP_Text>().text = option.optionText;
                 button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => OnButtonClicked(option.nextDialogPartKey));
+                if (option.nextDialogPartKey == null || !dialog.ContainsKey(option.nextDialogPartKey))
+                {
+                    button.onClick.AddListener(() => CloseDialog());
+                }
+                else
+                {
+                    button.onClick.AddListener(() => OnButtonClicked(option.nextDialogPartKey));
+                }
+
                 if (option.dropItem != null)
                 {
                     button.onClick.AddListener(() => DropItem(option.dropItem));
                 }
+
                 optionButtons[i].gameObject.SetActive(true);
-            } else
+            }
+            else
             {
                 optionButtons[i].gameObject.SetActive(false);
             }
+        }
+        if (dialogPart.options.Count == 0) // no options => add close button
+        {
+            Button button = optionButtons[0].GetComponent<Button>();
+            optionButtons[0].GetComponentInChildren<TMP_Text>().text = "Gespräch beenden";
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(() => CloseDialog());
+            optionButtons[0].gameObject.SetActive(true);
         }
     }
 
@@ -132,7 +154,8 @@ public class DialogController : MonoBehaviour
 
     public void CloseDialog()
     {
-
+        dialogPanel.SetActive(false);
+        GameEvents.Instance.OnDialogueClosed();
     }
 }
     
