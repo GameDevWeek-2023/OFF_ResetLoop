@@ -208,7 +208,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 33
   m_Sprite: {fileID: 21300000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.3137255}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 1001565326}
   - component: {fileID: 1001565325}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: WalkingObstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -819,7 +819,7 @@ MonoBehaviour:
   m_VoxelSize: 0.03
   m_BuildHeightMesh: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: 194befb8be8cd4958b0fc2cf17861302, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 81b62f8a9f3824baba165019305adf83, type: 2}
 --- !u!4 &1001565327
 Transform:
   m_ObjectHideFlags: 0
@@ -948,8 +948,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140753232}
   m_LocalRotation: {x: 0.7069834, y: -0, z: -0, w: 0.70723015}
-  m_LocalPosition: {x: 0.3357, y: -0.0015258789, z: -4.3717995}
-  m_LocalScale: {x: 13.635072, y: 1.4296114, z: 1}
+  m_LocalPosition: {x: 0.1607, y: -0.0015258789, z: -4.3717995}
+  m_LocalScale: {x: 13.985493, y: 1.4296114, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1001565327}
@@ -997,7 +997,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 33
   m_Sprite: {fileID: 21300000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.3137255}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1609,7 +1609,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 33
   m_Sprite: {fileID: 21300000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.3137255}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
