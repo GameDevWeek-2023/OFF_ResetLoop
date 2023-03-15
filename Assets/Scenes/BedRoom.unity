@@ -738,6 +738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionId: 1
   clickable: 0
+  possibleInteractionItems: 
   item: 1
 --- !u!212 &382599364
 SpriteRenderer:
@@ -1883,7 +1884,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f1333349ac1c185448d413d3a4a935a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2809bbf82a1177041a94e1accccc113c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1902,7 +1903,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1969301183}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.75, y: -0.48, z: 0}
+  m_LocalPosition: {x: 19.43, y: -9.97, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1923,10 +1924,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionId: 0
   clickable: 1
+  possibleInteractionItems: 020000000a00000009000000
   dialogFileWater: {fileID: 4900000, guid: fb2db8fff3b56f04ab1945c8ddfb8fc5, type: 3}
   dialogFileCoffee: {fileID: 0}
   dialogFileBooze: {fileID: 0}
-  dialogController: {fileID: 1875357009}
+  garryNoWater: {fileID: 21300000, guid: ad0da9d7578f1384c8960d6eebbe4c12, type: 3}
+  garryWater: {fileID: 21300000, guid: 822b411b28aee9c4081969d424ab42cd, type: 3}
+  garryCoffee: {fileID: 21300000, guid: dd91bad1ee8c11345a4d2be4df17652a, type: 3}
+  garryBooze: {fileID: 21300000, guid: f02a0f4b700924742ba2367448a074b6, type: 3}
 --- !u!61 &1969301188
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1944,7 +1949,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.4, y: 3.77}
+    oldSize: {x: 16, y: 12}
     newSize: {x: 6.4, y: 3.77}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

@@ -9,7 +9,7 @@ public class WorldState : MonoBehaviour
     private int _time = 0;
         
     private List<Item> _inventory = new List<Item>();
-    private Item _currentlySelectedInventoryItem;
+    private Item _currentlySelectedInventoryItem = Item.NULL_ITEM;
 
     public Item CurrentlySelectedInventoryItem => _currentlySelectedInventoryItem;
 
