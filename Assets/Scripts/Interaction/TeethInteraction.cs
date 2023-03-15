@@ -75,7 +75,7 @@ namespace Interaction
                     break;
                 case Item.ALCOHOL:
                     UpdateState(State.BOOZE, garryBooze);
-                    //RemoveFromInventory(Item.ALCOHOL);
+                    RemoveFromInventory(Item.ALCOHOL);
                     break;
                 case Item.WALKING_STICK_NO_BALLS:
                     ProcessWalkingStick();
