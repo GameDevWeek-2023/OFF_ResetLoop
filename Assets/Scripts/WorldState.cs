@@ -1,16 +1,22 @@
 using System.Collections.Generic;
 using Interaction;
+using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.UI;
 using static ItemInteraction;
 
 public class WorldState : MonoBehaviour
 {
     public static WorldState Instance;
     private int _time = 0;
-        
-    private List<Item> _inventory = new List<Item>();
-    private Item _currentlySelectedInventoryItem;
 
+    private List<Item> _inventory = new List<Item>();
+    private Item _currentlySelectedInventoryItem = Item.NULL_ITEM;
+    [SerializeField] private GameObject inventoryPanel;
+    [SerializeField] private GameObject inventoryPrefab;
+    private InventoryItem[] _inventoryItemScriptableObjects;
+    private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
+    
     public Item CurrentlySelectedInventoryItem => _currentlySelectedInventoryItem;
 
     private void Awake()
@@ -19,15 +25,25 @@ public class WorldState : MonoBehaviour
         {
             Instance = this;
         }
+        
+        _inventoryItemScriptableObjects = Resources.LoadAll<InventoryItem>("InventoryItems");
+        foreach (InventoryItem inventoryItemScriptableObject in _inventoryItemScriptableObjects)
+        {
+            _itemToScriptableObject[inventoryItemScriptableObject.Item] = inventoryItemScriptableObject;
+        }
         DontDestroyOnLoad(gameObject);
     }
-    
+
     private void Start()
     {
         GameEvents.Instance.OnItemFound += OnItemFound;
         GameEvents.Instance.OnDialogueStart += delegate { StopTime(); };
         GameEvents.Instance.OnDialogueClosed += StartTime;
-        GameEvents.Instance.OnInventoryItemSelected += delegate(Item item) { _currentlySelectedInventoryItem = item; };
+        GameEvents.Instance.OnInventoryItemSelected += delegate(Item item)
+        {
+            Debug.Log("Item selected: "+ item);
+            _currentlySelectedInventoryItem = item;
+        };
         GameEvents.Instance.OnInventoryItemConsumed += delegate { _currentlySelectedInventoryItem = Item.NULL_ITEM; };
         StartTime();
     }
@@ -36,7 +52,7 @@ public class WorldState : MonoBehaviour
     {
         InvokeRepeating(nameof(Tick), 0f, 1f);
     }
-        
+
     private void StopTime()
     {
         CancelInvoke(nameof(Tick));
@@ -45,8 +61,18 @@ public class WorldState : MonoBehaviour
     private void OnItemFound(Item item)
     {
         _inventory.Add(item);
+        AddInventoryItemToGui(item);
     }
-        
+
+    private void AddInventoryItemToGui(Item item)
+    {
+        GameObject newInventory = Instantiate(inventoryPrefab, inventoryPanel.transform);
+        Sprite sprite = _itemToScriptableObject[item].Itemsprite;
+        newInventory.GetComponent<Image>().sprite = sprite;
+        newInventory.GetComponent<Button>().onClick
+            .AddListener(() => GameEvents.Instance.OnInventoryItemSelected(item)); 
+    }
+    
     public void Tick()
     {
         _time++;
@@ -55,6 +81,7 @@ public class WorldState : MonoBehaviour
             GameEvents.Instance.OnWorldReset();
             _time = 0;
         }
+
         GameEvents.Instance.OnTimeChanged(_time);
     }
 }

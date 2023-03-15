@@ -18,10 +18,7 @@ namespace Interaction
 
         public override void OnTimeChanged(int time)
         {
-            if (time == 5)
-            {
-                Destroy(gameObject);
-            }
+
         }
         
         public override void OnUsableItemDrop(Item item)
