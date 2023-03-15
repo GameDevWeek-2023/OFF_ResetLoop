@@ -59,7 +59,7 @@ public class DialogController : MonoBehaviour
 
             foreach (JObject c in content.Children<JObject>())
             {
-                if (c.ContainsKey("option"))
+                if (c.ContainsKey("option") && c["option"].ToString().Length > 0)
                 {
                     DialogOption option = new DialogOption();
 
@@ -133,6 +133,7 @@ public class DialogController : MonoBehaviour
         }
         if (dialogPart.options.Count == 0) // no options => add close button
         {
+            Debug.Log("Keine Optionen");
             Button button = optionButtons[0].GetComponent<Button>();
             optionButtons[0].GetComponentInChildren<TMP_Text>().text = "Gespräch beenden";
             button.onClick.RemoveAllListeners();
