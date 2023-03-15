@@ -69,6 +69,7 @@ namespace Interaction
                     UpdateState(State.BOOZE, garryBooze);
                     break;
             }
+            SpecificMouseDownBehaviour();
         }
 
 
