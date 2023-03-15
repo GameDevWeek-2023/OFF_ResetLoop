@@ -102,6 +102,11 @@ public abstract class ItemInteraction : MonoBehaviour
         GameEvents.Instance.OnItemFound(item);
     }
 
+    public void RemoveFromInventory(Item item)
+    {
+        GameEvents.Instance.OnItemRemoved(item);
+    }
+    
     public void OnItemDrop(Item item)
     {
         if (possibleInteractionItems.Contains(item))
