@@ -9,6 +9,7 @@ namespace ScriptableObjects
         [SerializeField] private ItemInteraction.Item item;
         [SerializeField] private ItemInteraction.Item[] dismantledItems;
         [SerializeField] private Sprite itemsprite;
+        [SerializeField][TextArea] private string itemDescription;
 
         public ItemInteraction.Item Item => item;
 
