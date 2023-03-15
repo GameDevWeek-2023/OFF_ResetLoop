@@ -45,9 +45,15 @@ public class WorldState : MonoBehaviour
             _currentlySelectedInventoryItem = item;
         };
         GameEvents.Instance.OnInventoryItemConsumed += delegate { _currentlySelectedInventoryItem = Item.NULL_ITEM; };
+        GameEvents.Instance.OnItemRemoved += OnItemRemoved;
         StartTime();
     }
 
+    public bool ItemExists(Item item)
+    {
+        return _inventory.Contains(item);
+    }
+    
     private void StartTime()
     {
         InvokeRepeating(nameof(Tick), 0f, 1f);
@@ -64,16 +70,28 @@ public class WorldState : MonoBehaviour
         AddInventoryItemToGui(item);
     }
 
+    private void OnItemRemoved(Item item)
+    {
+        _inventory.Remove(item);
+        RemoveInventoryItemFromGui(item);
+    }
+    
     private void AddInventoryItemToGui(Item item)
     {
         GameObject newInventory = Instantiate(inventoryPrefab, inventoryPanel.transform);
         Sprite sprite = _itemToScriptableObject[item].Itemsprite;
         newInventory.GetComponent<Image>().sprite = sprite;
         newInventory.GetComponent<Button>().onClick
-            .AddListener(() => GameEvents.Instance.OnInventoryItemSelected(item)); 
+            .AddListener(() => GameEvents.Instance.OnInventoryItemSelected(item));
+        newInventory.name = item.ToString();
+    }
+
+    private void RemoveInventoryItemFromGui(Item item)
+    {
+        Destroy(inventoryPanel.transform.Find(item.ToString()));
     }
     
-    public void Tick()
+    private void Tick()
     {
         _time++;
         if (_time == 60)
