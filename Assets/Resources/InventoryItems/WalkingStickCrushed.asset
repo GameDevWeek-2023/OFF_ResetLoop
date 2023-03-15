@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WalkingStickCrushed
   m_EditorClassIdentifier: 
   item: 6
-  itemsprite: {fileID: 0}
+  itemsprite: {fileID: 875121969, guid: 40d8fdf2308fd3a41a3fbfab77474171, type: 3}
