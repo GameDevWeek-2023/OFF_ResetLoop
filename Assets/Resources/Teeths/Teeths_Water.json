@@ -1,39 +1,65 @@
 {
-    "title": "Teeths",
     "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Sabrina",
+            "libraryVisible": false,
+            "playPoint": "ghhhhhn",
+            "textSize": 0
+        },
+        "initial": "ghhhhhn",
+        "optionMirroring": true,
         "stitches": {
             "ghhhhhn": {
-                "content": ["Gääähhhhhn! ", {
-                        "option": "Puh, das letzte Glas gestern war nicht gut!{KAFFEE}",
-                        "linkPath": "haltDieKlappeIch",
+                "content": [
+                    "Uhaaaaa! Ist das kalt. Spinnst du, kaltes Wasser auf ein altes Gebiss zu schütten?!",
+                     {
                         "ifConditions": null,
-                        "notIfConditions": null
-                    }, {
-                        "option": "Guten Morgen!",
+                        "linkPath": null,
+                        "notIfConditions": null,
+                        "option": "Gegenstände sprechen nicht! [Das Gebiss ignorieren]"
+                    },
+					{
+                        "ifConditions": null,
+                        "linkPath": "wennInteressiert",
+                        "notIfConditions": null,
+                        "option": "Das Gebiss redet mit mir? Puh, das letzte Glas gestern war nicht gut!"
+                    },
+                    {
+                        "ifConditions": null,
                         "linkPath": "vonWegenGutenMor",
-                        "ifConditions": null,
-                        "notIfConditions": null
-                    }, {
+                        "notIfConditions": null,
+                        "option": "Guten Morgen!"
+                    },
+                   
+                    {
                         "pageNum": 1
                     }
                 ]
             },
-            "haltDieKlappeIch": {
-                "content": ["Halt die Klappe, ich möchte weiterschlafen!"]
+            "vielZuFrhUndIchH": {
+                "content": [
+                    "Viel zu früh zum Reden und ich hatte noch keinen Kaffee!"
+                ]
             },
             "vonWegenGutenMor": {
-                "content": ["Von wegen guten Morgen! Vor meinem ersten Kaffee, gibt es keinen guten Morgen!"]
+                "content": [
+                    "Von wegen guten Morgen! Vor meinem ersten Kaffee, gibt es keinen guten Morgen!"
+                ]
+            },
+            "wennInteressiert": {
+                "content": [
+                    "Wenn interessiert das?! Halt die Klappe, ich möchte weiterschlafen!",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "vielZuFrhUndIchH",
+                        "notIfConditions": null,
+                        "option": "Hey, wenn ich Selbstgespräche führe, erwarte ich, dass man mir zuhört!"
+                    }
+                ]
             }
-        },
-        "initial": "ghhhhhn",
-        "optionMirroring": true,
-        "allowCheckpoints": false,
-        "editorData": {
-            "playPoint": "haltDieKlappeIch",
-            "libraryVisible": false,
-            "authorName": "Sabrina",
-            "textSize": 0
         }
     },
+    "title": "Teeths",
     "url_key": 152933
 }
