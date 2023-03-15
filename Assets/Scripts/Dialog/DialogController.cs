@@ -19,6 +19,11 @@ public class DialogController : MonoBehaviour
     [SerializeField] private TMP_Text messageText;
     [SerializeField] private Button[] optionButtons;
 
+    public void Start()
+    {
+        GameEvents.Instance.OnDialogueStart += StartNewDialog;
+    }
+
 
     public void StartNewDialog(string dialogJSON)
     {
@@ -120,5 +125,10 @@ public class DialogController : MonoBehaviour
     public void DropItem(string item)
     {
         Debug.Log($"Drop: {item}");
+    }
+
+    public CloseDialog()
+    {
+
     }
 }

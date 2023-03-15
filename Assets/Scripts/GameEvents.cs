@@ -8,7 +8,7 @@ public class GameEvents : MonoBehaviour
     public static GameEvents Instance;
     [CanBeNull] public Action<int> OnTimeChanged;
     [CanBeNull] public Action<ItemInteraction.Item> OnItemFound;
-    [CanBeNull] public Action OnDialogueOpened;
+    [CanBeNull] public Action<string> OnDialogueStart;
     [CanBeNull] public Action OnDialogueClosed;
     [CanBeNull] public Action OnWorldReset;
 
