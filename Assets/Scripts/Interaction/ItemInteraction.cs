@@ -59,7 +59,7 @@ public abstract class ItemInteraction : MonoBehaviour
     }
 
     [SerializeField] protected Interaction interactionId;
-    [SerializeField] protected bool clickable;
+    [SerializeField] protected bool clickable = true;
     [SerializeField] protected Item[] possibleInteractionItems;
     protected Item droppedItem;
 
@@ -76,6 +76,7 @@ public abstract class ItemInteraction : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        
     }
 
     private void OnMouseExit()
