@@ -29,7 +29,6 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnDialogueClosed += StartTime;
         GameEvents.Instance.OnInventoryItemSelected += delegate(Item item) { _currentlySelectedInventoryItem = item; };
         GameEvents.Instance.OnInventoryItemConsumed += delegate { _currentlySelectedInventoryItem = Item.NULL_ITEM; };
-        GameEvents.Instance.OnInventoryItemSelected(Item.BALLS);
         StartTime();
     }
 
