@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WalkingSticksWithBalls
   m_EditorClassIdentifier: 
   item: 5
-  itemsprite: {fileID: 0}
+  itemsprite: {fileID: 262612129, guid: 4b59b4354ecd49c4b92c3cbc177f2a3e, type: 3}

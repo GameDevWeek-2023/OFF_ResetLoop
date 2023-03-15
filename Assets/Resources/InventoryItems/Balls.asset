@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Balls
   m_EditorClassIdentifier: 
   item: 6
-  itemsprite: {fileID: 0}
+  itemsprite: {fileID: -553498442, guid: ec01357bcf844d94a9f50591f275f999, type: 3}
