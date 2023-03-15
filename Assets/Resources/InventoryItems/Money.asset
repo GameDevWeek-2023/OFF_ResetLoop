@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a70e45f3d94e2ea5522d8763789c21, type: 3}
   m_Name: Money
   m_EditorClassIdentifier: 
-  item: 11
+  item: 13
+  dismantledItems: 
   itemsprite: {fileID: 0}
+  itemDescription: Geld.

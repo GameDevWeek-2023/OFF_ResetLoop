@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a70e45f3d94e2ea5522d8763789c21, type: 3}
   m_Name: WalkingStickCrushed
   m_EditorClassIdentifier: 
-  item: 6
+  item: 7
+  dismantledItems: 
   itemsprite: {fileID: 875121969, guid: 40d8fdf2308fd3a41a3fbfab77474171, type: 3}
+  itemDescription: "Der kl\xE4gliche Rest des Gehstocks, den das Gebiss zerkleinert
+    hat."

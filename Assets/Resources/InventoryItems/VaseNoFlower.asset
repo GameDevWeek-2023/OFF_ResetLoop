@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: VaseNoFlower
   m_EditorClassIdentifier: 
   item: 1
+  dismantledItems: 
   itemsprite: {fileID: 21300000, guid: c705a9343dca2c64d9d19a3960eb588c, type: 3}
+  itemDescription: "Eine leere Vase. Du hast das Wasser und die Blumen daraus entfernt.
+    Jetzt enth\xE4lt sie nur noch Luft."

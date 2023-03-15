@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a70e45f3d94e2ea5522d8763789c21, type: 3}
   m_Name: Flowers
   m_EditorClassIdentifier: 
-  item: 3
-  itemsprite: {fileID: 0}
+  item: 4
+  dismantledItems: 
+  itemsprite: {fileID: 21300000, guid: afa33307d0bd3674b98ec23890cf8c8c, type: 3}
+  itemDescription: "Ein h\xFCbscher Strau\xDF Blumen."
