@@ -1,0 +1,31 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Sabrina",
+            "libraryVisible": false,
+            "playPoint": "ahhhhEinSchnesKh",
+            "textSize": 0
+        },
+        "initial": "ahhhhEinSchnesKh",
+        "optionMirroring": true,
+        "stitches": {
+            "ahhhhEinSchnesKh": {
+                "content": [
+                    "Ahhhh, ein schönes kühles Bier. Mir ist ganz schwindelig! Kanst du mir etwas geben, damit ich geradeaus laufen kann?",
+                    {
+                        "ifConditions": null,
+                        "linkPath": null,
+                        "notIfConditions": null,
+                        "option": ""
+                    },
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            }
+        }
+    },
+    "title": "Teeths",
+    "url_key": 153000
+}
