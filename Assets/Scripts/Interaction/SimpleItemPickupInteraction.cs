@@ -14,7 +14,6 @@ namespace Interaction
                 AddToInventory(item);
                 Destroy(gameObject);
             }
-            
         }
 
         public override void OnTimeChanged(int time)
@@ -23,6 +22,10 @@ namespace Interaction
             {
                 Destroy(gameObject);
             }
+        }
+        
+        public override void OnUsableItemDrop(Item item)
+        {
         }
     }
 }

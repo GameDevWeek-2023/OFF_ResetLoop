@@ -1,8 +1,7 @@
-using Interaction;
-using Unity.VisualScripting;
+using Dialog;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Interaction
 {
     public class TeethInteraction : ItemInteraction
     {
@@ -19,5 +18,13 @@ namespace DefaultNamespace
         {
             
         }
+
+
+        public override void OnUsableItemDrop(Item item)
+        {
+            
+        }
+
+
     }
 }

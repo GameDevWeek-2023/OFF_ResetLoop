@@ -1,24 +1,41 @@
 using System.Collections.Generic;
 using Interaction;
 using UnityEngine;
+using static ItemInteraction;
 
 public class WorldState : MonoBehaviour
 {
+    public static WorldState Instance;
     private int _time = 0;
         
-    private List<ItemInteraction.Item> _inventory = new List<ItemInteraction.Item>();
+    private List<Item> _inventory = new List<Item>();
+    private Item _currentlySelectedInventoryItem;
 
+    public Item CurrentlySelectedInventoryItem => _currentlySelectedInventoryItem;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+    
     private void Start()
     {
         GameEvents.Instance.OnItemFound += OnItemFound;
-        GameEvents.Instance.OnDialogueOpened += StopTime;
+        GameEvents.Instance.OnDialogueStart += delegate { StopTime(); };
         GameEvents.Instance.OnDialogueClosed += StartTime;
+        GameEvents.Instance.OnInventoryItemSelected += delegate(Item item) { _currentlySelectedInventoryItem = item; };
+        GameEvents.Instance.OnInventoryItemConsumed += delegate { _currentlySelectedInventoryItem = Item.NULL_ITEM; };
+        GameEvents.Instance.OnInventoryItemSelected(Item.BALLS);
         StartTime();
     }
 
     private void StartTime()
     {
-        InvokeRepeating(nameof(Tick), 1f, 1f);
+        InvokeRepeating(nameof(Tick), 0f, 1f);
     }
         
     private void StopTime()
@@ -26,7 +43,7 @@ public class WorldState : MonoBehaviour
         CancelInvoke(nameof(Tick));
     }
 
-    private void OnItemFound(ItemInteraction.Item item)
+    private void OnItemFound(Item item)
     {
         _inventory.Add(item);
     }

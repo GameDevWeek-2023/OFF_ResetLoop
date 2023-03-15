@@ -5,8 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 using Newtonsoft.Json.Linq;
 
+namespace Dialog
+{
+
 /// <summary>
-/// Parser für Dialoge, die mit dem Online-Editor inklewriter erstellt wurden:
+/// Parser fï¿½r Dialoge, die mit dem Online-Editor inklewriter erstellt wurden:
 /// https://www.inklewriter.com/
 /// </summary>
 public class DialogController : MonoBehaviour
@@ -127,8 +130,10 @@ public class DialogController : MonoBehaviour
         Debug.Log($"Drop: {item}");
     }
 
-    public CloseDialog()
+    public void CloseDialog()
     {
 
     }
+}
+    
 }
