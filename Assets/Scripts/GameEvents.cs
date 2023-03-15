@@ -1,6 +1,7 @@
 using System;
 using Interaction;
 using JetBrains.Annotations;
+using model;
 using UnityEngine;
 using static ItemInteraction;
 
@@ -14,6 +15,8 @@ public class GameEvents : MonoBehaviour
     [CanBeNull] public Action OnDialogueClosed;
     [CanBeNull] public Action<Item> OnInventoryItemSelected;
     [CanBeNull] public Action OnInventoryItemConsumed;
+    [CanBeNull] public Action<Position> OnMovePlayerToPosition;
+    
     [CanBeNull] public Action OnWorldReset;
 
     private void Awake()
