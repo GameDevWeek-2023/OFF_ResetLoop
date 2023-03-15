@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45a70e45f3d94e2ea5522d8763789c21, type: 3}
-  m_Name: VaseNoFlower
+  m_Name: VaseCrushed
   m_EditorClassIdentifier: 
-  item: 1
-  itemsprite: {fileID: 21300000, guid: c705a9343dca2c64d9d19a3960eb588c, type: 3}
+  item: 3
+  itemsprite: {fileID: 21300000, guid: 13d1bd4c8e8707447a0f17e7d681f45b, type: 3}

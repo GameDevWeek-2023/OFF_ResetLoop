@@ -44,6 +44,7 @@ public abstract class ItemInteraction : MonoBehaviour
         VASE_WITH_FLOWER,
         VASE_EMPTY,
         VASE_WITH_WATER,
+        VASE_CRUSHED,
         FLOWERS,
         WALKING_STICK_NO_BALLS,
         WALKING_STICK_WITH_BALLS,
