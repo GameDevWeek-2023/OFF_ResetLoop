@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: VaseWthWater
   m_EditorClassIdentifier: 
   item: 2
-  itemsprite: {fileID: 0}
+  itemsprite: {fileID: 21300000, guid: ded851415162e3e4aac8d5b38b124dc7, type: 3}
