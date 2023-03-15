@@ -42,11 +42,12 @@ public abstract class ItemInteraction : MonoBehaviour
     public enum Item
     {
         VASE_WITH_FLOWER,
-        VASE_NO_FLOWER,
-        VASE_WTH_WATER,
+        VASE_EMPTY,
+        VASE_WITH_WATER,
         FLOWERS,
         WALKING_STICK_NO_BALLS,
         WALKING_STICK_WITH_BALLS,
+        WALKING_STICK_CRUSHED,
         BALLS,
         NEWSPAPER,
         STOCK,
@@ -102,6 +103,11 @@ public abstract class ItemInteraction : MonoBehaviour
         GameEvents.Instance.OnItemFound(item);
     }
 
+    public void RemoveFromInventory(Item item)
+    {
+        GameEvents.Instance.OnItemRemoved(item);
+    }
+    
     public void OnItemDrop(Item item)
     {
         if (possibleInteractionItems.Contains(item))
