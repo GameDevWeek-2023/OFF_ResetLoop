@@ -88,7 +88,7 @@ public class WorldState : MonoBehaviour
 
     private void RemoveInventoryItemFromGui(Item item)
     {
-        Destroy(inventoryPanel.transform.Find(item.ToString()));
+        Destroy(inventoryPanel.transform.Find(item.ToString()).gameObject);
     }
     
     private void Tick()
