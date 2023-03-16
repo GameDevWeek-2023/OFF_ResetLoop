@@ -1,0 +1,183 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Sabrina",
+            "libraryVisible": false,
+            "playPoint": "wIRWarenPartner",
+            "textSize": 0
+        },
+        "initial": "grmpf",
+        "optionMirroring": true,
+        "stitches": {
+            "dUHastMichInDenR": {
+                "content": [
+                    "DU hast mich in den RUIN getrieben!",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wIRWarenPartner",
+                        "notIfConditions": null,
+                        "option": "?!?"
+                    }
+                ]
+            },
+            "grmpf": {
+                "content": [
+                    "*Grmpf* ",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "nein",
+                        "notIfConditions": null,
+                        "option": "Hattest du nicht gerade noch eine Zeitung?"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "kaum",
+                        "notIfConditions": null,
+                        "option": "Du siehst so aus, als hättest du genug Alkohol gehabt..."
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "unsereStrae",
+                        "notIfConditions": null,
+                        "option": "Zieh weiter, du verschandelst meine Straße!"
+                    },
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            },
+            "iCHWillMeinenVer": {
+                "content": [
+                    "ICH will meinen versprochenen Anteil!"
+                ]
+            },
+            "kaum": {
+                "content": [
+                    "Kaum.",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "nein1",
+                        "notIfConditions": null,
+                        "option": "Gib mir dein Bier."
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "dUHastMichInDenR",
+                        "notIfConditions": null,
+                        "option": "Lass ab vom Alkohol und werde wieder ein produtives Mitglied der Gesellschaft!"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "mhmpf",
+                        "notIfConditions": null,
+                        "option": "Alkohol kann zu Gehirnschäden führen."
+                    }
+                ]
+            },
+            "mhmpf": {
+                "content": [
+                    "*Mhmpf*"
+                ]
+            },
+            "nein": {
+                "content": [
+                    "Nein.",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "nein",
+                        "notIfConditions": null,
+                        "option": "Doch, du hast mit einer Zeitung geschlafen!"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": null,
+                        "notIfConditions": null,
+                        "option": "Ich gebs dran!"
+                    }
+                ]
+            },
+            "nein1": {
+                "content": [
+                    "Nein."
+                ]
+            },
+            "unserElternhausU": {
+                "content": [
+                    "Unser Elternhaus! Unsere Firma!",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "unserElternhausU",
+                        "notIfConditions": null,
+                        "option": "?!?"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": null,
+                        "notIfConditions": null,
+                        "option": "Du bist nicht zurechnungsfähig!"
+                    }
+                ]
+            },
+            "unseremHaus": {
+                "content": [
+                    "Unserem Haus!",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "unseremHaus",
+                        "notIfConditions": null,
+                        "option": "?!?"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "unseremHaus",
+                        "notIfConditions": null,
+                        "option": "Meinem Haus!"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": null,
+                        "notIfConditions": null,
+                        "option": "Graaaaaaaa"
+                    }
+                ]
+            },
+            "unsereStrae": {
+                "content": [
+                    "Unsere Straße!",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "unseremHaus",
+                        "notIfConditions": null,
+                        "option": "Was sollen die Nachbarn denken, wenn du neben meinem Haus liegst?"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "unserElternhausU",
+                        "notIfConditions": null,
+                        "option": "Es gibt nichts, was wir gemein haben!"
+                    }
+                ]
+            },
+            "wIRWarenPartner": {
+                "content": [
+                    "WIR waren Partner!",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "iCHWillMeinenVer",
+                        "notIfConditions": null,
+                        "option": "Öhm, also..."
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": null,
+                        "notIfConditions": null,
+                        "option": "So ein Quatsch!"
+                    }
+                ]
+            }
+        }
+    },
+    "title": "Beggar_Awake",
+    "url_key": 153133
+}
