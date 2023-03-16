@@ -635,7 +635,7 @@ MonoBehaviour:
   interactionId: 2
   clickable: 1
   possibleInteractionItems: 
-  item: 5
+  item: 6
 --- !u!114 &570824954 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1444671175050650741, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
@@ -2189,10 +2189,14 @@ PrefabInstance:
     - target: {fileID: 123038887608312941, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 62ce01ddca719d34ea9648c586a7cc94, type: 3}
+      objectReference: {fileID: 21300000, guid: ad0da9d7578f1384c8960d6eebbe4c12, type: 3}
     - target: {fileID: 123038887608312941, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
       propertyPath: m_PreserveAspect
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 645797247534703160, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1444671175571832220, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
       propertyPath: m_Color.a
@@ -2285,6 +2289,10 @@ PrefabInstance:
     - target: {fileID: 1444671175571832222, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
       propertyPath: m_Name
       value: DialogPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444671175571832222, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
