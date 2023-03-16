@@ -19,6 +19,8 @@ public class BeggerInteraction : ItemInteraction
     [Header("Dialog files")]
     [SerializeField] private TextAsset dialogSleeping;
     [SerializeField] private TextAsset dialogAwake;
+    [SerializeField] private TextAsset dialogNotEnoughMoney;
+    [SerializeField] private TextAsset dialogEnoughMoney;
 
     [Header("Sprites")]
     [SerializeField] private Sprite beggerSleeping;
@@ -54,11 +56,12 @@ public class BeggerInteraction : ItemInteraction
     {
         if(state == State.AWAKE && item == Item.MONEY)
         {
-
+            GameEvents.Instance.OnDialogueStart?.Invoke(dialogNotEnoughMoney.text, beggerAwakeHead);
         }
         else if (state == State.AWAKE && item == Item.MONEY_RICH)
         {
-
+            GameEvents.Instance.OnDialogueStart?.Invoke(dialogEnoughMoney.text, beggerAwakeHead);
+            beerInteraction.ActivateBeer();
         }
     }
 
@@ -72,7 +75,6 @@ public class BeggerInteraction : ItemInteraction
             case State.AWAKE:
                 GameEvents.Instance.OnDialogueStart?.Invoke(dialogAwake.text, beggerAwakeHead);
                 break;
-
         }
     }
 
