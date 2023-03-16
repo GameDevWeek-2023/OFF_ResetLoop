@@ -7,7 +7,7 @@ public class TooltipController : MonoBehaviour
 {
     public static TooltipController Instance;
 
-    [SerializeField] GameObject tooltip;
+    private GameObject _tooltip;
     TMP_Text tooltipText;
 
 
@@ -17,20 +17,28 @@ public class TooltipController : MonoBehaviour
         {
             Instance = this;
         }
-        tooltipText = tooltip.GetComponentInChildren<TMP_Text>();
+        else
+        {
+            Destroy(gameObject);
+        }
+        _tooltip = GameObject.Find("ToolTip").transform.Find("ToolTipPanel").gameObject;
+        tooltipText = _tooltip.GetComponentInChildren<TMP_Text>();
         tooltipText.text = "Test";
     }
 
     private void Update()
     {
-        SetPosition();
+        if (isActiveAndEnabled)
+        {
+            SetPosition();
+        }
     }
 
     public void Show(string message)
     {
         tooltipText.text = message;
         SetPosition();
-        tooltip.SetActive(true);
+        _tooltip.SetActive(true);
     }
 
     private void SetPosition()
@@ -39,12 +47,12 @@ public class TooltipController : MonoBehaviour
         mousePosition.x += 2f;
         mousePosition.y -= 0.5f;
         mousePosition.z += Camera.main.nearClipPlane;
-        tooltip.transform.position = mousePosition;
+        _tooltip.transform.position = mousePosition;
     }
 
     public void Hide()
     {
-        tooltip.SetActive(false);
+        _tooltip.SetActive(false);
     }
 
 

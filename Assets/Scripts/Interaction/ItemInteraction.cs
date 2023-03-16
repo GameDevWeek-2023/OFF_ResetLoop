@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+[RequireComponent(typeof(Collider2D))]
 public abstract class ItemInteraction : MonoBehaviour
 {
     public enum Interaction

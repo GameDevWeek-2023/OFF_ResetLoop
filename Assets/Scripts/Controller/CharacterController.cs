@@ -44,12 +44,10 @@ namespace Controller
                 }
                 _isWalking = false;
             }
-
-            Debug.Log("Agent stopped: "+_agent.isStopped);
         }
 
         private void MoveCharacterToPosition(Position position)
-        {
+        { 
             if (position.X < transform.position.x)
             {
                 _animator.SetTrigger(WalkLeft);
@@ -64,6 +62,11 @@ namespace Controller
             _isWalking = true;
             Debug.Log("Move Character to " + position.X + " - " + position.Y);
             _agent.SetDestination(new Vector3(position.X, position.Y, 0f));
+        }
+
+        private void OnDestroy()
+        {
+            GameEvents.Instance.OnMovePlayerToPosition -= MoveCharacterToPosition;
         }
     }
 }

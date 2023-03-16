@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BedRoom.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/JonasDebug1.unity
+    guid: e394e838aaf3f476998e4a927c364e06
+  - enabled: 1
+    path: Assets/Scenes/JonasDebug2.unity
+    guid: eb562210adaf0400c8ef0e6805a6589a
   m_configObjects: {}

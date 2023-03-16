@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Interaction;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static ItemInteraction;
 
@@ -16,6 +18,15 @@ public class WorldState : MonoBehaviour
     [SerializeField] private GameObject inventoryPrefab;
     private InventoryItem[] _inventoryItemScriptableObjects;
     private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
+
+    public enum Scene
+    {
+        Bedroom,
+        Street,
+        Kiosk, 
+        JonasDebug1,
+        JonasDebug2
+    };
     
     public Item CurrentlySelectedInventoryItem => _currentlySelectedInventoryItem;
 
@@ -24,6 +35,11 @@ public class WorldState : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
         
         _inventoryItemScriptableObjects = Resources.LoadAll<InventoryItem>("InventoryItems");
@@ -31,7 +47,6 @@ public class WorldState : MonoBehaviour
         {
             _itemToScriptableObject[inventoryItemScriptableObject.Item] = inventoryItemScriptableObject;
         }
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -46,9 +61,32 @@ public class WorldState : MonoBehaviour
         };
         GameEvents.Instance.OnInventoryItemConsumed += delegate { _currentlySelectedInventoryItem = Item.NULL_ITEM; };
         GameEvents.Instance.OnItemRemoved += OnItemRemoved;
+        GameEvents.Instance.OnSceneChange += OnSceneChange;
+        SceneManager.sceneLoaded += OnSceneLoaded;
         StartTime();
     }
 
+    public void OnSceneChange(Scene scene)
+    {
+        switch (scene)
+        {
+            case Scene.Bedroom:
+            case Scene.Street:
+            case Scene.Kiosk:
+            case Scene.JonasDebug1:
+            case Scene.JonasDebug2:
+                SceneManager.LoadScene(scene.ToString());
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
+        }
+    }
+
+    public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
+    {
+        inventoryPanel = GameObject.Find("InventoryPanel");
+    }
+    
     public bool ItemExists(Item item)
     {
         return _inventory.Contains(item);

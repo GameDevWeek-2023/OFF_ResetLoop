@@ -16,6 +16,7 @@ public class GameEvents : MonoBehaviour
     [CanBeNull] public Action<Item> OnInventoryItemSelected;
     [CanBeNull] public Action OnInventoryItemConsumed;
     [CanBeNull] public Action<Position> OnMovePlayerToPosition;
+    [CanBeNull] public Action<WorldState.Scene> OnSceneChange;
     
     [CanBeNull] public Action OnWorldReset;
 
@@ -24,9 +25,11 @@ public class GameEvents : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-
-        Debug.Log("GameEvents Instance done");
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
