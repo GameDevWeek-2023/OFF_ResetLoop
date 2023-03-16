@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Collider2D))]
 public abstract class ItemInteraction : MonoBehaviour
@@ -21,6 +18,7 @@ public abstract class ItemInteraction : MonoBehaviour
         STR_ALCOHOL,
         STR_BUSINESSMAN,
         STR_DOG,
+        STR_BUS,
         KIO_RADIO,
         KIO_OWNER,
         KIO_COFFEE,
