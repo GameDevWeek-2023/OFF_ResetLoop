@@ -60,6 +60,8 @@ public abstract class ItemInteraction : MonoBehaviour
         NULL_ITEM
     }
 
+    private Vector3 _originalScale;
+    
     [SerializeField] protected Interaction interactionId;
     [SerializeField] protected bool clickable = true;
     [SerializeField] protected Item[] possibleInteractionItems;
@@ -68,6 +70,8 @@ public abstract class ItemInteraction : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        Vector3 transformLocalScale = transform.localScale;
+        _originalScale = new Vector3(transformLocalScale.x, transformLocalScale.y, transformLocalScale.z);
         GameEvents.Instance.OnTimeChanged += OnTimeChanged;
     }
 
@@ -78,11 +82,18 @@ public abstract class ItemInteraction : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        
+        if (clickable)
+        {
+            LeanTween.scale(gameObject, _originalScale * 1.2f, 0.1f).setEaseInOutCubic();
+        }
     }
 
     private void OnMouseExit()
     {
+        if (clickable)
+        {
+            LeanTween.scale(gameObject, _originalScale, 0.2f).setEaseInOutCubic();
+        }
     }
 
     private void OnMouseDown()
