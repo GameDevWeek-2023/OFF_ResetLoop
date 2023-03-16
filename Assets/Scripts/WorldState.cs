@@ -109,6 +109,7 @@ public class WorldState : MonoBehaviour
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
     {
         inventoryPanel = GameObject.Find("InventoryPanel");
+        LoadFullInventory();
     }
     
     public bool ItemExists(Item item)
@@ -138,6 +139,14 @@ public class WorldState : MonoBehaviour
         RemoveInventoryItemFromGui(item);
     }
 
+    private void LoadFullInventory()
+    {
+        foreach (Item item in _inventory)
+        {
+            AddInventoryItemToGui(item);
+        }
+    }
+    
     private void AddInventoryItemToGui(Item item)
     {
         GameObject newInventory = Instantiate(inventoryPrefab, inventoryPanel.transform);

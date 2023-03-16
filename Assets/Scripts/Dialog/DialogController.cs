@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -158,7 +159,12 @@ public class DialogController : MonoBehaviour
     public void CloseDialog()
     {
         dialogPanel.SetActive(false);
-        GameEvents.Instance.OnDialogueClosed();
+        GameEvents.Instance.OnDialogueClosed?.Invoke();
+    }
+
+    public void OnDestroy()
+    {
+        GameEvents.Instance.OnDialogueStart -= StartNewDialog;
     }
 }
     
