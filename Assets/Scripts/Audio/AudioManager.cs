@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     private bool mute = false;
+    private bool firstCall = true;
 
     private void Awake()
     {
@@ -75,6 +76,7 @@ public class AudioManager : MonoBehaviour
         GameEvents.Instance.OnSceneChange += OnSceneChange;
         GameEvents.Instance.OnCall += OnCall;
         GameEvents.Instance.OnButtonDialed += OnButtonDialed;
+        OnSceneChange(WorldState.Instance.CurrentScene);
     }
 
     public void OnSceneChange(WorldState.Scene scene)
@@ -84,10 +86,12 @@ public class AudioManager : MonoBehaviour
             StopSound(onlyInThisSceneSound);
         }
         _onlyInThisSceneSounds.Clear();
-        if (scene != WorldState.Scene.Telephone)
+        if (scene != WorldState.Scene.Telephone && !firstCall)
         {
             Play("door");
         }
+
+        firstCall = false;
 
         switch (scene)
         {
@@ -95,7 +99,7 @@ public class AudioManager : MonoBehaviour
                 Play("clock");
                 break;
             case WorldState.Scene.Street:
-                Play("cityambience");
+                Play("cityambience", WorldState.Instance.Time);
                 break;
             case WorldState.Scene.Telephone:
                 break;
@@ -153,7 +157,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public void Play(string name)
+    public void Play(string name, float startTime = 0f)
     {
         if (!mute)
         {
@@ -164,6 +168,7 @@ public class AudioManager : MonoBehaviour
             }
             else
             {
+                soundToPlay.source.time = startTime;
                 soundToPlay.source.Play();
                 _onlyInThisSceneSounds.Add(name);
             }
