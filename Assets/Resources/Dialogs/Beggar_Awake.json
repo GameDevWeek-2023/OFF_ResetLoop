@@ -4,17 +4,12 @@
         "editorData": {
             "authorName": "Sabrina",
             "libraryVisible": false,
-            "playPoint": "blankStitch",
+            "playPoint": "uNSERElternhausU",
             "textSize": 0
         },
         "initial": "grmpf",
         "optionMirroring": true,
         "stitches": {
-            "blankStitch": {
-                "content": [
-                    ""
-                ]
-            },
             "dUHastMichInDenR": {
                 "content": [
                     "DU hast mich in den RUIN getrieben!",
@@ -85,17 +80,6 @@
                     "*Mhmpf*"
                 ]
             },
-            "nEIN": {
-                "content": [
-                    "NEIN!!!",
-                    {
-                        "ifConditions": null,
-                        "linkPath": null,
-                        "notIfConditions": null,
-                        "option": "Ich gebs dran!"
-                    }
-                ]
-            },
             "nein": {
                 "content": [
                     "Nein.",
@@ -105,6 +89,17 @@
                         "notIfConditions": null,
                         "option": "Doch, du hast mit einer Zeitung geschlafen!"
                     },
+                    {
+                        "ifConditions": null,
+                        "linkPath": null,
+                        "notIfConditions": null,
+                        "option": "Ich gebs dran!"
+                    }
+                ]
+            },
+            "nEIN": {
+                "content": [
+                    "NEIN!!!",
                     {
                         "ifConditions": null,
                         "linkPath": null,
@@ -135,12 +130,17 @@
                     "Nein."
                 ]
             },
+            "uNSERElternhausU": {
+                "content": [
+                    "UNSER Elternhaus!!! UNSERE Firma!"
+                ]
+            },
             "unserElternhausU": {
                 "content": [
                     "Unser Elternhaus! Unsere Firma!",
                     {
                         "ifConditions": null,
-                        "linkPath": "unserElternhausU",
+                        "linkPath": "uNSERElternhausU",
                         "notIfConditions": null,
                         "option": "?!?"
                     },
@@ -150,6 +150,11 @@
                         "notIfConditions": null,
                         "option": "Du bist nicht zurechnungsfähig!"
                     }
+                ]
+            },
+            "uNSEREMHaus": {
+                "content": [
+                    "UNSEREM Haus!"
                 ]
             },
             "unseremHaus": {
@@ -163,7 +168,7 @@
                     },
                     {
                         "ifConditions": null,
-                        "linkPath": "blankStitch",
+                        "linkPath": "uNSEREMHaus",
                         "notIfConditions": null,
                         "option": "Meinem Haus!"
                     },
@@ -173,11 +178,6 @@
                         "notIfConditions": null,
                         "option": "Graaaaaaaa"
                     }
-                ]
-            },
-            "uNSEREMHaus": {
-                "content": [
-                    "UNSEREM Haus!"
                 ]
             },
             "unsereStrae": {
