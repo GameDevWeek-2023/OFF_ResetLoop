@@ -5,7 +5,7 @@ namespace Interaction
     public class SimpleItemPickupInteraction : ItemInteraction
     {
 
-        [SerializeField] private Item item;
+        [SerializeField] protected Item item;
         
         public override void SpecificMouseDownBehaviour()
         {

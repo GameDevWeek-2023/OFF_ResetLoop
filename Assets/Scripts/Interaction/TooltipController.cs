@@ -17,13 +17,13 @@ public class TooltipController : MonoBehaviour
         {
             Instance = this;
         }
-        else
+        /*else
         {
             Destroy(gameObject);
-        }
-        _tooltip = GameObject.Find("ToolTip").transform.Find("ToolTipPanel").gameObject;
-        tooltipText = _tooltip.GetComponentInChildren<TMP_Text>();
-        tooltipText.text = "Test";
+        }*/
+        UpdateTooltipGameObject();
+
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     private void Update()
@@ -38,6 +38,7 @@ public class TooltipController : MonoBehaviour
     {
         tooltipText.text = message;
         SetPosition();
+        UpdateTooltipGameObject();
         _tooltip.SetActive(true);
     }
 
@@ -47,13 +48,24 @@ public class TooltipController : MonoBehaviour
         mousePosition.x += 2f;
         mousePosition.y -= 0.5f;
         mousePosition.z += Camera.main.nearClipPlane;
+        UpdateTooltipGameObject();
         _tooltip.transform.position = mousePosition;
     }
 
     public void Hide()
     {
+        UpdateTooltipGameObject();
         _tooltip.SetActive(false);
     }
 
+    private void UpdateTooltipGameObject()
+    {
+        if (_tooltip == null)
+        {
+            _tooltip = GameObject.Find("ToolTip").transform.Find("ToolTipPanel").gameObject;
+            tooltipText = _tooltip.GetComponentInChildren<TMP_Text>();
+            tooltipText.text = "Test";
+        }
+    }
 
 }

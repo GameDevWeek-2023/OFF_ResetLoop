@@ -18,6 +18,7 @@ public class WorldState : MonoBehaviour
     [SerializeField] private GameObject inventoryPrefab;
     private InventoryItem[] _inventoryItemScriptableObjects;
     private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
+    private Dictionary<KeyEvent, bool> _keyeventToActivated = new Dictionary<KeyEvent, bool>();
 
     public enum Scene
     {
@@ -27,7 +28,14 @@ public class WorldState : MonoBehaviour
         JonasDebug1,
         JonasDebug2
     };
-    
+
+    public enum KeyEvent
+    {
+        BEGGAR_AWAKE,
+        BEER_TAKEN,
+        DOG_AVAIABLE
+    }
+
     public Item CurrentlySelectedInventoryItem => _currentlySelectedInventoryItem;
 
     private void Awake()
@@ -47,6 +55,12 @@ public class WorldState : MonoBehaviour
         {
             _itemToScriptableObject[inventoryItemScriptableObject.Item] = inventoryItemScriptableObject;
         }
+
+        foreach(KeyEvent keyEvent in Enum.GetValues(typeof(KeyEvent)))
+        {
+            _keyeventToActivated.Add(keyEvent, false);
+
+        }
     }
 
     private void Start()
@@ -62,9 +76,11 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnInventoryItemConsumed += delegate { _currentlySelectedInventoryItem = Item.NULL_ITEM; };
         GameEvents.Instance.OnItemRemoved += OnItemRemoved;
         GameEvents.Instance.OnSceneChange += OnSceneChange;
+        GameEvents.Instance.OnKeyEvent += OnKeyEvent;
         SceneManager.sceneLoaded += OnSceneLoaded;
         StartTime();
     }
+
 
     public void OnSceneChange(Scene scene)
     {
@@ -113,7 +129,7 @@ public class WorldState : MonoBehaviour
         _inventory.Remove(item);
         RemoveInventoryItemFromGui(item);
     }
-    
+
     private void AddInventoryItemToGui(Item item)
     {
         GameObject newInventory = Instantiate(inventoryPrefab, inventoryPanel.transform);
@@ -145,5 +161,15 @@ public class WorldState : MonoBehaviour
         }
 
         GameEvents.Instance.OnTimeChanged?.Invoke(_time);
+    }
+
+    private void OnKeyEvent(KeyEvent keyEvent)
+    {
+        _keyeventToActivated[keyEvent] = true;
+    }
+
+    public bool HasKeyEventHappend(KeyEvent keyEvent)
+    {
+        return _keyeventToActivated[keyEvent];
     }
 }

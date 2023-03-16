@@ -19,7 +19,7 @@ public class GameEvents : MonoBehaviour
     [CanBeNull] public Action<WorldState.Scene> OnSceneChange;
     [CanBeNull] public Action<TelephoneController.Button> OnButtonDialed;
     [CanBeNull] public Action<TelephoneController.CallType> OnCall;
-    
+    [CanBeNull] public Action<WorldState.KeyEvent> OnKeyEvent;
     [CanBeNull] public Action OnWorldReset;
 
     private void Awake()
