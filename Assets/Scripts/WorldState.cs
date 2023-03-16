@@ -13,6 +13,7 @@ public class WorldState : MonoBehaviour
     private int _time = 0;
 
     private List<Item> _inventory = new List<Item>();
+    private HashSet<Item> _everythingEverywhereAllAtOnce = new HashSet<Item>();
     private Item _currentlySelectedInventoryItem = Item.NULL_ITEM;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject inventoryPrefab;
@@ -109,6 +110,15 @@ public class WorldState : MonoBehaviour
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
     {
         inventoryPanel = GameObject.Find("InventoryPanel");
+        GameObject[] findGameObjectsWithTag = GameObject.FindGameObjectsWithTag("SimpleItemPickup");
+        foreach (GameObject simpleItemPickupGO in findGameObjectsWithTag)
+        {
+            Item sceneItem = simpleItemPickupGO.GetComponent<SimpleItemPickupInteraction>().Item;
+            if (_everythingEverywhereAllAtOnce.Contains(sceneItem))
+            {
+                Destroy(simpleItemPickupGO);
+            }
+        }
         LoadFullInventory();
     }
     
@@ -130,6 +140,7 @@ public class WorldState : MonoBehaviour
     private void OnItemFound(Item item)
     {
         _inventory.Add(item);
+        _everythingEverywhereAllAtOnce.Add(item);
         AddInventoryItemToGui(item);
     }
 

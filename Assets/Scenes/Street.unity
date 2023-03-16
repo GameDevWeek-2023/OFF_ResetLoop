@@ -1101,7 +1101,7 @@ MonoBehaviour:
   possibleInteractionItems: 0d0000000e000000
   beer: {fileID: 1017295539}
   dialogSleeping: {fileID: 4900000, guid: 796a16e68e92cd945a5d35504f9932aa, type: 3}
-  dialogAwake: {fileID: 0}
+  dialogAwake: {fileID: 4900000, guid: 2519fb17df3bd434e87d18eb55a2b4f4, type: 3}
   beggerSleeping: {fileID: 21300000, guid: edcdd09c832404b48ae4f4bff18f1599, type: 3}
   beggarAwake: {fileID: 21300000, guid: c71bb295954432745a901d2811ca0014, type: 3}
   beggerSleepingHead: {fileID: 21300000, guid: 7e9a72e0363a64e4c9da59c74e3fef72, type: 3}
