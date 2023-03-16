@@ -20,6 +20,10 @@ public class WorldState : MonoBehaviour
     private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
     private Dictionary<KeyEvent, bool> _keyeventToActivated = new Dictionary<KeyEvent, bool>();
 
+    private Scene _currentScene = Scene.Bedroom;
+
+    public Scene CurrentScene => _currentScene;
+
     public enum Scene
     {
         Bedroom,
@@ -98,6 +102,8 @@ public class WorldState : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
         }
+
+        _currentScene = scene;
     }
 
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)

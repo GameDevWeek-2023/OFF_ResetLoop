@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
     public AudioMixerGroup ambienceOutput;
 
     private MusicManager _musicManager;
-
+    private List<string> _onlyInThisSceneSounds = new List<string>();
 
     public enum SoundGroup
     {
@@ -79,6 +79,11 @@ public class AudioManager : MonoBehaviour
 
     public void OnSceneChange(WorldState.Scene scene)
     {
+        foreach (string onlyInThisSceneSound in _onlyInThisSceneSounds)
+        {
+            StopSound(onlyInThisSceneSound);
+        }
+        _onlyInThisSceneSounds.Clear();
         if (scene != WorldState.Scene.Telephone)
         {
             Play("door");
@@ -88,7 +93,6 @@ public class AudioManager : MonoBehaviour
         {
             case WorldState.Scene.Bedroom:
                 Play("clock");
-                StopSound("cityambience");
                 break;
             case WorldState.Scene.Street:
                 Play("cityambience");
@@ -161,6 +165,7 @@ public class AudioManager : MonoBehaviour
             else
             {
                 soundToPlay.source.Play();
+                _onlyInThisSceneSounds.Add(name);
             }
         }
     }
