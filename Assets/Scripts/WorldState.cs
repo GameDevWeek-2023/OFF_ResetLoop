@@ -136,10 +136,10 @@ public class WorldState : MonoBehaviour
         _time++;
         if (_time == 60)
         {
-            GameEvents.Instance.OnWorldReset();
+            GameEvents.Instance.OnWorldReset?.Invoke();
             _time = 0;
         }
 
-        GameEvents.Instance.OnTimeChanged(_time);
+        GameEvents.Instance.OnTimeChanged?.Invoke(_time);
     }
 }
