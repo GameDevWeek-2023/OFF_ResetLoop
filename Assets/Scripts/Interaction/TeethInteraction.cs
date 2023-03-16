@@ -42,13 +42,13 @@ namespace Interaction
                     // DO Nothing at the moment
                     break;
                 case State.WATER:
-                    GameEvents.Instance.OnDialogueStart(dialogFileWater.text, garryWater);
+                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileWater.text, garryWater);
                     break;
                 case State.COFFEE:
-                    GameEvents.Instance.OnDialogueStart(dialogFileCoffee.text, garryCoffee);
+                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileCoffee.text, garryCoffee);
                     break;
                 case State.BOOZE:
-                    GameEvents.Instance.OnDialogueStart(dialogFileBooze.text, garryBooze);
+                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileBooze.text, garryBooze);
                     break;
             }
         }
