@@ -14,6 +14,7 @@ public abstract class ItemInteraction : MonoBehaviour
         BED_VASE,
         BED_WALKSTICK,
         BED_STOCK,
+        BED_DISMENTAL_ITEM,
         STR_NEWSPAPER,
         STR_HOMELESS,
         STR_ALCOHOL,
@@ -55,6 +56,7 @@ public abstract class ItemInteraction : MonoBehaviour
         ALCOHOL,
         COFFEE,
         MONEY,
+        DISMANTLE_ITEM,
         NULL_ITEM
     }
 

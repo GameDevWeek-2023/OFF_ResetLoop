@@ -13,6 +13,10 @@ namespace ScriptableObjects
 
         public ItemInteraction.Item Item => item;
 
+        public ItemInteraction.Item[] DismantledItems => dismantledItems;
+
         public Sprite Itemsprite => itemsprite;
+
+        public string ItemDescription => itemDescription;
     }
 }

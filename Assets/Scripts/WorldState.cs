@@ -84,6 +84,8 @@ public class WorldState : MonoBehaviour
         newInventory.GetComponent<Button>().onClick
             .AddListener(() => GameEvents.Instance.OnInventoryItemSelected(item));
         newInventory.name = item.ToString();
+        newInventory.GetComponent<Tooltip>().Message = _itemToScriptableObject[item].ItemDescription;
+        newInventory.GetComponent<Tooltip>().DismantledItems = _itemToScriptableObject[item].DismantledItems;
     }
 
     private void RemoveInventoryItemFromGui(Item item)
