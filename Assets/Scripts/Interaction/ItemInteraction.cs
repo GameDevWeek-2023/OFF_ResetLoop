@@ -56,6 +56,7 @@ public abstract class ItemInteraction : MonoBehaviour
         ALCOHOL,
         COFFEE,
         MONEY,
+        MONEY_RICH,
         DISMANTLE_ITEM,
         NULL_ITEM
     }

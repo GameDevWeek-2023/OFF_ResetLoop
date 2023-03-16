@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45a70e45f3d94e2ea5522d8763789c21, type: 3}
-  m_Name: Money
+  m_Name: MuchMoney
   m_EditorClassIdentifier: 
-  item: 13
+  item: 14
   dismantledItems: 
   itemsprite: {fileID: 0}
-  itemDescription: Etwas Geld.
+  itemDescription: Eine enorme Summe Geld.
