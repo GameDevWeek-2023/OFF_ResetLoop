@@ -129,4 +129,9 @@ public abstract class ItemInteraction : MonoBehaviour
     public abstract void SpecificMouseDownBehaviour();
 
     public abstract void OnTimeChanged(int time);
+
+    private void OnDestroy()
+    {
+        GameEvents.Instance.OnTimeChanged -= OnTimeChanged;
+    }
 }
