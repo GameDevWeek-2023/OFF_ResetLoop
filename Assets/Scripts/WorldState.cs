@@ -23,7 +23,7 @@ public class WorldState : MonoBehaviour
     {
         Bedroom,
         Street,
-        Kiosk, 
+        Telephone, 
         JonasDebug1,
         JonasDebug2
     };
@@ -72,7 +72,7 @@ public class WorldState : MonoBehaviour
         {
             case Scene.Bedroom:
             case Scene.Street:
-            case Scene.Kiosk:
+            case Scene.Telephone:
             case Scene.JonasDebug1:
             case Scene.JonasDebug2:
                 SceneManager.LoadScene(scene.ToString());
@@ -128,7 +128,11 @@ public class WorldState : MonoBehaviour
 
     private void RemoveInventoryItemFromGui(Item item)
     {
-        Destroy(inventoryPanel.transform.Find(item.ToString()).gameObject);
+        Transform find = inventoryPanel.transform.Find(item.ToString());
+        if (find != null)
+        {
+            Destroy(find.gameObject);
+        }
     }
     
     private void Tick()
