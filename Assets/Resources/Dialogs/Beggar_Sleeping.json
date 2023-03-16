@@ -1,0 +1,53 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Sabrina",
+            "libraryVisible": false,
+            "playPoint": "blankStitch",
+            "textSize": 0
+        },
+        "initial": "schnarch",
+        "optionMirroring": true,
+        "stitches": {
+            "blankStitch": {
+                "content": [
+                    ""
+                ]
+            },
+            "schnarch": {
+                "content": [
+                    "*schnarch*",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "schnarchSchnorch",
+                        "notIfConditions": null,
+                        "option": "Könnte ich mir die Zeitung mal kurz borgen?"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "schnarchSchnorch",
+                        "notIfConditions": null,
+                        "option": "Du siehst so aus, als hättest du genug Alkohol gehabt..."
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "schnarchSchnorch",
+                        "notIfConditions": null,
+                        "option": "Zieh weiter, du verschandelst meine Straße!"
+                    },
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            },
+            "schnarchSchnorch": {
+                "content": [
+                    "*schnarch* *schnorchel* *schnarch*"
+                ]
+            },
+        }
+    },
+    "title": "Sleeping",
+    "url_key": 153077
+}

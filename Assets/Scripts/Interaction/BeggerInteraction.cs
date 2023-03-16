@@ -67,10 +67,10 @@ public class BeggerInteraction : ItemInteraction
         switch (state)
         {
             case State.SLEEPING:
-                GameEvents.Instance.OnDialogueStart?.Invoke(dialogSleeping.text, beggerSleeping);
+                GameEvents.Instance.OnDialogueStart?.Invoke(dialogSleeping.text, beggerSleepingHead);
                 break;
             case State.AWAKE:
-                GameEvents.Instance.OnDialogueStart?.Invoke(dialogSleeping.text, beggerSleeping);
+                GameEvents.Instance.OnDialogueStart?.Invoke(dialogAwake.text, beggerAwakeHead);
                 break;
 
         }

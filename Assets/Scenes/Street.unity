@@ -747,7 +747,7 @@ MonoBehaviour:
   clickable: 1
   possibleInteractionItems: 0d0000000e000000
   beer: {fileID: 1017295539}
-  dialogSleeping: {fileID: 0}
+  dialogSleeping: {fileID: 4900000, guid: 796a16e68e92cd945a5d35504f9932aa, type: 3}
   dialogAwake: {fileID: 0}
   beggerSleeping: {fileID: 21300000, guid: edcdd09c832404b48ae4f4bff18f1599, type: 3}
   beggarAwake: {fileID: 21300000, guid: c71bb295954432745a901d2811ca0014, type: 3}
@@ -2087,7 +2087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 645797247534703160, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1444671175571832220, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
       propertyPath: m_Color.a
