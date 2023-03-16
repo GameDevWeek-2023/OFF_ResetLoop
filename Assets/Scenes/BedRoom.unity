@@ -872,7 +872,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789360240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.84, y: -3.39, z: 0}
+  m_LocalPosition: {x: -4.89, y: 4.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1330,6 +1330,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1278388067 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 123038887608312941, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
+  m_PrefabInstance: {fileID: 1444671175554104463}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1512790345 stripped
@@ -1839,6 +1850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogPanel: {fileID: 17924369}
+  speakerImage: {fileID: 1278388067}
   messageText: {fileID: 1512790345}
   optionButtons:
   - {fileID: 185065679}
@@ -2174,6 +2186,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1796204894}
     m_Modifications:
+    - target: {fileID: 123038887608312941, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 62ce01ddca719d34ea9648c586a7cc94, type: 3}
+    - target: {fileID: 123038887608312941, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444671175571832220, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
+      propertyPath: m_Color.a
+      value: 0.85882354
+      objectReference: {fileID: 0}
     - target: {fileID: 1444671175571832221, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
