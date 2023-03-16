@@ -534,7 +534,7 @@ MonoBehaviour:
   clickable: 0
   possibleInteractionItems: 
   begger: {fileID: 552858635}
-  startDriving: 1
+  startDriving: 28
 --- !u!61 &389715126
 BoxCollider2D:
   m_ObjectHideFlags: 0
