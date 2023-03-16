@@ -11,8 +11,9 @@ public class KioskInteraktion : ItemInteraction
     [Header("Sprites")]
     [SerializeField] private Sprite kioskSellerHead;
 
-    private void Awake()
+    protected override void Start()
     {
+        base.Start();
         GameEvents.Instance.OnCall += OnCall;
     }
 
