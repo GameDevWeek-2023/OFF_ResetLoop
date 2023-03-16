@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Interaction
@@ -6,7 +7,14 @@ namespace Interaction
     {
 
         [SerializeField] protected Item item;
-        
+
+        public Item Item => item;
+
+        private void Awake()
+        {
+            gameObject.tag = "SimpleItemPickup";
+        }
+
         public override void SpecificMouseDownBehaviour()
         {
             if (clickable)
