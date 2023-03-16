@@ -136,6 +136,66 @@ MonoBehaviour:
     soundGroup: 2
     loop: 0
     source: {fileID: 0}
+  - name: foot_bed1
+    clip: {fileID: 8300000, guid: a84bc60e50ec24f869edd356f667633d, type: 3}
+    volume: 1
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: foot_bed2
+    clip: {fileID: 8300000, guid: a13422562e7574825a2acf8ddc2d8310, type: 3}
+    volume: 1
+    soundGroup: 2
+    loop: 0
+    source: {fileID: 0}
+  - name: foot_bed3
+    clip: {fileID: 8300000, guid: 9174b3b55ddc6404dbf82176068040c6, type: 3}
+    volume: 1
+    soundGroup: 2
+    loop: 0
+    source: {fileID: 0}
+  - name: foot_bed4
+    clip: {fileID: 8300000, guid: 0f7888ee501fb46778a211bb461b9550, type: 3}
+    volume: 1
+    soundGroup: 2
+    loop: 0
+    source: {fileID: 0}
+  - name: foot_bed5
+    clip: {fileID: 8300000, guid: ac905a02e4ca24811b25475e52e6fe7f, type: 3}
+    volume: 1
+    soundGroup: 2
+    loop: 0
+    source: {fileID: 0}
+  - name: foot_str1
+    clip: {fileID: 8300000, guid: f476729cb3668428dbadc2a18f2a84f2, type: 3}
+    volume: 1
+    soundGroup: 2
+    loop: 0
+    source: {fileID: 0}
+  - name: foot_str2
+    clip: {fileID: 8300000, guid: 9bc08fcf5a1794feba5a8ad37ef54a09, type: 3}
+    volume: 1
+    soundGroup: 2
+    loop: 0
+    source: {fileID: 0}
+  - name: foot_str3
+    clip: {fileID: 8300000, guid: c9b76a936094843d29aaa624c4a319ff, type: 3}
+    volume: 1
+    soundGroup: 2
+    loop: 0
+    source: {fileID: 0}
+  - name: foot_str4
+    clip: {fileID: 8300000, guid: f1bef60c4954047d5983b8d559dff99c, type: 3}
+    volume: 1
+    soundGroup: 2
+    loop: 0
+    source: {fileID: 0}
+  - name: foot_str5
+    clip: {fileID: 8300000, guid: 0d2d2d583433842fe9d62c5fa7fc48e2, type: 3}
+    volume: 1
+    soundGroup: 2
+    loop: 0
+    source: {fileID: 0}
   musicTracks: []
   soundeffectOutput: {fileID: 2523414357410959982, guid: bdba992000bb54c8f99f59286c81d70a, type: 2}
   musicOutput: {fileID: 4036349486229800731, guid: bdba992000bb54c8f99f59286c81d70a, type: 2}

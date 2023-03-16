@@ -64,6 +64,11 @@ namespace Controller
             _agent.SetDestination(new Vector3(position.X, position.Y, 0f));
         }
 
+        public void OnFootStep()
+        {
+            GameEvents.Instance.OnFootStep?.Invoke();
+        }
+        
         private void OnDestroy()
         {
             GameEvents.Instance.OnMovePlayerToPosition -= MoveCharacterToPosition;

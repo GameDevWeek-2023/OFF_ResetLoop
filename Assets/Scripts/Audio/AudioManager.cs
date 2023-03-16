@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Interaction;
 using UnityEditor;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class AudioManager : MonoBehaviour
     private MusicManager _musicManager;
     private List<string> _onlyInThisSceneSounds = new List<string>();
 
+    private Dictionary<string, string[]> _randomSoundCache = new Dictionary<string, string[]>();
     public enum SoundGroup
     {
         Soundeffect,
@@ -31,6 +33,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     private bool mute = false;
+    private bool firstCall = true;
 
     private void Awake()
     {
@@ -75,6 +78,8 @@ public class AudioManager : MonoBehaviour
         GameEvents.Instance.OnSceneChange += OnSceneChange;
         GameEvents.Instance.OnCall += OnCall;
         GameEvents.Instance.OnButtonDialed += OnButtonDialed;
+        GameEvents.Instance.OnFootStep += OnFootstep;
+        OnSceneChange(WorldState.Instance.CurrentScene);
     }
 
     public void OnSceneChange(WorldState.Scene scene)
@@ -84,10 +89,12 @@ public class AudioManager : MonoBehaviour
             StopSound(onlyInThisSceneSound);
         }
         _onlyInThisSceneSounds.Clear();
-        if (scene != WorldState.Scene.Telephone)
+        if (scene != WorldState.Scene.Telephone && !firstCall)
         {
             Play("door");
         }
+
+        firstCall = false;
 
         switch (scene)
         {
@@ -95,7 +102,7 @@ public class AudioManager : MonoBehaviour
                 Play("clock");
                 break;
             case WorldState.Scene.Street:
-                Play("cityambience");
+                Play("cityambience", WorldState.Instance.Time);
                 break;
             case WorldState.Scene.Telephone:
                 break;
@@ -152,8 +159,24 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-
-    public void Play(string name)
+    public void OnFootstep()
+    {
+        switch (WorldState.Instance.CurrentScene)
+        {
+            case WorldState.Scene.Bedroom:
+                PlayRandomSoundStartingWith("foot_bed");
+                break;
+            case WorldState.Scene.Street:
+            case WorldState.Scene.Telephone:
+                PlayRandomSoundStartingWith("foot_str");
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        
+    }
+    
+    public void Play(string name, float startTime = 0f)
     {
         if (!mute)
         {
@@ -164,6 +187,7 @@ public class AudioManager : MonoBehaviour
             }
             else
             {
+                soundToPlay.source.time = startTime;
                 soundToPlay.source.Play();
                 _onlyInThisSceneSounds.Add(name);
             }
@@ -188,6 +212,16 @@ public class AudioManager : MonoBehaviour
         mute = !mute;
     }
 
+    private void PlayRandomSoundStartingWith(string startString)
+    {
+        if (!_randomSoundCache.ContainsKey(startString))
+        {
+            _randomSoundCache[startString] = sounds.Where(sound => sound.name.StartsWith(startString))
+                .Select(sound => sound.name).
+                ToArray();
+        }
+        playRandomSound(_randomSoundCache[startString]);
+    }
 
     private void playRandomSound(string[] selection)
     {
