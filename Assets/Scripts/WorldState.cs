@@ -103,13 +103,13 @@ public class WorldState : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
         }
 
-        LoadFullInventory();
         _currentScene = scene;
     }
 
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
     {
         inventoryPanel = GameObject.Find("InventoryPanel");
+        LoadFullInventory();
     }
     
     public bool ItemExists(Item item)
