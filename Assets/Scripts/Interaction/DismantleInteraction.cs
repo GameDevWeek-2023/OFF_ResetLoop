@@ -11,6 +11,7 @@ public class DismantleInteraction : ItemInteraction
 
     public override void OnUsableItemDrop(Item item)
     {
+        Debug.Log("Dismantle item");
         switch (item)
         {
             case Item.VASE_WITH_FLOWER:
