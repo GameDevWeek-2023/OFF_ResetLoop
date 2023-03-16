@@ -4,7 +4,7 @@
         "editorData": {
             "authorName": "Sabrina",
             "libraryVisible": false,
-            "playPoint": "wIRWarenPartner",
+            "playPoint": "dUHastMichInDenR",
             "textSize": 0
         },
         "initial": "grmpf",
@@ -17,7 +17,7 @@
                         "ifConditions": null,
                         "linkPath": "wIRWarenPartner",
                         "notIfConditions": null,
-                        "option": "?!?"
+                        "option": "Wie?!?"
                     }
                 ]
             },
@@ -57,7 +57,7 @@
                     "Kaum.",
                     {
                         "ifConditions": null,
-                        "linkPath": "nein1",
+                        "linkPath": "nein2",
                         "notIfConditions": null,
                         "option": "Gib mir dein Bier."
                     },
@@ -85,7 +85,7 @@
                     "Nein.",
                     {
                         "ifConditions": null,
-                        "linkPath": "nein",
+                        "linkPath": "nein1",
                         "notIfConditions": null,
                         "option": "Doch, du hast mit einer Zeitung geschlafen!"
                     },
@@ -97,7 +97,35 @@
                     }
                 ]
             },
+            "nEIN": {
+                "content": [
+                    "NEIN!!!",
+                    {
+                        "ifConditions": null,
+                        "linkPath": null,
+                        "notIfConditions": null,
+                        "option": "Ich gebs dran!"
+                    }
+                ]
+            },
             "nein1": {
+                "content": [
+                    "Nein!",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "nEIN",
+                        "notIfConditions": null,
+                        "option": "Doch, du hast mit einer Zeitung geschlafen!"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": null,
+                        "notIfConditions": null,
+                        "option": "Ich gebs dran!"
+                    }
+                ]
+            },
+            "nein2": {
                 "content": [
                     "Nein."
                 ]
