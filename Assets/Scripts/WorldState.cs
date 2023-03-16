@@ -20,11 +20,15 @@ public class WorldState : MonoBehaviour
     private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
     private Dictionary<KeyEvent, bool> _keyeventToActivated = new Dictionary<KeyEvent, bool>();
 
+    private Scene _currentScene = Scene.Bedroom;
+
+    public Scene CurrentScene => _currentScene;
+
     public enum Scene
     {
         Bedroom,
         Street,
-        Kiosk, 
+        Telephone, 
         JonasDebug1,
         JonasDebug2
     };
@@ -90,7 +94,7 @@ public class WorldState : MonoBehaviour
         {
             case Scene.Bedroom:
             case Scene.Street:
-            case Scene.Kiosk:
+            case Scene.Telephone:
             case Scene.JonasDebug1:
             case Scene.JonasDebug2:
                 SceneManager.LoadScene(scene.ToString());
@@ -98,6 +102,8 @@ public class WorldState : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
         }
+
+        _currentScene = scene;
     }
 
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
@@ -146,7 +152,11 @@ public class WorldState : MonoBehaviour
 
     private void RemoveInventoryItemFromGui(Item item)
     {
-        Destroy(inventoryPanel.transform.Find(item.ToString()).gameObject);
+        Transform find = inventoryPanel.transform.Find(item.ToString());
+        if (find != null)
+        {
+            Destroy(find.gameObject);
+        }
     }
     
     private void Tick()

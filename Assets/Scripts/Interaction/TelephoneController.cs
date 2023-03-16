@@ -22,7 +22,7 @@ namespace Interaction
             B7,
             B8,
             B9,
-            B_DIAL
+            B_CALL
         };
 
         public enum CallType
@@ -37,7 +37,7 @@ namespace Interaction
 
         private void OnButtonDialed(Button buttonAction)
         {
-            if (buttonAction == Button.B_DIAL)
+            if (buttonAction == Button.B_CALL)
             {
                 InitiateCall();
             }
@@ -60,12 +60,13 @@ namespace Interaction
             }
             else
             {
-                int randomCallId = _dialedNumber.ToCharArray().Sum(x => x) % 3 - 1 ;
-                callType = (CallType)Enum.Parse(typeof(CallType), "RANDOM" + randomCallId, true);
+                int randomCallId = _dialedNumber.ToCharArray().Sum(x => x) % 3;
+                callType = (CallType)Enum.Parse(typeof(CallType), "RANDOM" + randomCallId, true);    
                 Debug.Log(callType);
+                // Ideen: Gewitter Oma, R2D2, Wall-E, Warteschleife
             }
             _dialedNumber = "";
-            GameEvents.Instance.OnCall(callType);
+            GameEvents.Instance.OnCall?.Invoke(callType);
         }
     }
 }
