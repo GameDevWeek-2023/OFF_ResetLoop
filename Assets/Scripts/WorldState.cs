@@ -103,6 +103,7 @@ public class WorldState : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
         }
 
+        LoadFullInventory();
         _currentScene = scene;
     }
 
@@ -138,6 +139,14 @@ public class WorldState : MonoBehaviour
         RemoveInventoryItemFromGui(item);
     }
 
+    private void LoadFullInventory()
+    {
+        foreach (Item item in _inventory)
+        {
+            AddInventoryItemToGui(item);
+        }
+    }
+    
     private void AddInventoryItemToGui(Item item)
     {
         GameObject newInventory = Instantiate(inventoryPrefab, inventoryPanel.transform);
