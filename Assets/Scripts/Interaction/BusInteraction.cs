@@ -35,6 +35,6 @@ public class BusInteraction : ItemInteraction
 
     public void WakeBegger()
     {
-        begger.WakeBeggar();
+        begger.WakeBeggar(true);
     }
 }
