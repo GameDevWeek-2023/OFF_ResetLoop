@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a70e45f3d94e2ea5522d8763789c21, type: 3}
   m_Name: WalkingSticksWithBalls
   m_EditorClassIdentifier: 
-  item: 5
+  item: 6
+  dismantledItems: 0500000008000000
   itemsprite: {fileID: 262612129, guid: 4b59b4354ecd49c4b92c3cbc177f2a3e, type: 3}
+  itemDescription: "Ein Gehstock mit B\xE4llen"

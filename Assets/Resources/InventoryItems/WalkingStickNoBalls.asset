@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a70e45f3d94e2ea5522d8763789c21, type: 3}
   m_Name: WalkingStickNoBalls
   m_EditorClassIdentifier: 
-  item: 4
+  item: 5
+  dismantledItems: 
   itemsprite: {fileID: 910745531, guid: eaa45699073b8154a8cadd8830cd1611, type: 3}
+  itemDescription: "Du hast von diesem Gehstock einen der Tennisb\xE4lle entfernt.
+    Jetzt ist er sehr unsymmetrisch."

@@ -14,6 +14,7 @@ public abstract class ItemInteraction : MonoBehaviour
         BED_VASE,
         BED_WALKSTICK,
         BED_STOCK,
+        BED_DISMENTAL_ITEM,
         STR_NEWSPAPER,
         STR_HOMELESS,
         STR_ALCOHOL,
@@ -44,6 +45,7 @@ public abstract class ItemInteraction : MonoBehaviour
         VASE_WITH_FLOWER,
         VASE_EMPTY,
         VASE_WITH_WATER,
+        VASE_CRUSHED,
         FLOWERS,
         WALKING_STICK_NO_BALLS,
         WALKING_STICK_WITH_BALLS,
@@ -54,11 +56,12 @@ public abstract class ItemInteraction : MonoBehaviour
         ALCOHOL,
         COFFEE,
         MONEY,
+        DISMANTLE_ITEM,
         NULL_ITEM
     }
 
     [SerializeField] protected Interaction interactionId;
-    [SerializeField] protected bool clickable;
+    [SerializeField] protected bool clickable = true;
     [SerializeField] protected Item[] possibleInteractionItems;
     protected Item droppedItem;
 
@@ -75,6 +78,7 @@ public abstract class ItemInteraction : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        
     }
 
     private void OnMouseExit()

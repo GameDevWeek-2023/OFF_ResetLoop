@@ -21,6 +21,7 @@ public class DialogController : MonoBehaviour
     string activeKey;
 
     [SerializeField] private GameObject dialogPanel;
+    [SerializeField] private Image speakerImage;
     [SerializeField] private TMP_Text messageText;
     [SerializeField] private Button[] optionButtons;
 
@@ -30,12 +31,13 @@ public class DialogController : MonoBehaviour
     }
 
 
-    public void StartNewDialog(string dialogJSON)
+    public void StartNewDialog(string dialogJSON, Sprite speakerImage)
     {
         Debug.Log("Start Dialog");
         ParseDialog(dialogJSON);
         activeKey = startKey;
         UpdateUI(activeKey);
+        this.speakerImage.sprite = speakerImage;
         dialogPanel.SetActive(true);
     }
 

@@ -1,0 +1,91 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Sabrina",
+            "libraryVisible": false,
+            "playPoint": "guteFrageViellei",
+            "textSize": 0
+        },
+        "initial": "kaffeeOhDuSchwar",
+        "optionMirroring": true,
+        "stitches": {
+            "esGehtDirImmerNu": {
+                "content": [
+                    "Es geht dir immer nur um deinen Gewinn, nicht?",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "undWasIstMitFreu",
+                        "notIfConditions": null,
+                        "option": "Reine Marktwirtschaft, wenn ich etwas gebe, muss ich auch was bekommen."
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "guteFrageViellei",
+                        "notIfConditions": null,
+                        "option": "Was ist daran schlecht?"
+                    }
+                ]
+            },
+            "glaubstDuWirklic": {
+                "content": [
+                    "Glaubst du wirklich an Dinge, die dir imaginäre Stimmen mitteilen?",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wennWirAnDemPunk",
+                        "notIfConditions": null,
+                        "option": "Klar!"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "undDasFragstDuDa",
+                        "notIfConditions": null,
+                        "option": "Nein, aber ich wüsste gerne, warum ich mit einem Gebiss rede."
+                    }
+                ]
+            },
+            "guteFrageViellei": {
+                "content": [
+                    "Gute Frage. Vielleicht solltest du uns einfach eine Flasche Alkohol holen. Dann wird alles besser."
+                ]
+            },
+            "kaffeeOhDuSchwar": {
+                "content": [
+                    "Kaffee. Oh du schwarzes Ambrosia. Ich merke wie mein imaginäres Hirn in Schwung kommt.",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "glaubstDuWirklic",
+                        "notIfConditions": null,
+                        "option": "Prima, dann nutze deine imaginäre Zunge, um mir zu erklären, was hier passiert!"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "esGehtDirImmerNu",
+                        "notIfConditions": null,
+                        "option": "Du hast Kaffee bekommen. Was bekomme ich dafür?"
+                    },
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            },
+            "undDasFragstDuDa": {
+                "content": [
+                    "Und das fragst du das Gebiss?! Vielleicht solltest du lieber darüber nachdenken, warum du nicht mit Menschen sprichst. Früher hast du doch auch über alles mit deinem Bruder besprochen..."
+                ]
+            },
+            "undWasIstMitFreu": {
+                "content": [
+                    "Und was ist mit Freundschaft? Mit Familie? "
+                ]
+            },
+            "wennWirAnDemPunk": {
+                "content": [
+                    "Wenn wir an dem Punkt sind, wird es Zeit für Alkohol, oder?"
+                ]
+            }
+        }
+    },
+    "title": "Garry Coffee",
+    "url_key": 152990
+}

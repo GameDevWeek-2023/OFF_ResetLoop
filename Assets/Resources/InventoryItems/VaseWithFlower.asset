@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: VaseWithFlower
   m_EditorClassIdentifier: 
   item: 0
-  itemsprite: {fileID: 0}
+  dismantledItems: 0200000004000000
+  itemsprite: {fileID: 21300000, guid: 50a932496d92e4d40b72ec2f19699ea6, type: 3}
+  itemDescription: Eine Vase mit Blumen.
