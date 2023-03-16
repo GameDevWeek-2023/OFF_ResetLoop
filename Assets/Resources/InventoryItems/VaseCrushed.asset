@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: 3
   dismantledItems: 
-  itemsprite: {fileID: 21300000, guid: 13d1bd4c8e8707447a0f17e7d681f45b, type: 3}
+  itemsprite: {fileID: -440064239, guid: 13d1bd4c8e8707447a0f17e7d681f45b, type: 3}
   itemDescription: "Du hast die Vase zerst\xF6rt."
