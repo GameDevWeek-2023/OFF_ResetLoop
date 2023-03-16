@@ -38,6 +38,8 @@ public class WorldState : MonoBehaviour
 
     public Item CurrentlySelectedInventoryItem => _currentlySelectedInventoryItem;
 
+    public int Time => _time;
+
     private void Awake()
     {
         if (Instance == null)
@@ -154,6 +156,7 @@ public class WorldState : MonoBehaviour
     private void Tick()
     {
         _time++;
+
         if (_time == 60)
         {
             GameEvents.Instance.OnWorldReset?.Invoke();

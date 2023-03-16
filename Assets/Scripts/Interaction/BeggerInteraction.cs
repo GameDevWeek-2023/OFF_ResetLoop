@@ -12,8 +12,6 @@ public class BeggerInteraction : ItemInteraction
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D collider;
 
-    private int time;
-
     [Header("Items")]
     [SerializeField] private GameObject beer;
     private BeerInteraction beerInteraction;
@@ -28,32 +26,28 @@ public class BeggerInteraction : ItemInteraction
     [SerializeField] private Sprite beggerSleepingHead;
     [SerializeField] private Sprite beggerAwakeHead;
 
-    private void Awake()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode arg1)
+    protected override void Start()
     {
+        base.Start();
+
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         collider = GetComponent<BoxCollider2D>();
         beerInteraction = beer.GetComponent<BeerInteraction>();
-      
 
-        Debug.Log($"scene {scene} loaded, beggar awake: {WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.BEGGAR_AWAKE)}");
-        if (WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.BEGGAR_AWAKE)){
-            WakeBeggar(false);
-        } else
+        Debug.Log($"START, beggar awake: {WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.BEGGAR_AWAKE)}");
+        if (!WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.BEGGAR_AWAKE) && WorldState.Instance.Time > 30)
+        {
+            WakeBeggar();
+        }
+        else if (WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.BEGGAR_AWAKE))
+        {
+            WakeBeggar();
+        }
+        else
         {
             InitSleepingBeggar();
         }
-    }
-
-
-    public override void OnTimeChanged(int time)
-    {
-        this.time = time;
-       
     }
 
     public override void OnUsableItemDrop(Item item)
@@ -73,18 +67,18 @@ public class BeggerInteraction : ItemInteraction
         switch (state)
         {
             case State.SLEEPING:
-                GameEvents.Instance.OnDialogueStart(dialogSleeping.text, beggerSleeping);
+                GameEvents.Instance.OnDialogueStart?.Invoke(dialogSleeping.text, beggerSleeping);
                 break;
             case State.AWAKE:
-                GameEvents.Instance.OnDialogueStart(dialogSleeping.text, beggerSleeping);
+                GameEvents.Instance.OnDialogueStart?.Invoke(dialogSleeping.text, beggerSleeping);
                 break;
 
         }
     }
 
-    public void WakeBeggar(bool triggeredByEvent)
+    public void WakeBeggar()
     {
-        Debug.Log("Begger Awake" + triggeredByEvent);
+        Debug.Log("Begger Awake");
         state = State.AWAKE;
         spriteRenderer.sprite = beggarAwake;
         gameObject.transform.position = new Vector3(3, -1, 0);
@@ -94,10 +88,7 @@ public class BeggerInteraction : ItemInteraction
             beer.SetActive(true);
         }
 
-        if (triggeredByEvent)
-        {
-            GameEvents.Instance.OnKeyEvent(WorldState.KeyEvent.BEGGAR_AWAKE);
-        }
+        GameEvents.Instance.OnKeyEvent?.Invoke(WorldState.KeyEvent.BEGGAR_AWAKE);
     }
 
     private void InitSleepingBeggar()
@@ -108,5 +99,10 @@ public class BeggerInteraction : ItemInteraction
 
         beerInteraction.DeactivateBeer();
         beer.SetActive(false);
+    }
+
+    public override void OnTimeChanged(int time)
+    {
+        
     }
 }
