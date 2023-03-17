@@ -85,6 +85,9 @@ namespace Interaction
                 case Item.WALKING_STICK_NO_BALLS:
                     ProcessWalkingStick();
                     break;
+                case Item.WALKING_STICK_WITH_BALLS:
+                    ProcessWalkingStick();
+                    break;
             }
             StartDialog();
         }
