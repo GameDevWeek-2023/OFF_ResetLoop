@@ -52,6 +52,9 @@ namespace Interaction
                 case State.BOOZE:
                     GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileBooze.text, garryBooze);
                     break;
+                case State.WALKING_STICK:
+                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileBoozeWalkingStick.text, garryBooze);
+                    break;
             }
         }
             
@@ -90,8 +93,9 @@ namespace Interaction
         {
             if(state == State.BOOZE)
             {
-                GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileBooze.text, garryBooze);
                 state = State.WALKING_STICK;
+                GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileBoozeWalkingStick.text, garryBooze);
+                
                 RemoveFromInventory(Item.WALKING_STICK_NO_BALLS);
                 AddToInventory(Item.WALKING_STICK_CRUSHED);
             }
