@@ -7,12 +7,6 @@ public class CoffeeInteraction : SimpleItemPickupInteraction
 {
     protected override void Start()
     {
-        clickable = false;
-        GameEvents.Instance.OnCall += OnCall;
-    }
-
-    private void OnCall(TelephoneController.CallType obj)
-    {
-        clickable = true;
+        clickable = WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.KIOSK_OWNER_GONE);
     }
 }

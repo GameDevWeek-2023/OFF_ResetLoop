@@ -14,7 +14,10 @@ public class KioskInteraktion : ItemInteraction
     protected override void Start()
     {
         base.Start();
-        GameEvents.Instance.OnCall += OnCall;
+        if (WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.KIOSK_OWNER_GONE))
+        {
+            Destroy(gameObject);
+        };
     }
 
     public override void OnTimeChanged(int time)
@@ -31,11 +34,4 @@ public class KioskInteraktion : ItemInteraction
     {
         GameEvents.Instance.OnDialogueStart?.Invoke(dialogStandard.text, kioskSellerHead);
     }
-
-    private void OnCall(TelephoneController.CallType obj)
-    {
-        gameObject.SetActive(false);
-    }
-
-
 }

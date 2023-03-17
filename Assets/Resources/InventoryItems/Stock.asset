@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: 10
   dismantledItems: 
-  itemsprite: {fileID: 0}
+  itemsprite: {fileID: 21300000, guid: b93c40ac7abe62b4d96815f0b69ae86e, type: 3}
   itemDescription: Aktien. Sie scheinen aber in letzter Zeit stark gefallen zu sein.

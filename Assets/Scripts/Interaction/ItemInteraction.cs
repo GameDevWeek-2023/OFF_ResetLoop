@@ -59,6 +59,7 @@ public abstract class ItemInteraction : MonoBehaviour
         MONEY_RICH,
         DISMANTLE_ITEM,
         ASPERIN,
+        PHONEBOOK,
         NULL_ITEM
     }
 

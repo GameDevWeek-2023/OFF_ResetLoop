@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: 13
   dismantledItems: 
-  itemsprite: {fileID: 0}
+  itemsprite: {fileID: 21300000, guid: bbe68d67faeff8a4a92745dfe5aa6c68, type: 3}
   itemDescription: Etwas Geld.

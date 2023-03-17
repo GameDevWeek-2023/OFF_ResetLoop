@@ -14,6 +14,8 @@ namespace Interaction
         [SerializeField] private TextAsset dialogFileWater;
         [SerializeField] private TextAsset dialogFileCoffee;
         [SerializeField] private TextAsset dialogFileBooze;
+        [SerializeField] private TextAsset dialogFileBoozeWalkingStick;
+
 
         [Header("Sprites")]
         [SerializeField] private Sprite garryNoWater;
@@ -49,6 +51,9 @@ namespace Interaction
                     break;
                 case State.BOOZE:
                     GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileBooze.text, garryBooze);
+                    break;
+                case State.WALKING_STICK:
+                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileBoozeWalkingStick.text, garryBooze);
                     break;
             }
         }
@@ -89,6 +94,8 @@ namespace Interaction
             if(state == State.BOOZE)
             {
                 state = State.WALKING_STICK;
+                GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileBoozeWalkingStick.text, garryBooze);
+                
                 RemoveFromInventory(Item.WALKING_STICK_NO_BALLS);
                 AddToInventory(Item.WALKING_STICK_CRUSHED);
             }
