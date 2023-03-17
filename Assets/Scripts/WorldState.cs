@@ -141,7 +141,9 @@ public class WorldState : MonoBehaviour
         OnSceneChange(Scene.Bedroom);
         _inventory.Clear();
         _everythingEverywhereAllAtOnce.Clear();
-        foreach (KeyEvent keyEvent in _keyeventToActivated.Keys)
+        List< KeyEvent > keyEventList = _keyeventToActivated.Keys.ToList();
+
+        foreach (KeyEvent keyEvent in keyEventList)
         {
             if (_permanentKeyEvents.Contains(keyEvent))
             {
@@ -234,7 +236,7 @@ public class WorldState : MonoBehaviour
     {
         _time++;
         Debug.Log(_time);
-        if (_time == 60)
+        if (_time == 5)
         {
             GameEvents.Instance.OnWorldReset?.Invoke();
         }
