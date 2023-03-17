@@ -1,6 +1,7 @@
 using System;
 using model;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace DefaultNamespace
 {
@@ -8,8 +9,11 @@ namespace DefaultNamespace
     {
         private void OnMouseDown()
         {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            GameEvents.Instance.OnMovePlayerToPosition(new Position(mousePos.x, mousePos.y));
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                GameEvents.Instance.OnMovePlayerToPosition(new Position(mousePos.x, mousePos.y));
+            }
         }
 
         private void OnMouseEnter()

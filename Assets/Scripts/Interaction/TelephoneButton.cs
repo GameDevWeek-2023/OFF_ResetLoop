@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Interaction
 {
@@ -8,7 +9,10 @@ namespace Interaction
         [SerializeField] private TelephoneController.Button _buttonAction;
         private void OnMouseDown()
         {
-            GameEvents.Instance.OnButtonDialed(_buttonAction);
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                GameEvents.Instance.OnButtonDialed(_buttonAction);
+            }
         }
     }
 }
