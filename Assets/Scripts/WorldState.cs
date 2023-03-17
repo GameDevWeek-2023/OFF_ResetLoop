@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Interaction;
 using ScriptableObjects;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class WorldState : MonoBehaviour
     private Item _currentlySelectedInventoryItem = Item.NULL_ITEM;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject inventoryPrefab;
+    [SerializeField] private MouseCursorSO[] _mouseCursorArray;
     private InventoryItem[] _inventoryItemScriptableObjects;
     private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
     private Dictionary<KeyEvent, bool> _keyeventToActivated = new Dictionary<KeyEvent, bool>();
@@ -25,6 +27,20 @@ public class WorldState : MonoBehaviour
 
     public Scene CurrentScene => _currentScene;
 
+    public enum MouseCursor
+    {
+        DEFAULT,
+        FOOT,
+        SPEECH,
+        INSPECT,
+        ARROW_UP,
+        ARROW_RIGHT,
+        ARROW_DOWN,
+        ARROW_LEFT
+    };
+    
+    
+    
     public enum Scene
     {
         Bedroom,
@@ -66,8 +82,9 @@ public class WorldState : MonoBehaviour
         foreach(KeyEvent keyEvent in Enum.GetValues(typeof(KeyEvent)))
         {
             _keyeventToActivated.Add(keyEvent, false);
-
         }
+        _mouseCursorArray = Resources.LoadAll<MouseCursorSO>("MouseCursor");
+        OnMouseCursorChange(MouseCursor.DEFAULT);
     }
 
     private void Start()
@@ -84,6 +101,7 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnItemRemoved += OnItemRemoved;
         GameEvents.Instance.OnSceneChange += OnSceneChange;
         GameEvents.Instance.OnKeyEvent += OnKeyEvent;
+        GameEvents.Instance.OnMouseCursorChange += OnMouseCursorChange;
         SceneManager.sceneLoaded += OnSceneLoaded;
         StartTime();
     }
@@ -200,5 +218,11 @@ public class WorldState : MonoBehaviour
     public bool HasKeyEventHappend(KeyEvent keyEvent)
     {
         return _keyeventToActivated[keyEvent];
+    }
+
+    public void OnMouseCursorChange(MouseCursor mouseCursorState)
+    {
+        MouseCursorSO mouseCursorSo = _mouseCursorArray.FirstOrDefault(obj => obj.MouseCursorState == mouseCursorState);
+        if (mouseCursorSo is not null) Cursor.SetCursor(mouseCursorSo.MouseCursorImage, Vector2.zero, CursorMode.Auto);
     }
 }

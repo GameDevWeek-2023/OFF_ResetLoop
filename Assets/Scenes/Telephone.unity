@@ -142,8 +142,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 132490629}
-  - component: {fileID: 132490631}
-  - component: {fileID: 132490630}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -167,54 +165,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &132490630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 132490628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ccc8fd5c45b41d9be3b94dafa289758, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!60 &132490631
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 132490628}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.3059427, y: -1.3481901}
-      - {x: -0.25931096, y: -2.1585085}
-      - {x: -0.26987356, y: -2.7085285}
-      - {x: -3.996528, y: -2.8168128}
-      - {x: -4.1154284, y: -1.6456323}
-      - {x: -6.029227, y: -1.6319351}
-      - {x: -7.887914, y: -3.222964}
-      - {x: -9.010436, y: -3.4389622}
-      - {x: -9.406559, y: -3.8955884}
-      - {x: 6.7854238, y: -3.822098}
-      - {x: 4.233599, y: -1.136282}
 --- !u!114 &158006907 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1444671175439352564, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
@@ -1864,6 +1814,80 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryPanel: {fileID: 316498625}
   inventoryPrefab: {fileID: 6231002968515280176, guid: e351b4c6402af4dc2a931272b8d0f235, type: 3}
+  _mouseCursorArray: []
+--- !u!1 &1973875093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1973875096}
+  - component: {fileID: 1973875095}
+  - component: {fileID: 1973875094}
+  m_Layer: 0
+  m_Name: DoorToStreet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1973875094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973875093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7e8290362140fe8f5b3307fb470b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToGoTo: 1
+  _mouseCursor: 6
+--- !u!61 &1973875095
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973875093}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.34465623, y: -0.87177813}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 19.23, y: 1.78}
+  m_EdgeRadius: 0
+--- !u!4 &1973875096
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973875093}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.06, y: -3.25, z: 240.50356}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2002911013
 GameObject:
   m_ObjectHideFlags: 0

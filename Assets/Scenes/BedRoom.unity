@@ -1794,6 +1794,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryPanel: {fileID: 316498625}
   inventoryPrefab: {fileID: 6231002968515280176, guid: e351b4c6402af4dc2a931272b8d0f235, type: 3}
+  _mouseCursorArray: []
 --- !u!1 &2020984005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1926,6 +1927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToGoTo: 1
+  _mouseCursor: 5
 --- !u!61 &2095245943
 BoxCollider2D:
   m_ObjectHideFlags: 0

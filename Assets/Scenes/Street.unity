@@ -617,6 +617,7 @@ MonoBehaviour:
   interactionId: 13
   clickable: 0
   possibleInteractionItems: 
+  _mouseCursor: 3
   item: 12
 --- !u!61 &254256200
 BoxCollider2D:
@@ -843,6 +844,7 @@ MonoBehaviour:
   interactionId: 10
   clickable: 0
   possibleInteractionItems: 
+  _mouseCursor: 3
   begger: {fileID: 552858635}
   startDriving: 28
 --- !u!61 &389715126
@@ -1157,6 +1159,7 @@ MonoBehaviour:
   interactionId: 6
   clickable: 1
   possibleInteractionItems: 0d0000000e000000
+  _mouseCursor: 3
   beer: {fileID: 1017295539}
   dialogSleeping: {fileID: 4900000, guid: 796a16e68e92cd945a5d35504f9932aa, type: 3}
   dialogAwake: {fileID: 4900000, guid: 2519fb17df3bd434e87d18eb55a2b4f4, type: 3}
@@ -1223,6 +1226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToGoTo: 2
+  _mouseCursor: 4
 --- !u!61 &745746027
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1380,6 +1384,7 @@ MonoBehaviour:
   interactionId: 4
   clickable: 1
   possibleInteractionItems: 000000000100000006000000
+  _mouseCursor: 3
 --- !u!61 &789360242
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1786,6 +1791,7 @@ MonoBehaviour:
   interactionId: 7
   clickable: 0
   possibleInteractionItems: 
+  _mouseCursor: 3
   item: 11
 --- !u!61 &1017295543
 BoxCollider2D:
@@ -1965,6 +1971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToGoTo: 0
+  _mouseCursor: 4
 --- !u!61 &1344918341
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2755,6 +2762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryPanel: {fileID: 316498625}
   inventoryPrefab: {fileID: 6231002968515280176, guid: e351b4c6402af4dc2a931272b8d0f235, type: 3}
+  _mouseCursorArray: []
 --- !u!1001 &1930946210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2999,6 +3007,7 @@ MonoBehaviour:
   interactionId: 9
   clickable: 1
   possibleInteractionItems: 0800000007000000
+  _mouseCursor: 3
   ball: {fileID: 1543673978}
   stick: {fileID: 1478545926}
   house: {fileID: 1563640041}
