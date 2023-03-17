@@ -49,7 +49,8 @@ public class WorldState : MonoBehaviour
         Street,
         Telephone,
         JonasDebug1,
-        JonasDebug2
+        JonasDebug2,
+        End
     };
 
     public enum KeyEvent
@@ -110,6 +111,8 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnWorldReset += OnWorldReset;
         SceneManager.sceneLoaded += OnSceneLoaded;
 
+        GameEvents.Instance.OnItemFound(Item.ALCOHOL);
+
         StartTime();
     }
 
@@ -121,6 +124,7 @@ public class WorldState : MonoBehaviour
             case Scene.Bedroom:
             case Scene.Street:
             case Scene.Telephone:
+            case Scene.End:
             case Scene.JonasDebug1:
             case Scene.JonasDebug2:
                 SceneManager.LoadScene(scene.ToString());
