@@ -34,7 +34,7 @@ public class LancelotInteraction : ItemInteraction
     {
         base.Start();
         _agent = GetComponent<NavMeshAgent>();
-        _animator = transform.Find("Sprite").GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
     public override void OnTimeChanged(int time)
     {
