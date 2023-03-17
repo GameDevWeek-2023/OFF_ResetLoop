@@ -169,37 +169,37 @@ public class LancelotInteraction : ItemInteraction
                 ball.SetActive(false);
                 stick.SetActive(false);
                 house.SetActive(false);
-                prefabAsperin.SetActive(false);
+                aperin.SetActive(false);
                 break;
             case Toy.BALL:
                 ball.SetActive(true);
                 stick.SetActive(false);
                 house.SetActive(false);
-                prefabAsperin.SetActive(false);
+                aperin.SetActive(false);
                 break;
             case Toy.STICK:
                 ball.SetActive(false);
                 stick.SetActive(true);
                 house.SetActive(false);
-                prefabAsperin.SetActive(false);
+                aperin.SetActive(false);
                 break;
             case Toy.FlYING_HOUSE:
                 ball.SetActive(false);
                 stick.SetActive(false);
                 house.SetActive(true);
-                prefabAsperin.SetActive(false);
+                aperin.SetActive(false);
                 break;
             case Toy.ASPERIN:
                 ball.SetActive(false);
                 stick.SetActive(false);
-                house.SetActive(true);
-                prefabAsperin.SetActive(true);
+                house.SetActive(false);
+                aperin.SetActive(true);
                 break;
             default:
                 ball.SetActive(false);
                 stick.SetActive(false);
                 house.SetActive(false);
-                prefabAsperin.SetActive(false);
+                aperin.SetActive(false);
                 break;
         }
     }
