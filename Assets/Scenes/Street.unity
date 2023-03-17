@@ -2303,10 +2303,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 416033603
+  m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d72fe614b186c4de3b8fca5b1e0d5077, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f8d4452ae4a3730448f33d5475d29ce1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2674,6 +2674,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 9288d65df73602b4694b77a0230437db, type: 3}
+    - target: {fileID: 5924071220352604453, guid: b680af6a4cd14ae44a38566826e754b2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924071220352604453, guid: b680af6a4cd14ae44a38566826e754b2, type: 3}
+      propertyPath: m_SortingOrder
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924071220352604453, guid: b680af6a4cd14ae44a38566826e754b2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 416033603
+      objectReference: {fileID: 0}
     - target: {fileID: 5924071220352604454, guid: b680af6a4cd14ae44a38566826e754b2, type: 3}
       propertyPath: m_Name
       value: KioskSeller
