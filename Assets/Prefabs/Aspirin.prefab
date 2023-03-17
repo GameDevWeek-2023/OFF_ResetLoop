@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3890412129731247025
 Transform:
   m_ObjectHideFlags: 0
@@ -127,4 +127,5 @@ MonoBehaviour:
   interactionId: 11
   clickable: 1
   possibleInteractionItems: 
+  _mouseCursor: 3
   item: 16
