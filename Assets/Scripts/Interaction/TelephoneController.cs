@@ -7,8 +7,8 @@ namespace Interaction
     public class TelephoneController : MonoBehaviour
     {
         private string _dialedNumber = "";
-        private string stockNumber = "1234";
-        private string kioskOwnerNumber = "11880";
+        private string stockNumber = "4711";
+        private string kioskOwnerNumber = "0815";
         
         public enum Button
         {
