@@ -15,7 +15,5 @@ MonoBehaviour:
   item: 9
   dismantledItems: 
   itemsprite: {fileID: 21300000, guid: 3aae0605c878f9449b52440083f8ab3e, type: 3}
-  itemDescription: "Eine Seite der Zeitung mit Kontaktanzeigen.\nUnter anderem sucht
-    unser Kiosbesitzer nach \"einer h\xFCbschen, sportlichen Frau, die Lust auf Abenteuer
-    hat, gut kocht und gerne den Haushalt macht\".Er freut auf Anrufe unter der Telefonnummer
-    666042."
+  itemDescription: "Eine Seite der Zeitung mit Kontaktanzeigen. Der Kiosbesitzer
+    freut sich unter der Nummer 0815 \xFCber Anrufe."
