@@ -21,28 +21,25 @@ namespace Interaction
             {
                 if (callType == TelephoneController.CallType.STOCK) OnStockCall();
             };
-            gameObject.SetActive(true);
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteRenderer.enabled = false;
         }
 
         private void OnStockCall()
         {
-            if (WorldState.Instance.ItemExists(ItemInteraction.Item.STOCK))
+            if (WorldState.Instance.ItemExists(Item.STOCK))
             {
                 SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-                if (WorldState.Instance.Time > 0)
+                if (WorldState.Instance.Time > 30)
                 {
                     item = Item.MONEY;
                     spriteRenderer.sprite = lowMoneySprite;
-                    //TODO sprite, Dialog
                     GameEvents.Instance.OnDialogueStart(dialogLowMoney.text, phoneSprite);
                 }
                 else
                 {
                     item = Item.MONEY_RICH;
                     spriteRenderer.sprite = highMoneySprite;
-                    //TODO sprite
                     GameEvents.Instance.OnDialogueStart(dialogHighMoney.text, phoneSprite);
                 }
                 clickable = true;
