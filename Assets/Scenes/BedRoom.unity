@@ -571,6 +571,7 @@ MonoBehaviour:
   interactionId: 2
   clickable: 1
   possibleInteractionItems: 
+  _mouseCursor: 3
   item: 6
 --- !u!114 &570824954 stripped
 MonoBehaviour:
@@ -718,7 +719,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647533153}
   m_LocalRotation: {x: -0, y: -0, z: 0.051377337, w: 0.99867934}
-  m_LocalPosition: {x: -5.0817585, y: 1.6151965, z: 0}
+  m_LocalPosition: {x: -5.08, y: 1.89, z: 0}
   m_LocalScale: {x: 0.9721959, y: 0.9721959, z: 0.972196}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -759,6 +760,7 @@ MonoBehaviour:
   interactionId: 4
   clickable: 1
   possibleInteractionItems: 000000000100000006000000
+  _mouseCursor: 3
 --- !u!61 &789360242
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1794,6 +1796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryPanel: {fileID: 316498625}
   inventoryPrefab: {fileID: 6231002968515280176, guid: e351b4c6402af4dc2a931272b8d0f235, type: 3}
+  _mouseCursorArray: []
 --- !u!1 &2020984005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1926,6 +1929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToGoTo: 1
+  _mouseCursor: 5
 --- !u!61 &2095245943
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2152,6 +2156,7 @@ MonoBehaviour:
   interactionId: 1
   clickable: 1
   possibleInteractionItems: 
+  _mouseCursor: 3
   item: 0
 --- !u!61 &2118234390
 BoxCollider2D:
@@ -2196,7 +2201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 645797247534703160, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1444671175571832220, guid: c530ed4957ecfbd4a9384d322e175f0d, type: 3}
       propertyPath: m_Color.a
@@ -2347,6 +2352,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1582839509252612997, guid: bff2b6d5a831a45568360fa3efb1b553, type: 3}
+      propertyPath: musicTracks.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582839509252612997, guid: bff2b6d5a831a45568360fa3efb1b553, type: 3}
+      propertyPath: musicTracks.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b99d129b534d64ff8b866ab7926b75c5, type: 3}
+    - target: {fileID: 1582839509252612997, guid: bff2b6d5a831a45568360fa3efb1b553, type: 3}
+      propertyPath: musicTracks.Array.data[0].volume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1582839509252612999, guid: bff2b6d5a831a45568360fa3efb1b553, type: 3}
       propertyPath: m_Name
       value: Audio
@@ -2360,6 +2377,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2432445270560815248, guid: 1601bf55e1360194b82996795b57efa3, type: 3}
+      propertyPath: possibleInteractionItems.Array.data[1]
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432445270560815248, guid: 1601bf55e1360194b82996795b57efa3, type: 3}
+      propertyPath: possibleInteractionItems.Array.data[2]
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432445270560815248, guid: 1601bf55e1360194b82996795b57efa3, type: 3}
+      propertyPath: possibleInteractionItems.Array.data[3]
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2432445270560815249, guid: 1601bf55e1360194b82996795b57efa3, type: 3}
       propertyPath: m_RootOrder
       value: 3

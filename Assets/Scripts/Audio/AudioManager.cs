@@ -79,6 +79,7 @@ public class AudioManager : MonoBehaviour
         GameEvents.Instance.OnCall += OnCall;
         GameEvents.Instance.OnButtonDialed += OnButtonDialed;
         GameEvents.Instance.OnFootStep += OnFootstep;
+        _musicManager.Play();
         OnSceneChange(WorldState.Instance.CurrentScene);
     }
 

@@ -1,0 +1,58 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Sabrina",
+            "libraryVisible": false,
+            "playPoint": "wasSollIchDennDa",
+            "textSize": 0
+        },
+        "initial": "wasSollIchDennDa",
+        "optionMirroring": true,
+        "stitches": {
+            "dafrGebeIchDirNi": {
+                "content": [
+                    "Dafür gebe ich dir nicht einmal mein Bier."
+                ]
+            },
+            "dasIstNichtMalAn": {
+                "content": [
+                    "Das ist nicht mal ansatzweise genug!"
+                ]
+            },
+            "dasReichtNicht": {
+                "content": [
+                    "Das reicht nicht!"
+                ]
+            },
+            "wasSollIchDennDa": {
+                "content": [
+                    "Was soll ich denn damit?",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "dasIstNichtMalAn",
+                        "notIfConditions": null,
+                        "option": "Du wolltest doch Geld haben?!"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "dasReichtNicht",
+                        "notIfConditions": null,
+                        "option": "Dein Anteil aus der Firma."
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "dafrGebeIchDirNi",
+                        "notIfConditions": null,
+                        "option": "Die Bezahlung für dein Bier!"
+                    },
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            }
+        }
+    },
+    "title": "Beggar_Not_Enough_Money",
+    "url_key": 153142
+}

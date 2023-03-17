@@ -1,0 +1,25 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Anonymous",
+            "libraryVisible": false,
+            "playPoint": "duHastDeineAktie",
+            "textSize": 0
+        },
+        "initial": "duHastDeineAktie",
+        "optionMirroring": true,
+        "stitches": {
+            "duHastDeineAktie": {
+                "content": [
+                    "Du hast deine Aktien für 50 € verkauft. Damit hast du ein riesiges Verlustgeschäft gemacht. Schade!",
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            }
+        }
+    },
+    "title": "MOney not enough",
+    "url_key": 153188
+}

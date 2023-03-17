@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Interaction;
 using ScriptableObjects;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class WorldState : MonoBehaviour
     private Item _currentlySelectedInventoryItem = Item.NULL_ITEM;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject inventoryPrefab;
+    [SerializeField] private MouseCursorSO[] _mouseCursorArray;
     private InventoryItem[] _inventoryItemScriptableObjects;
     private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
     private Dictionary<KeyEvent, bool> _keyeventToActivated = new Dictionary<KeyEvent, bool>();
@@ -25,11 +27,24 @@ public class WorldState : MonoBehaviour
 
     public Scene CurrentScene => _currentScene;
 
+    public enum MouseCursor
+    {
+        DEFAULT,
+        FOOT,
+        SPEECH,
+        INSPECT,
+        ARROW_UP,
+        ARROW_RIGHT,
+        ARROW_DOWN,
+        ARROW_LEFT
+    };
+
+
     public enum Scene
     {
         Bedroom,
         Street,
-        Telephone, 
+        Telephone,
         JonasDebug1,
         JonasDebug2
     };
@@ -56,18 +71,20 @@ public class WorldState : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
         _inventoryItemScriptableObjects = Resources.LoadAll<InventoryItem>("InventoryItems");
         foreach (InventoryItem inventoryItemScriptableObject in _inventoryItemScriptableObjects)
         {
             _itemToScriptableObject[inventoryItemScriptableObject.Item] = inventoryItemScriptableObject;
         }
 
-        foreach(KeyEvent keyEvent in Enum.GetValues(typeof(KeyEvent)))
+        foreach (KeyEvent keyEvent in Enum.GetValues(typeof(KeyEvent)))
         {
             _keyeventToActivated.Add(keyEvent, false);
-
         }
+
+        _mouseCursorArray = Resources.LoadAll<MouseCursorSO>("MouseCursor");
+        OnMouseCursorChange(MouseCursor.DEFAULT);
     }
 
     private void Start()
@@ -77,14 +94,17 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnDialogueClosed += StartTime;
         GameEvents.Instance.OnInventoryItemSelected += delegate(Item item)
         {
-            Debug.Log("Item selected: "+ item);
+            Debug.Log("Item selected: " + item);
             _currentlySelectedInventoryItem = item;
         };
         GameEvents.Instance.OnInventoryItemConsumed += delegate { _currentlySelectedInventoryItem = Item.NULL_ITEM; };
         GameEvents.Instance.OnItemRemoved += OnItemRemoved;
         GameEvents.Instance.OnSceneChange += OnSceneChange;
         GameEvents.Instance.OnKeyEvent += OnKeyEvent;
+        GameEvents.Instance.OnMouseCursorChange += OnMouseCursorChange;
+        GameEvents.Instance.OnWorldReset += OnWorldReset;
         SceneManager.sceneLoaded += OnSceneLoaded;
+
         StartTime();
     }
 
@@ -107,6 +127,13 @@ public class WorldState : MonoBehaviour
         _currentScene = scene;
     }
 
+    public void OnWorldReset()
+    {
+        OnSceneChange(Scene.Bedroom);
+        _inventory.Clear();
+        _everythingEverywhereAllAtOnce.Clear();
+    }
+
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
     {
         inventoryPanel = GameObject.Find("InventoryPanel");
@@ -119,14 +146,15 @@ public class WorldState : MonoBehaviour
                 Destroy(simpleItemPickupGO);
             }
         }
+
         LoadFullInventory();
     }
-    
+
     public bool ItemExists(Item item)
     {
         return _inventory.Contains(item);
     }
-    
+
     private void StartTime()
     {
         InvokeRepeating(nameof(Tick), 0f, 1f);
@@ -157,7 +185,7 @@ public class WorldState : MonoBehaviour
             AddInventoryItemToGui(item);
         }
     }
-    
+
     private void AddInventoryItemToGui(Item item)
     {
         GameObject newInventory = Instantiate(inventoryPrefab, inventoryPanel.transform);
@@ -178,7 +206,7 @@ public class WorldState : MonoBehaviour
             Destroy(find.gameObject);
         }
     }
-    
+
     private void Tick()
     {
         _time++;
@@ -200,5 +228,18 @@ public class WorldState : MonoBehaviour
     public bool HasKeyEventHappend(KeyEvent keyEvent)
     {
         return _keyeventToActivated[keyEvent];
+    }
+
+    public void OnMouseCursorChange(MouseCursor mouseCursorState)
+    {
+        MouseCursorSO mouseCursorSo = _mouseCursorArray.FirstOrDefault(obj => obj.MouseCursorState == mouseCursorState);
+        Vector2 hotSpot = Vector2.zero;
+        // if (mouseCursorState == MouseCursor.DEFAULT)
+        // {
+        float x = mouseCursorSo.MouseCursorImage.width * 0.315f;
+        float y = mouseCursorSo.MouseCursorImage.height * 0.21f;
+        hotSpot = new Vector2(x, y);
+        // }
+        if (mouseCursorSo is not null) Cursor.SetCursor(mouseCursorSo.MouseCursorImage, hotSpot, CursorMode.Auto);
     }
 }

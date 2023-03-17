@@ -1,0 +1,25 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Anonymous",
+            "libraryVisible": false,
+            "playPoint": "duHastDeineAktie",
+            "textSize": 0
+        },
+        "initial": "duHastDeineAktie",
+        "optionMirroring": true,
+        "stitches": {
+            "duHastDeineAktie": {
+                "content": [
+                    "Du hast deine Aktien für 10.000 € verkauft. Gratuliere. Das war der perfekte Zeitpunkt!",
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            }
+        }
+    },
+    "title": "Telefon_High_Money",
+    "url_key": 153188
+}

@@ -19,6 +19,7 @@ public abstract class ItemInteraction : MonoBehaviour
         STR_BUSINESSMAN,
         STR_DOG,
         STR_BUS,
+        STR_ASPERIN,
         KIO_RADIO,
         KIO_OWNER,
         KIO_COFFEE,
@@ -57,6 +58,7 @@ public abstract class ItemInteraction : MonoBehaviour
         MONEY,
         MONEY_RICH,
         DISMANTLE_ITEM,
+        ASPERIN,
         NULL_ITEM
     }
 
@@ -65,6 +67,8 @@ public abstract class ItemInteraction : MonoBehaviour
     [SerializeField] protected Interaction interactionId;
     [SerializeField] protected bool clickable = true;
     [SerializeField] protected Item[] possibleInteractionItems;
+    [SerializeField] protected WorldState.MouseCursor _mouseCursor = WorldState.MouseCursor.INSPECT;
+
     protected Item droppedItem;
 
     // Start is called before the first frame update
@@ -85,6 +89,7 @@ public abstract class ItemInteraction : MonoBehaviour
         if (clickable)
         {
             LeanTween.scale(gameObject, _originalScale * 1.2f, 0.1f).setEaseInOutCubic();
+            GameEvents.Instance.OnMouseCursorChange(_mouseCursor);
         }
     }
 
@@ -93,6 +98,8 @@ public abstract class ItemInteraction : MonoBehaviour
         if (clickable)
         {
             LeanTween.scale(gameObject, _originalScale, 0.2f).setEaseInOutCubic();
+            GameEvents.Instance.OnMouseCursorChange(WorldState.MouseCursor.DEFAULT);
+
         }
     }
 
