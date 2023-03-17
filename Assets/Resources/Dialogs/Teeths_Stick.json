@@ -1,0 +1,25 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Anonymous",
+            "libraryVisible": false,
+            "playPoint": "dankeDasHatGutGe",
+            "textSize": 0
+        },
+        "initial": "dankeDasHatGutGe",
+        "optionMirroring": true,
+        "stitches": {
+            "dankeDasHatGutGe": {
+                "content": [
+                    "Danke, das hat gut getan. Ich habe schon ewig nicht mehr richtig zugebissen.",
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            }
+        }
+    },
+    "title": "Untitled Story",
+    "url_key": 153191
+}
