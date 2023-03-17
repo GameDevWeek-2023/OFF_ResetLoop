@@ -19,6 +19,7 @@ public abstract class ItemInteraction : MonoBehaviour
         STR_BUSINESSMAN,
         STR_DOG,
         STR_BUS,
+        STR_ASPERIN,
         KIO_RADIO,
         KIO_OWNER,
         KIO_COFFEE,
@@ -57,6 +58,7 @@ public abstract class ItemInteraction : MonoBehaviour
         MONEY,
         MONEY_RICH,
         DISMANTLE_ITEM,
+        ASPERIN,
         NULL_ITEM
     }
 
