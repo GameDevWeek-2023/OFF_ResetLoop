@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: 14
   dismantledItems: 
-  itemsprite: {fileID: 21300000, guid: bbe68d67faeff8a4a92745dfe5aa6c68, type: 3}
+  itemsprite: {fileID: 21300000, guid: 6dd80dd90506dbf40b7165676226de7f, type: 3}
   itemDescription: Eine enorme Summe Geld.
