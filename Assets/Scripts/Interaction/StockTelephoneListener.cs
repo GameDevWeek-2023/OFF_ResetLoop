@@ -11,6 +11,7 @@ namespace Interaction
         [SerializeField] private Sprite phoneSprite;
         [SerializeField] private TextAsset dialogLowMoney;
         [SerializeField] private TextAsset dialogHighMoney;
+        [SerializeField] private TextAsset dialogNoStock;
         private SpriteRenderer _spriteRenderer;
 
         protected override void Start()
@@ -49,7 +50,7 @@ namespace Interaction
             }
             else
             {
-                GameEvents.Instance.OnDialogueStart("Telephone_No_Stock.json", null);
+                GameEvents.Instance.OnDialogueStart(dialogNoStock.text, phoneSprite);
             }
         }
     }

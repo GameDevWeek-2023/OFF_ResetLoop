@@ -1951,6 +1951,7 @@ MonoBehaviour:
   phoneSprite: {fileID: 21300000, guid: 94d0fbd4a9cfbae43999ccd1f57c6e8e, type: 3}
   dialogLowMoney: {fileID: 4900000, guid: f1d2387ac2bc3f84da88626601652bae, type: 3}
   dialogHighMoney: {fileID: 4900000, guid: b04db92f531c13c458eedf93457ca350, type: 3}
+  dialogNoStock: {fileID: 4900000, guid: ff89eebd07b890a4692573ca275dc7a7, type: 3}
 --- !u!114 &1825228834
 MonoBehaviour:
   m_ObjectHideFlags: 0
