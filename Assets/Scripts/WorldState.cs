@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Interaction;
-using Newtonsoft.Json.Serialization;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,6 +22,7 @@ public class WorldState : MonoBehaviour
     private InventoryItem[] _inventoryItemScriptableObjects;
     private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
     private Dictionary<KeyEvent, bool> _keyeventToActivated = new Dictionary<KeyEvent, bool>();
+    private List<KeyEvent> _permanentKeyEvents = new List<KeyEvent>();
     private bool _timeRunning = false;
     
     
@@ -49,7 +49,8 @@ public class WorldState : MonoBehaviour
         Street,
         Telephone,
         JonasDebug1,
-        JonasDebug2
+        JonasDebug2,
+        End
     };
 
     public enum KeyEvent
@@ -57,7 +58,8 @@ public class WorldState : MonoBehaviour
         BEGGAR_AWAKE,
         BEER_TAKEN,
         DOG_AVAIABLE,
-        KIOSK_OWNER_GONE
+        KIOSK_OWNER_GONE, 
+        BEGGAR_SAVED
     }
 
     public Item CurrentlySelectedInventoryItem => _currentlySelectedInventoryItem;
@@ -89,6 +91,7 @@ public class WorldState : MonoBehaviour
 
         _mouseCursorArray = Resources.LoadAll<MouseCursorSO>("MouseCursor");
         OnMouseCursorChange(MouseCursor.DEFAULT);
+        _permanentKeyEvents.Add(KeyEvent.BEGGAR_SAVED);
     }
 
     private void Start()
@@ -120,6 +123,7 @@ public class WorldState : MonoBehaviour
             case Scene.Bedroom:
             case Scene.Street:
             case Scene.Telephone:
+            case Scene.End:
             case Scene.JonasDebug1:
             case Scene.JonasDebug2:
                 SceneManager.LoadScene(scene.ToString());
@@ -127,7 +131,6 @@ public class WorldState : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
         }
-
         _currentScene = scene;
     }
 
@@ -138,6 +141,14 @@ public class WorldState : MonoBehaviour
         OnSceneChange(Scene.Bedroom);
         _inventory.Clear();
         _everythingEverywhereAllAtOnce.Clear();
+        foreach (KeyEvent keyEvent in _keyeventToActivated.Keys)
+        {
+            if (_permanentKeyEvents.Contains(keyEvent))
+            {
+                continue;
+            }
+            _keyeventToActivated[keyEvent] = false;
+        }
     }
 
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
