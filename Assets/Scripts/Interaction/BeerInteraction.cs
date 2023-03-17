@@ -10,6 +10,9 @@ public class BeerInteraction : SimpleItemPickupInteraction
         if (WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.BEER_TAKEN))
         {
             Destroy(gameObject);
+        } else if (WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.BEGGAR_SAVED))
+        {
+            ActivateBeer();
         }
     }
 

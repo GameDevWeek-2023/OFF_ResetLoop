@@ -57,7 +57,8 @@ public class WorldState : MonoBehaviour
         BEGGAR_AWAKE,
         BEER_TAKEN,
         DOG_AVAIABLE,
-        KIOSK_OWNER_GONE
+        KIOSK_OWNER_GONE, 
+        BEGGAR_SAVED
     }
 
     public Item CurrentlySelectedInventoryItem => _currentlySelectedInventoryItem;

@@ -46,6 +46,10 @@ public class BeggerInteraction : ItemInteraction
         {
             WakeBeggar();
         }
+        else if (WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.BEGGAR_SAVED))
+        {
+            gameObject.SetActive(false);
+        }
         else
         {
             InitSleepingBeggar();
@@ -64,6 +68,7 @@ public class BeggerInteraction : ItemInteraction
             GameEvents.Instance.OnDialogueStart?.Invoke(dialogEnoughMoney.text, beggerAwakeHead);
             beerInteraction.ActivateBeer();
             RemoveFromInventory(Item.MONEY_RICH);
+            GameEvents.Instance.OnKeyEvent?.Invoke(WorldState.KeyEvent.BEGGAR_SAVED);
         }
     }
 
