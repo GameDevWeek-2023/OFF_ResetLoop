@@ -17,6 +17,7 @@ public class NewspaperInteraction : SimpleItemPickupInteraction
 
     public void OnBus()
     {
+        Debug.Log("Newspaper start flying");
         animator.enabled = true;
     }
 }

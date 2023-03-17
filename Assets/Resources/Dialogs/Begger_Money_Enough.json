@@ -1,0 +1,58 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Anonymous",
+            "libraryVisible": false,
+            "playPoint": "duGibstMirGeld",
+            "textSize": 0
+        },
+        "initial": "duGibstMirGeld",
+        "optionMirroring": true,
+        "stitches": {
+            "daraufStoenWirAn": {
+                "content": [
+                    "Darauf stoßen wir an. Nimm dir das Bier."
+                ]
+            },
+            "duGibstMirGeld": {
+                "content": [
+                    "Du gibst mir Geld?!?",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "okayDafrDarfstDu",
+                        "notIfConditions": null,
+                        "option": "Nimm es schon."
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "duNderstDichNieD",
+                        "notIfConditions": null,
+                        "option": "Anders komm ich ja nicht an dein Bier."
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "daraufStoenWirAn",
+                        "notIfConditions": null,
+                        "option": "Dein Anteil an der Firma."
+                    },
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            },
+            "duNderstDichNieD": {
+                "content": [
+                    "Du änderst dich nie. Dann nimm dir halt das Bier."
+                ]
+            },
+            "okayDafrDarfstDu": {
+                "content": [
+                    "Okay, dafür darfst du mein Bier haben."
+                ]
+            }
+        }
+    },
+    "title": "Beggar_Enough_Money",
+    "url_key": 153181
+}

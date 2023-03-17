@@ -34,7 +34,7 @@ public class KioskInteraktion : ItemInteraction
 
     private void OnCall(TelephoneController.CallType obj)
     {
-        //TODO
+        gameObject.SetActive(false);
     }
 
 

@@ -57,11 +57,13 @@ public class BeggerInteraction : ItemInteraction
         if(state == State.AWAKE && item == Item.MONEY)
         {
             GameEvents.Instance.OnDialogueStart?.Invoke(dialogNotEnoughMoney.text, beggerAwakeHead);
+            RemoveFromInventory(Item.MONEY);
         }
         else if (state == State.AWAKE && item == Item.MONEY_RICH)
         {
             GameEvents.Instance.OnDialogueStart?.Invoke(dialogEnoughMoney.text, beggerAwakeHead);
             beerInteraction.ActivateBeer();
+            RemoveFromInventory(Item.MONEY_RICH);
         }
     }
 
