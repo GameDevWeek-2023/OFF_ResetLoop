@@ -22,6 +22,8 @@ public class GameEvents : MonoBehaviour
     [CanBeNull] public Action<WorldState.KeyEvent> OnKeyEvent;
     [CanBeNull] public Action OnWorldReset;
     [CanBeNull] public Action OnFootStep;
+    [CanBeNull] public Action<WorldState.MouseCursor> OnMouseCursorChange;
+    
 
     private void Awake()
     {

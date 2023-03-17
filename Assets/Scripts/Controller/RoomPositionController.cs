@@ -11,5 +11,15 @@ namespace DefaultNamespace
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             GameEvents.Instance.OnMovePlayerToPosition(new Position(mousePos.x, mousePos.y));
         }
+
+        private void OnMouseEnter()
+        {
+            GameEvents.Instance.OnMouseCursorChange(WorldState.MouseCursor.FOOT);
+        }
+        
+        private void OnMouseExit()
+        {
+            GameEvents.Instance.OnMouseCursorChange(WorldState.MouseCursor.DEFAULT);
+        }
     }
 }

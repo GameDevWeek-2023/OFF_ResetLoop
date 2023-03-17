@@ -60,7 +60,6 @@ namespace Controller
             }
 
             _isWalking = true;
-            Debug.Log("Move Character to " + position.X + " - " + position.Y);
             _agent.SetDestination(new Vector3(position.X, position.Y, 0f));
         }
 

@@ -1,9 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DismantleInteraction : ItemInteraction
 {
+    private void Awake()
+    {
+        base._mouseCursor = WorldState.MouseCursor.DEFAULT;
+    }
+
     public override void OnTimeChanged(int time)
     {
 
