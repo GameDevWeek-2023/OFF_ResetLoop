@@ -33,6 +33,13 @@ namespace Interaction
         private void Start()
         {
             GameEvents.Instance.OnButtonDialed += OnButtonDialed;
+            GameEvents.Instance.OnCall += delegate(CallType type) {
+                if (type == CallType.KIOSK_OWNER)
+                {
+                    // So sorry, it's a mess
+                    OnKioskOwnerCall();
+                }
+            };
         }
 
         private void OnButtonDialed(Button buttonAction)
@@ -67,6 +74,12 @@ namespace Interaction
             }
             _dialedNumber = "";
             GameEvents.Instance.OnCall?.Invoke(callType);
+        }
+
+        // So sorry, it's a mess
+        private void OnKioskOwnerCall()
+        {
+            GameEvents.Instance.OnKeyEvent(WorldState.KeyEvent.KIOSK_OWNER_GONE);
         }
     }
 }
