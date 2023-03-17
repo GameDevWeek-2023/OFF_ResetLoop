@@ -112,8 +112,6 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnWorldReset += OnWorldReset;
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        GameEvents.Instance.OnItemFound(Item.ALCOHOL);
-
         StartTime();
     }
 
