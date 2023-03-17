@@ -716,11 +716,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f2bd7a18f7488da05d1d3c6a7b3b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionId: 1
+  interactionId: 16
   clickable: 1
   possibleInteractionItems: 
   _mouseCursor: 3
-  item: 0
+  item: 17
 --- !u!61 &602117247
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1853,7 +1853,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.73, y: 3.85}
+    oldSize: {x: 6.75, y: 4.3875}
     newSize: {x: 0.81166667, y: 1.6283333}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1903,7 +1903,7 @@ SpriteRenderer:
   m_SortingLayerID: -613061391
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: da97b78b9608b499a890e2b98750e995, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bbe68d67faeff8a4a92745dfe5aa6c68, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1946,7 +1946,7 @@ MonoBehaviour:
   possibleInteractionItems: 
   _mouseCursor: 3
   item: 14
-  lowMoneySprite: {fileID: 21300000, guid: 32ef61997db5c42fb9badb0fef3b19f6, type: 3}
+  lowMoneySprite: {fileID: 21300000, guid: bbe68d67faeff8a4a92745dfe5aa6c68, type: 3}
   highMoneySprite: {fileID: 21300000, guid: da97b78b9608b499a890e2b98750e995, type: 3}
   phoneSprite: {fileID: 21300000, guid: 94d0fbd4a9cfbae43999ccd1f57c6e8e, type: 3}
   dialogLowMoney: {fileID: 4900000, guid: f1d2387ac2bc3f84da88626601652bae, type: 3}
