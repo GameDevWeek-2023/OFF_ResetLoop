@@ -129,7 +129,6 @@ public class WorldState : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
         }
-
         _currentScene = scene;
     }
 
@@ -140,14 +139,13 @@ public class WorldState : MonoBehaviour
         OnSceneChange(Scene.Bedroom);
         _inventory.Clear();
         _everythingEverywhereAllAtOnce.Clear();
-        _keyeventToActivated.Clear();
         foreach (KeyEvent keyEvent in _keyeventToActivated.Keys)
         {
             if (_permanentKeyEvents.Contains(keyEvent))
             {
                 continue;
             }
-            _keyeventToActivated.Remove(keyEvent);
+            _keyeventToActivated[keyEvent] = false;
         }
     }
 
