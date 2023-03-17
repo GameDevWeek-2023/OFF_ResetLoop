@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Interaction;
-using Newtonsoft.Json.Serialization;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,7 +22,7 @@ public class WorldState : MonoBehaviour
     private InventoryItem[] _inventoryItemScriptableObjects;
     private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
     private Dictionary<KeyEvent, bool> _keyeventToActivated = new Dictionary<KeyEvent, bool>();
-    private Dictionary<KeyEvent, bool> _permanentKeyEvents = new Dictionary<KeyEvent, bool>();
+    private List<KeyEvent> _permanentKeyEvents = new List<KeyEvent>();
     private bool _timeRunning = false;
     
     
@@ -91,6 +90,7 @@ public class WorldState : MonoBehaviour
 
         _mouseCursorArray = Resources.LoadAll<MouseCursorSO>("MouseCursor");
         OnMouseCursorChange(MouseCursor.DEFAULT);
+        _permanentKeyEvents.Add(KeyEvent.BEGGAR_SAVED);
     }
 
     private void Start()
@@ -137,10 +137,18 @@ public class WorldState : MonoBehaviour
     {
         Debug.Log("RESET");
         _time = 0;
-        _keyeventToActivated.;
         OnSceneChange(Scene.Bedroom);
         _inventory.Clear();
         _everythingEverywhereAllAtOnce.Clear();
+        _keyeventToActivated.Clear();
+        foreach (KeyEvent keyEvent in _keyeventToActivated.Keys)
+        {
+            if (_permanentKeyEvents.Contains(keyEvent))
+            {
+                continue;
+            }
+            _keyeventToActivated.Remove(keyEvent);
+        }
     }
 
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
