@@ -108,6 +108,8 @@ public class AudioManager : MonoBehaviour
                 break;
             case WorldState.Scene.Telephone:
                 break;
+            case WorldState.Scene.End:
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
         }
