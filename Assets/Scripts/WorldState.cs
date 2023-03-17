@@ -23,6 +23,7 @@ public class WorldState : MonoBehaviour
     private InventoryItem[] _inventoryItemScriptableObjects;
     private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
     private Dictionary<KeyEvent, bool> _keyeventToActivated = new Dictionary<KeyEvent, bool>();
+    private Dictionary<KeyEvent, bool> _permanentKeyEvents = new Dictionary<KeyEvent, bool>();
     private bool _timeRunning = false;
     
     
@@ -135,6 +136,7 @@ public class WorldState : MonoBehaviour
     {
         Debug.Log("RESET");
         _time = 0;
+        _keyeventToActivated.;
         OnSceneChange(Scene.Bedroom);
         _inventory.Clear();
         _everythingEverywhereAllAtOnce.Clear();
