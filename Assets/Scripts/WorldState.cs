@@ -236,7 +236,7 @@ public class WorldState : MonoBehaviour
     {
         _time++;
         Debug.Log(_time);
-        if (_time == 5)
+        if (_time == 60)
         {
             GameEvents.Instance.OnWorldReset?.Invoke();
         }
