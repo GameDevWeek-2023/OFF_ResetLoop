@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Interaction;
+using Newtonsoft.Json.Serialization;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,7 +23,9 @@ public class WorldState : MonoBehaviour
     private InventoryItem[] _inventoryItemScriptableObjects;
     private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
     private Dictionary<KeyEvent, bool> _keyeventToActivated = new Dictionary<KeyEvent, bool>();
-
+    private bool _timeRunning = false;
+    
+    
     private Scene _currentScene = Scene.Bedroom;
 
     public Scene CurrentScene => _currentScene;
@@ -54,7 +57,8 @@ public class WorldState : MonoBehaviour
         BEGGAR_AWAKE,
         BEER_TAKEN,
         DOG_AVAIABLE,
-        KIOSK_OWNER_GONE
+        KIOSK_OWNER_GONE, 
+        BEGGAR_SAVED
     }
 
     public Item CurrentlySelectedInventoryItem => _currentlySelectedInventoryItem;
@@ -130,6 +134,8 @@ public class WorldState : MonoBehaviour
 
     public void OnWorldReset()
     {
+        Debug.Log("RESET");
+        _time = 0;
         OnSceneChange(Scene.Bedroom);
         _inventory.Clear();
         _everythingEverywhereAllAtOnce.Clear();
@@ -149,6 +155,10 @@ public class WorldState : MonoBehaviour
         }
 
         LoadFullInventory();
+        if (!_timeRunning)
+        {
+            StartTime();
+        }
     }
 
     public bool ItemExists(Item item)
@@ -159,11 +169,13 @@ public class WorldState : MonoBehaviour
     private void StartTime()
     {
         InvokeRepeating(nameof(Tick), 0f, 1f);
+        _timeRunning = true;
     }
 
     private void StopTime()
     {
         CancelInvoke(nameof(Tick));
+        _timeRunning = false;
     }
 
     private void OnItemFound(Item item)
@@ -211,14 +223,16 @@ public class WorldState : MonoBehaviour
     private void Tick()
     {
         _time++;
-
+        Debug.Log(_time);
         if (_time == 60)
         {
             GameEvents.Instance.OnWorldReset?.Invoke();
-            _time = 0;
+        }
+        else
+        {
+            GameEvents.Instance.OnTimeChanged?.Invoke(_time);
         }
 
-        GameEvents.Instance.OnTimeChanged?.Invoke(_time);
     }
 
     private void OnKeyEvent(KeyEvent keyEvent)
