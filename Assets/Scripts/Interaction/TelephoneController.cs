@@ -6,6 +6,9 @@ namespace Interaction
 {
     public class TelephoneController : MonoBehaviour
     {
+        [SerializeField] private TextAsset dialogKioskOwner;
+        [SerializeField] private Sprite spriteKioskOwner;
+
         private string _dialedNumber = "";
         private string stockNumber = "4711";
         private string kioskOwnerNumber = "0815";
@@ -80,6 +83,7 @@ namespace Interaction
         private void OnKioskOwnerCall()
         {
             GameEvents.Instance.OnKeyEvent(WorldState.KeyEvent.KIOSK_OWNER_GONE);
+            GameEvents.Instance.OnDialogueStart?.Invoke(dialogKioskOwner.text, spriteKioskOwner);
         }
     }
 }

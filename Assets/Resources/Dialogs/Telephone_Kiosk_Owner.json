@@ -1,0 +1,37 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Anonymous",
+            "libraryVisible": false,
+            "playPoint": "servus",
+            "textSize": 0
+        },
+        "initial": "servus",
+        "optionMirroring": true,
+        "stitches": {
+            "servus": {
+                "content": [
+                    "Servus!",
+                    {
+                        "ifConditions": null,
+                        "linkPath": null,
+                        "notIfConditions": null,
+                        "option": "Do spricht dei Muadda. I brauch gonz dringend dei Hoife."
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": null,
+                        "notIfConditions": null,
+                        "option": "Hi, hier spricht Chantal. Ich würde dich gerne kennen lernen."
+                    },
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            }
+        }
+    },
+    "title": "Call Kiosk Owner",
+    "url_key": 153240
+}
