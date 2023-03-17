@@ -265,6 +265,6 @@ public class WorldState : MonoBehaviour
         float y = mouseCursorSo.MouseCursorImage.height * 0.21f;
         hotSpot = new Vector2(x, y);
         // }
-        if (mouseCursorSo is not null) Cursor.SetCursor(mouseCursorSo.MouseCursorImage, hotSpot, CursorMode.Auto);
+        if (mouseCursorSo is not null) Cursor.SetCursor(mouseCursorSo.MouseCursorImage, hotSpot, CursorMode.ForceSoftware);
     }
 }
