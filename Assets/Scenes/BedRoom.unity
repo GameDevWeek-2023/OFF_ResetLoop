@@ -571,6 +571,7 @@ MonoBehaviour:
   interactionId: 2
   clickable: 1
   possibleInteractionItems: 
+  _mouseCursor: 3
   item: 6
 --- !u!114 &570824954 stripped
 MonoBehaviour:
@@ -759,6 +760,7 @@ MonoBehaviour:
   interactionId: 4
   clickable: 1
   possibleInteractionItems: 000000000100000006000000
+  _mouseCursor: 3
 --- !u!61 &789360242
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2154,6 +2156,7 @@ MonoBehaviour:
   interactionId: 1
   clickable: 1
   possibleInteractionItems: 
+  _mouseCursor: 3
   item: 0
 --- !u!61 &2118234390
 BoxCollider2D:
@@ -2374,6 +2377,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2432445270560815248, guid: 1601bf55e1360194b82996795b57efa3, type: 3}
+      propertyPath: possibleInteractionItems.Array.data[1]
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432445270560815248, guid: 1601bf55e1360194b82996795b57efa3, type: 3}
+      propertyPath: possibleInteractionItems.Array.data[2]
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432445270560815248, guid: 1601bf55e1360194b82996795b57efa3, type: 3}
+      propertyPath: possibleInteractionItems.Array.data[3]
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2432445270560815249, guid: 1601bf55e1360194b82996795b57efa3, type: 3}
       propertyPath: m_RootOrder
       value: 3

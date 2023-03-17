@@ -5,7 +5,7 @@ using Interaction;
 
 public class CoffeeInteraction : SimpleItemPickupInteraction
 {
-    private void Awake()
+    protected override void Start()
     {
         clickable = false;
         GameEvents.Instance.OnCall += OnCall;

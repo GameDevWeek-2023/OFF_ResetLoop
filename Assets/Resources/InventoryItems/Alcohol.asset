@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: 11
   dismantledItems: 
-  itemsprite: {fileID: 0}
-  itemDescription: 
+  itemsprite: {fileID: 1851332454, guid: c58a6667dd26f96408cf714993cadc82, type: 3}
+  itemDescription: "Eine Flasche sch\xF6nes, naturgek\xFChltes Bier. "

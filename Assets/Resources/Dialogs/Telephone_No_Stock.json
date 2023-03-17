@@ -1,0 +1,25 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Anonymous",
+            "libraryVisible": false,
+            "playPoint": "herzlichWillkomm",
+            "textSize": 0
+        },
+        "initial": "herzlichWillkomm",
+        "optionMirroring": true,
+        "stitches": {
+            "herzlichWillkomm": {
+                "content": [
+                    "Herzlich willkommen bei der Frankfurter Börse. Bei uns können Sie Ihre Aktien verkaufen.",
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            }
+        }
+    },
+    "title": "Untitled Story",
+    "url_key": 153189
+}
