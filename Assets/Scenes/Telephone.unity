@@ -738,7 +738,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.95, y: 2.21}
+    oldSize: {x: 9.18, y: 4.52}
     newSize: {x: 0.81166667, y: 1.6283333}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -788,7 +788,7 @@ SpriteRenderer:
   m_SortingLayerID: -613061391
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ef595df681e2c4db29dbd1da7c3f11d6, type: 3}
+  m_Sprite: {fileID: -684126306, guid: b902e2c212a37074bba15748298fbf51, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1828,7 +1828,6 @@ GameObject:
   - component: {fileID: 1825228831}
   - component: {fileID: 1825228830}
   - component: {fileID: 1825228833}
-  - component: {fileID: 1825228834}
   m_Layer: 0
   m_Name: Money
   m_TagString: Untagged
@@ -1952,19 +1951,6 @@ MonoBehaviour:
   dialogLowMoney: {fileID: 4900000, guid: f1d2387ac2bc3f84da88626601652bae, type: 3}
   dialogHighMoney: {fileID: 4900000, guid: b04db92f531c13c458eedf93457ca350, type: 3}
   dialogNoStock: {fileID: 4900000, guid: ff89eebd07b890a4692573ca275dc7a7, type: 3}
---- !u!114 &1825228834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825228828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 009ae3fdc99d4c02b4cccb2e7d3d9a87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemsToAdd: 0d000000
 --- !u!1 &1845120778
 GameObject:
   m_ObjectHideFlags: 0
