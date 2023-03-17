@@ -38,14 +38,13 @@ public class WorldState : MonoBehaviour
         ARROW_DOWN,
         ARROW_LEFT
     };
-    
-    
-    
+
+
     public enum Scene
     {
         Bedroom,
         Street,
-        Telephone, 
+        Telephone,
         JonasDebug1,
         JonasDebug2
     };
@@ -72,17 +71,18 @@ public class WorldState : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
         _inventoryItemScriptableObjects = Resources.LoadAll<InventoryItem>("InventoryItems");
         foreach (InventoryItem inventoryItemScriptableObject in _inventoryItemScriptableObjects)
         {
             _itemToScriptableObject[inventoryItemScriptableObject.Item] = inventoryItemScriptableObject;
         }
 
-        foreach(KeyEvent keyEvent in Enum.GetValues(typeof(KeyEvent)))
+        foreach (KeyEvent keyEvent in Enum.GetValues(typeof(KeyEvent)))
         {
             _keyeventToActivated.Add(keyEvent, false);
         }
+
         _mouseCursorArray = Resources.LoadAll<MouseCursorSO>("MouseCursor");
         OnMouseCursorChange(MouseCursor.DEFAULT);
     }
@@ -94,7 +94,7 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnDialogueClosed += StartTime;
         GameEvents.Instance.OnInventoryItemSelected += delegate(Item item)
         {
-            Debug.Log("Item selected: "+ item);
+            Debug.Log("Item selected: " + item);
             _currentlySelectedInventoryItem = item;
         };
         GameEvents.Instance.OnInventoryItemConsumed += delegate { _currentlySelectedInventoryItem = Item.NULL_ITEM; };
@@ -104,7 +104,7 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnMouseCursorChange += OnMouseCursorChange;
         GameEvents.Instance.OnWorldReset += OnWorldReset;
         SceneManager.sceneLoaded += OnSceneLoaded;
-        
+
         StartTime();
     }
 
@@ -133,7 +133,7 @@ public class WorldState : MonoBehaviour
         _inventory.Clear();
         _everythingEverywhereAllAtOnce.Clear();
     }
-    
+
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
     {
         inventoryPanel = GameObject.Find("InventoryPanel");
@@ -146,14 +146,15 @@ public class WorldState : MonoBehaviour
                 Destroy(simpleItemPickupGO);
             }
         }
+
         LoadFullInventory();
     }
-    
+
     public bool ItemExists(Item item)
     {
         return _inventory.Contains(item);
     }
-    
+
     private void StartTime()
     {
         InvokeRepeating(nameof(Tick), 0f, 1f);
@@ -184,7 +185,7 @@ public class WorldState : MonoBehaviour
             AddInventoryItemToGui(item);
         }
     }
-    
+
     private void AddInventoryItemToGui(Item item)
     {
         GameObject newInventory = Instantiate(inventoryPrefab, inventoryPanel.transform);
@@ -205,7 +206,7 @@ public class WorldState : MonoBehaviour
             Destroy(find.gameObject);
         }
     }
-    
+
     private void Tick()
     {
         _time++;
@@ -232,6 +233,13 @@ public class WorldState : MonoBehaviour
     public void OnMouseCursorChange(MouseCursor mouseCursorState)
     {
         MouseCursorSO mouseCursorSo = _mouseCursorArray.FirstOrDefault(obj => obj.MouseCursorState == mouseCursorState);
-        if (mouseCursorSo is not null) Cursor.SetCursor(mouseCursorSo.MouseCursorImage, Vector2.zero, CursorMode.Auto);
+        Vector2 hotSpot = Vector2.zero;
+        // if (mouseCursorState == MouseCursor.DEFAULT)
+        // {
+        float x = mouseCursorSo.MouseCursorImage.width * 0.315f;
+        float y = mouseCursorSo.MouseCursorImage.height * 0.21f;
+        hotSpot = new Vector2(x, y);
+        // }
+        if (mouseCursorSo is not null) Cursor.SetCursor(mouseCursorSo.MouseCursorImage, hotSpot, CursorMode.Auto);
     }
 }
