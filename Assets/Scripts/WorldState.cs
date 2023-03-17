@@ -102,7 +102,9 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnSceneChange += OnSceneChange;
         GameEvents.Instance.OnKeyEvent += OnKeyEvent;
         GameEvents.Instance.OnMouseCursorChange += OnMouseCursorChange;
+        GameEvents.Instance.OnWorldReset += OnWorldReset;
         SceneManager.sceneLoaded += OnSceneLoaded;
+        
         StartTime();
     }
 
@@ -125,6 +127,13 @@ public class WorldState : MonoBehaviour
         _currentScene = scene;
     }
 
+    public void OnWorldReset()
+    {
+        OnSceneChange(Scene.Bedroom);
+        _inventory.Clear();
+        _everythingEverywhereAllAtOnce.Clear();
+    }
+    
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
     {
         inventoryPanel = GameObject.Find("InventoryPanel");
