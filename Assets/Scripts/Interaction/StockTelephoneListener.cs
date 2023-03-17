@@ -8,6 +8,9 @@ namespace Interaction
     {
         [SerializeField] private Sprite lowMoneySprite;
         [SerializeField] private Sprite highMoneySprite;
+        [SerializeField] private Sprite phoneSprite;
+        [SerializeField] private TextAsset dialogLowMoney;
+        [SerializeField] private TextAsset dialogHighMoney;
         private SpriteRenderer _spriteRenderer;
 
         protected override void Start()
@@ -32,14 +35,14 @@ namespace Interaction
                     item = Item.MONEY;
                     spriteRenderer.sprite = lowMoneySprite;
                     //TODO sprite, Dialog
-                    GameEvents.Instance.OnDialogueStart("Telephone_Low_Money.json", null);
+                    GameEvents.Instance.OnDialogueStart(dialogLowMoney.text, phoneSprite);
                 }
                 else
                 {
                     item = Item.MONEY_RICH;
                     spriteRenderer.sprite = highMoneySprite;
                     //TODO sprite
-                    GameEvents.Instance.OnDialogueStart("Telephone_High_Money.json", null);
+                    GameEvents.Instance.OnDialogueStart(dialogHighMoney.text, phoneSprite);
                 }
                 clickable = true;
                 spriteRenderer.enabled = true;
