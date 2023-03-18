@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: 16
   dismantledItems: 
-  itemsprite: {fileID: 654348793, guid: 67e069b842bcd8e4aafd28dc69ad08fc, type: 3}
+  itemsprite: {fileID: 21300000, guid: 7eae2b0dfb93afd4a8a9d74299383a3e, type: 3}
   itemDescription: Asperin. Der Klassiker unter den Schmerztablette.

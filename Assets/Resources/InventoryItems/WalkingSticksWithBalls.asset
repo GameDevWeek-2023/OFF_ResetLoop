@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: 6
   dismantledItems: 0500000008000000
-  itemsprite: {fileID: 262612129, guid: 4b59b4354ecd49c4b92c3cbc177f2a3e, type: 3}
+  itemsprite: {fileID: 21300000, guid: 3033a5d493903064fa9a039a0692fc9c, type: 3}
   itemDescription: "Ein Gehstock mit B\xE4llen"
