@@ -7,7 +7,10 @@ public class KioskInteraktion : ItemInteraction
 {
     [Header("Dialog files")]
     [SerializeField] private TextAsset dialogStandard;
-   
+    [SerializeField] private TextAsset dialogMoney;
+    [SerializeField] private TextAsset dialogMoneyTooMuch;
+    [SerializeField] private TextAsset dialogFlowers;
+
     [Header("Sprites")]
     [SerializeField] private Sprite kioskSellerHead;
 
@@ -27,11 +30,39 @@ public class KioskInteraktion : ItemInteraction
 
     public override void OnUsableItemDrop(Item item)
     {
-        
+        switch (item)
+        {
+            case Item.MONEY_RICH:
+                GameEvents.Instance.OnDialogueStart?.Invoke(dialogMoneyTooMuch.text, kioskSellerHead);
+                break;
+            case Item.MONEY:
+                GameEvents.Instance.OnDialogueStart?.Invoke(dialogMoney.text, kioskSellerHead);
+                break;
+            case Item.FLOWERS:
+                GameEvents.Instance.OnDialogueStart?.Invoke(dialogFlowers.text, kioskSellerHead);
+                RemoveFromInventory(Item.FLOWERS);
+                break;
+            case Item.VASE_WITH_FLOWER:
+                GameEvents.Instance.OnDialogueStart?.Invoke(dialogFlowers.text, kioskSellerHead);
+                RemoveFromInventory(Item.VASE_WITH_FLOWER);
+                AddToInventory(Item.VASE_WITH_WATER);
+                break;
+        }
     }
 
     public override void SpecificMouseDownBehaviour()
     {
-        GameEvents.Instance.OnDialogueStart?.Invoke(dialogStandard.text, kioskSellerHead);
+        if (WorldState.Instance.ItemExists(Item.MONEY))
+        {
+            GameEvents.Instance.OnDialogueStart?.Invoke(dialogMoney.text, kioskSellerHead);
+        }
+        else if (WorldState.Instance.ItemExists(Item.MONEY))
+        {
+            GameEvents.Instance.OnDialogueStart?.Invoke(dialogMoneyTooMuch.text, kioskSellerHead);
+        } 
+        else
+        {
+            GameEvents.Instance.OnDialogueStart?.Invoke(dialogStandard.text, kioskSellerHead);
+        }
     }
 }

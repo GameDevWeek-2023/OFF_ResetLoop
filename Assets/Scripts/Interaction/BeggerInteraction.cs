@@ -38,7 +38,7 @@ public class BeggerInteraction : ItemInteraction
         beerInteraction = beer.GetComponent<BeerInteraction>();
 
         Debug.Log($"START, beggar awake: {WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.BEGGAR_AWAKE)}");
-        if (!WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.BEGGAR_AWAKE) && WorldState.Instance.Time > 30)
+        if (!WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.BEGGAR_AWAKE) && WorldState.Instance.Time > 29)
         {
             WakeBeggar();
         }
@@ -90,8 +90,8 @@ public class BeggerInteraction : ItemInteraction
         Debug.Log("Begger Awake");
         state = State.AWAKE;
         spriteRenderer.sprite = beggarAwake;
-        gameObject.transform.position = new Vector3(3, -1, 0);
-        collider.size = new Vector2(1.6f, 4);
+        gameObject.transform.position = new Vector3(10.3f, -1, 0);
+        collider.size = new Vector2(1.5f, 3.7f);
 
         if(beer != null) { //beer might be already taken
             beer.SetActive(true);
@@ -103,8 +103,8 @@ public class BeggerInteraction : ItemInteraction
     private void InitSleepingBeggar()
     {
         spriteRenderer.sprite = beggerSleeping;
-        gameObject.transform.position = new Vector3(2.3f, -2.3f, 0);
-        collider.size = new Vector2(4.3f, 2);
+        gameObject.transform.position = new Vector3(9.4f, -2.2f, 0);
+        collider.size = new Vector2(3f, 1.3f);
 
         beerInteraction.DeactivateBeer();
         beer.SetActive(false);

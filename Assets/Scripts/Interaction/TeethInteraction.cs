@@ -11,6 +11,7 @@ namespace Interaction
         private State state;
 
         [Header("Dialog files")]
+        [SerializeField] private TextAsset dialogFileEmpty;
         [SerializeField] private TextAsset dialogFileWater;
         [SerializeField] private TextAsset dialogFileCoffee;
         [SerializeField] private TextAsset dialogFileBooze;
@@ -41,7 +42,7 @@ namespace Interaction
             switch (state)
             {
                 case State.NO_WATER:
-                    // DO Nothing at the moment
+                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileEmpty.text, garryWater);
                     break;
                 case State.WATER:
                     GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileWater.text, garryWater);
@@ -73,6 +74,12 @@ namespace Interaction
                     UpdateState(State.WATER, garryWater);
                     RemoveFromInventory(Item.VASE_WITH_WATER);
                     AddToInventory(Item.VASE_EMPTY);
+                    break;
+                case Item.VASE_WITH_FLOWER:
+                    UpdateState(State.WATER, garryWater);
+                    RemoveFromInventory(Item.VASE_WITH_FLOWER);
+                    AddToInventory(Item.VASE_EMPTY);
+                    AddToInventory(Item.FLOWERS);
                     break;
                 case Item.COFFEE:
                     UpdateState(State.COFFEE, garryCoffee);

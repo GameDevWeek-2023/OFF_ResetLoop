@@ -1,0 +1,25 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Sabrina",
+            "libraryVisible": false,
+            "playPoint": "rchelhustMeinHal",
+            "textSize": 0
+        },
+        "initial": "rchelhustMeinHal",
+        "optionMirroring": true,
+        "stitches": {
+            "rchelhustMeinHal": {
+                "content": [
+                    "*röchel**hust* Mein Hals ist ganz trocken. Ich brauche dringend etwas zu trinken.",
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            }
+        }
+    },
+    "title": "Garry empty Glas",
+    "url_key": 153264
+}

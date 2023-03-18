@@ -113,6 +113,11 @@ public class WorldState : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         StartTime();
+
+        //TODO Debugging
+        GameEvents.Instance.OnItemFound(Item.MONEY);
+        GameEvents.Instance.OnItemFound(Item.MONEY_RICH);
+        GameEvents.Instance.OnItemFound(Item.FLOWERS);
     }
 
 

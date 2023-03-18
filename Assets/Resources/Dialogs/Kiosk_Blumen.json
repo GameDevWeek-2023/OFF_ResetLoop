@@ -1,0 +1,25 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Anonymous",
+            "libraryVisible": false,
+            "playPoint": "ohaScheeDassIDiK",
+            "textSize": 0
+        },
+        "initial": "ohaScheeDassIDiK",
+        "optionMirroring": true,
+        "stitches": {
+            "ohaScheeDassIDiK": {
+                "content": [
+                    "Oha, schee dass i di kennalerna hob, owa i steh mehra auf Frauen.",
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            }
+        }
+    },
+    "title": "Kiosk_Blumen",
+    "url_key": 153265
+}
