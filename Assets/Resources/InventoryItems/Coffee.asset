@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: 12
   dismantledItems: 
-  itemsprite: {fileID: -1335898192, guid: 62e8443f9613ae64ab911cd6d29e2a8a, type: 3}
+  itemsprite: {fileID: 21300000, guid: c9f9babfe0823214a874a1fb7a5a7ae0, type: 3}
   itemDescription: 'Ein herrlicher Becher Kaffee. '
