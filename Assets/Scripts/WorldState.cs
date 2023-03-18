@@ -138,7 +138,6 @@ public class WorldState : MonoBehaviour
             case Scene.JonasDebug1:
             case Scene.JonasDebug2:
                 SceneManager.LoadScene(scene.ToString());
-                UpdateGuiClock();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
@@ -177,6 +176,7 @@ public class WorldState : MonoBehaviour
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
     {
         inventoryPanel = GameObject.Find("InventoryPanel");
+        UpdateGuiClock();
         GameObject clock = GameObject.Find("clock");
         if (clock != null)
         {
