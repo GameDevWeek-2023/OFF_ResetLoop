@@ -15,82 +15,19 @@
                     "A Bia am Vormittag! Naa, sowos unterschütz i ned."
                 ]
             },
-            "achJaIBinAWengEi": {
-                "content": [
-                    "Ach ja, i bin a weng einsam.",
-                    {
-                        "ifConditions": null,
-                        "linkPath": "joDieRichtigeRuf",
-                        "notIfConditions": null,
-                        "option": "Lieber ein Single und ein Schlingel als vergeben ohne Leben."
-                    },
-                    {
-                        "ifConditions": null,
-                        "linkPath": "joDieRichtigeRuf",
-                        "notIfConditions": null,
-                        "option": "Es gibt für jeden Topf einen Deckel."
-                    },
-                    {
-                        "ifConditions": null,
-                        "linkPath": "duWirstSchoSengI",
-                        "notIfConditions": null,
-                        "option": "Wer will auch schon einen Kioskbesitzer?"
-                    }
-                ]
-            },
             "dasMacht": {
                 "content": [
-                    "Das macht 9,95 €.",
-                    {
-                        "ifConditions": null,
-                        "linkPath": "desDeafadMaWirkl",
-                        "notIfConditions": null,
-                        "option": "Ich würde gern anschreiben lassen."
-                    },
-                    {
-                        "ifConditions": null,
-                        "linkPath": "desDeafadMaWirkl",
-                        "notIfConditions": null,
-                        "option": "Das zahl ich beim nächsten Mal."
-                    },
-                    {
-                        "ifConditions": null,
-                        "linkPath": "desDeafadMaWirkl",
-                        "notIfConditions": null,
-                        "option": "Ich habe mein Portemonnaie vergessen. "
-                    }
-                ]
-            },
-            "desDeafadMaWirkl": {
-                "content": [
-                    ""
-                ]
-            },
-            "duWirstSchoSengI": {
-                "content": [
-                    "Du wirst scho seng. I suach jetzt im gonzn Ort mit ana Kontaktanzeig in da Togzeitung."
-                ]
+                    "Des san 9,95€. Do nimmst einfach d' Kaffee vom Tresn.{COFFEE_ENABLED}"
+				]
             },
             "griadi": {
                 "content": [
-                    "Griaßdi!",
+                    "Griaßdi! Wos daadst'dn gern hobn?",
                     {
                         "ifConditions": null,
                         "linkPath": "wosFrAnKaffeeMea",
                         "notIfConditions": null,
                         "option": "Einen Kaffee, bitte."
-                    },
-                    {
-                        "ifConditions": null,
-                        "linkPath": "miaDMamHodSiSBei",
-                        "notIfConditions": null,
-                        "option": "Was macht die Familie?"
-                    },
-                    {
-                        "ifConditions": null,
-                        "linkPath": "achJaIBinAWengEi",
-                        "notIfConditions": null,
-                        "option": "Und sonst so?"
                     },
                     {
                         "ifConditions": null,
@@ -101,16 +38,6 @@
                     {
                         "pageNum": 1
                     }
-                ]
-            },
-            "joDieRichtigeRuf": {
-                "content": [
-                    "Jo, die Richtige ruft mi bestimmt bald an! I hob dazu extra a Kontaktanzeig in da Togzeitung aufgemma."
-                ]
-            },
-            "miaDMamHodSiSBei": {
-                "content": [
-                    "Miaß. D'Mam hod si 's Bein brochn und braucht jetzt dauernd meine Hilf."
                 ]
             },
             "wiaGroMeachastEa": {
@@ -236,6 +163,6 @@
             }
         }
     },
-    "title": "Kioskbesitzer",
+    "title": "Kioskbesitzer_Geld",
     "url_key": 153137
 }

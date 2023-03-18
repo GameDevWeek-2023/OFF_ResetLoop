@@ -36,7 +36,6 @@ public class KioskInteraktion : ItemInteraction
                 GameEvents.Instance.OnDialogueStart?.Invoke(dialogMoneyTooMuch.text, kioskSellerHead);
                 break;
             case Item.MONEY:
-                //TODO: Dialog, Dialog event => geld nehmen und kaffee freischalten
                 GameEvents.Instance.OnDialogueStart?.Invoke(dialogMoney.text, kioskSellerHead);
                 break;
             case Item.FLOWERS:
@@ -53,6 +52,17 @@ public class KioskInteraktion : ItemInteraction
 
     public override void SpecificMouseDownBehaviour()
     {
-        GameEvents.Instance.OnDialogueStart?.Invoke(dialogStandard.text, kioskSellerHead);
+        if (WorldState.Instance.ItemExists(Item.MONEY))
+        {
+            GameEvents.Instance.OnDialogueStart?.Invoke(dialogMoney.text, kioskSellerHead);
+        }
+        else if (WorldState.Instance.ItemExists(Item.MONEY))
+        {
+            GameEvents.Instance.OnDialogueStart?.Invoke(dialogMoneyTooMuch.text, kioskSellerHead);
+        } 
+        else
+        {
+            GameEvents.Instance.OnDialogueStart?.Invoke(dialogStandard.text, kioskSellerHead);
+        }
     }
 }
