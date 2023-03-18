@@ -114,7 +114,6 @@ public class BeggerInteraction : ItemInteraction
 
     private void KillBegger()
     {
-        Debug.Log("KILL BEGGER");
         GameEvents.Instance.OnKeyEvent?.Invoke(WorldState.KeyEvent.MURDER);
     }
 
