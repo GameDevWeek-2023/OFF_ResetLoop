@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: 2
   dismantledItems: 03000000
-  itemsprite: {fileID: -1967372443, guid: ded851415162e3e4aac8d5b38b124dc7, type: 3}
+  itemsprite: {fileID: 21300000, guid: cfd6dc48ed117764fb63496034be566b, type: 3}
   itemDescription: Eine Vase mit Wasser.

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: 8
   dismantledItems: 
-  itemsprite: {fileID: -553498442, guid: ec01357bcf844d94a9f50591f275f999, type: 3}
+  itemsprite: {fileID: 21300000, guid: 65b89a0ec61a9454f8a3eb212679c92d, type: 3}
   itemDescription: Ein Tennisball. Gerettet von einem Gehstock.
