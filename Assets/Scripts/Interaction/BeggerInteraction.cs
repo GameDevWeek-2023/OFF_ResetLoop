@@ -37,7 +37,6 @@ public class BeggerInteraction : ItemInteraction
         collider = GetComponent<BoxCollider2D>();
         beerInteraction = beer.GetComponent<BeerInteraction>();
 
-        Debug.Log($"START, beggar awake: {WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.BEGGAR_AWAKE)}");
         if (!WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.BEGGAR_AWAKE) && WorldState.Instance.Time > 29)
         {
             WakeBeggar();
