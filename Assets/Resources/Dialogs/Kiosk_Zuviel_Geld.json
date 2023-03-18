@@ -1,0 +1,168 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Sabrina",
+            "libraryVisible": false,
+            "playPoint": "griadi",
+            "textSize": 0
+        },
+        "initial": "griadi",
+        "optionMirroring": true,
+        "stitches": {
+            "aBiaAmVormittagN": {
+                "content": [
+                    "A Bia am Vormittag! Naa, sowos unterschütz i ned."
+                ]
+            },
+            "dasMacht": {
+                "content": [
+                    "Des san 9,95€. Oje, des is zvui Gald zum wechseln für mi."
+				]
+            },
+            "griadi": {
+                "content": [
+                    "Griaßdi! Wos daadst'dn gern hobn?",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wosFrAnKaffeeMea",
+                        "notIfConditions": null,
+                        "option": "Einen Kaffee, bitte."
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "aBiaAmVormittagN",
+                        "notIfConditions": null,
+                        "option": "Ein Bier, bitte!"
+                    },
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            },
+            "wiaGroMeachastEa": {
+                "content": [
+                    "Wia groß meachast eanan Kaffee?",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wosFrAMuichMeach",
+                        "notIfConditions": null,
+                        "option": "Tall"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wosFrAMuichMeach",
+                        "notIfConditions": null,
+                        "option": "Grande"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wosFrAMuichMeach",
+                        "notIfConditions": null,
+                        "option": "Venti"
+                    }
+                ]
+            },
+            "wolltsNoWeidareZ": {
+                "content": [
+                    "Wollt's no weidare Zuatatn dazuaham?",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wuisEnernKaffeeD",
+                        "notIfConditions": null,
+                        "option": "Schlagsahne"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wuisEnernKaffeeD",
+                        "notIfConditions": null,
+                        "option": "Karamellsoße"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wuisEnernKaffeeD",
+                        "notIfConditions": null,
+                        "option": "Schokoladensoße"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wuisEnernKaffeeD",
+                        "notIfConditions": null,
+                        "option": "Nein"
+                    }
+                ]
+            },
+            "wosFrAMuichMeach": {
+                "content": [
+                    "Wos für a Muich meachast?",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wolltsNoWeidareZ",
+                        "notIfConditions": null,
+                        "option": "Vollmilch"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wolltsNoWeidareZ",
+                        "notIfConditions": null,
+                        "option": "fettarme Muich"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wolltsNoWeidareZ",
+                        "notIfConditions": null,
+                        "option": "Sojamilch"
+                    }
+                ]
+            },
+            "wosFrAnKaffeeMea": {
+                "content": [
+                    "Wos für an Kaffee meachast bestölln?",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wiaGroMeachastEa",
+                        "notIfConditions": null,
+                        "option": "Filterkaffee"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wiaGroMeachastEa",
+                        "notIfConditions": null,
+                        "option": "Espresso"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wiaGroMeachastEa",
+                        "notIfConditions": null,
+                        "option": "Cappuccino"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wiaGroMeachastEa",
+                        "notIfConditions": null,
+                        "option": "Latte Macchiato"
+                    }
+                ]
+            },
+            "wuisEnernKaffeeD": {
+                "content": [
+                    "Wui's enern Kaffee do trinkn oda zum Mitnehma bestölln?",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "dasMacht",
+                        "notIfConditions": null,
+                        "option": "Hier trinken."
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "dasMacht",
+                        "notIfConditions": null,
+                        "option": "Zum Mitnehmen."
+                    }
+                ]
+            }
+        }
+    },
+    "title": "Kioskbesitzer_Zuviel_Geld",
+    "url_key": 153137
+}

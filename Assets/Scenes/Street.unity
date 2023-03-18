@@ -2698,6 +2698,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: KioskSeller
       objectReference: {fileID: 0}
+    - target: {fileID: 5924071220352604455, guid: b680af6a4cd14ae44a38566826e754b2, type: 3}
+      propertyPath: dialogMoney
+      value: 
+      objectReference: {fileID: 4900000, guid: 2aa4d542037923246929bde7fcf03f39, type: 3}
+    - target: {fileID: 5924071220352604455, guid: b680af6a4cd14ae44a38566826e754b2, type: 3}
+      propertyPath: dialogFlowers
+      value: 
+      objectReference: {fileID: 4900000, guid: 55d21334ff14790459271b780b171adf, type: 3}
+    - target: {fileID: 5924071220352604455, guid: b680af6a4cd14ae44a38566826e754b2, type: 3}
+      propertyPath: dialogMoneyTooMuch
+      value: 
+      objectReference: {fileID: 4900000, guid: cc836c1281005a74c9dd82473adbc771, type: 3}
+    - target: {fileID: 5924071220352604455, guid: b680af6a4cd14ae44a38566826e754b2, type: 3}
+      propertyPath: possibleInteractionItems.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924071220352604455, guid: b680af6a4cd14ae44a38566826e754b2, type: 3}
+      propertyPath: possibleInteractionItems.Array.data[0]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924071220352604455, guid: b680af6a4cd14ae44a38566826e754b2, type: 3}
+      propertyPath: possibleInteractionItems.Array.data[1]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924071220352604455, guid: b680af6a4cd14ae44a38566826e754b2, type: 3}
+      propertyPath: possibleInteractionItems.Array.data[2]
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924071220352604455, guid: b680af6a4cd14ae44a38566826e754b2, type: 3}
+      propertyPath: possibleInteractionItems.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5924071220352604458, guid: b680af6a4cd14ae44a38566826e754b2, type: 3}
       propertyPath: m_RootOrder
       value: 2
