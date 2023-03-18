@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Interaction;
 using ScriptableObjects;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,14 +19,15 @@ public class WorldState : MonoBehaviour
     private Item _currentlySelectedInventoryItem = Item.NULL_ITEM;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject inventoryPrefab;
+    [SerializeField] private TextMeshProUGUI clockText;
     [SerializeField] private MouseCursorSO[] _mouseCursorArray;
     private InventoryItem[] _inventoryItemScriptableObjects;
     private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
     private Dictionary<KeyEvent, int> _keyeventToActivated = new Dictionary<KeyEvent, int>();
     private List<KeyEvent> _permanentKeyEvents = new List<KeyEvent>();
     private bool _timeRunning = false;
-    
-    
+    private int _totalCycleTimeSeconds = 60;
+
     private Scene _currentScene = Scene.Bedroom;
 
     public Scene CurrentScene => _currentScene;
@@ -59,7 +61,7 @@ public class WorldState : MonoBehaviour
         BEGGAR_AWAKE,
         BEER_TAKEN,
         DOG_AVAIABLE,
-        KIOSK_OWNER_GONE, 
+        KIOSK_OWNER_GONE,
         BEGGAR_SAVED,
         GARRY,
         ASPERIN, 
@@ -117,6 +119,7 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnKeyEventState += OnKeyEventState;
         GameEvents.Instance.OnMouseCursorChange += OnMouseCursorChange;
         GameEvents.Instance.OnWorldReset += OnWorldReset;
+        GameEvents.Instance.OnTimeChanged += delegate { UpdateGuiClock(); }; 
         SceneManager.sceneLoaded += OnSceneLoaded;
         StartTime();
     }
@@ -125,10 +128,10 @@ public class WorldState : MonoBehaviour
     {
         switch (scene)
         {
-            case Scene.Reset:
             case Scene.Bedroom:
             case Scene.Street:
             case Scene.Telephone:
+            case Scene.Reset:
             case Scene.End:
             case Scene.JonasDebug1:
             case Scene.JonasDebug2:
@@ -137,6 +140,7 @@ public class WorldState : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
         }
+        
         _currentScene = scene;
     }
 
@@ -154,19 +158,28 @@ public class WorldState : MonoBehaviour
             {
                 continue;
             }
+
             _keyeventToActivated[keyEvent] = 0;
         }
+
         Invoke(nameof(LoadBedRoomScene), 3f);
     }
 
     private void LoadBedRoomScene()
     {
         GameEvents.Instance.OnSceneChange(Scene.Bedroom);
+        _time = 0;
     }
 
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
     {
         inventoryPanel = GameObject.Find("InventoryPanel");
+        UpdateGuiClock();
+        GameObject clock = GameObject.Find("clock");
+        if (clock != null)
+        {
+            clockText = clock.GetComponent<TextMeshProUGUI>();
+        }
         GameObject[] findGameObjectsWithTag = GameObject.FindGameObjectsWithTag("SimpleItemPickup");
         foreach (GameObject simpleItemPickupGO in findGameObjectsWithTag)
         {
@@ -222,6 +235,28 @@ public class WorldState : MonoBehaviour
         }
     }
 
+    private void UpdateGuiClock()
+    {
+        if (clockText != null)
+        {
+            int startHour = 9;
+            int endHour = 18;
+            int totalNumberHours = endHour - startHour;
+            float conversionFactor = (float) totalNumberHours / _totalCycleTimeSeconds;
+            int hour = (int) Math.Floor(_time * conversionFactor) + startHour;
+            float rest = _time * conversionFactor - (int) Math.Floor(_time * conversionFactor);
+            Debug.Log("Rest:" + rest);
+            string minute = "00";
+            if (rest > 0.5)
+            {
+                minute = "30";
+            }
+
+            clockText.text = hour.ToString("D2") + ":" + minute;
+        }
+    }
+
+
     private void AddInventoryItemToGui(Item item)
     {
         GameObject newInventory = Instantiate(inventoryPrefab, inventoryPanel.transform);
@@ -247,7 +282,7 @@ public class WorldState : MonoBehaviour
     {
         _time++;
         Debug.Log(_time);
-        if (_time == 60)
+        if (_time == _totalCycleTimeSeconds)
         {
             GameEvents.Instance.OnWorldReset?.Invoke();
         }
@@ -255,7 +290,6 @@ public class WorldState : MonoBehaviour
         {
             GameEvents.Instance.OnTimeChanged?.Invoke(_time);
         }
-
     }
 
     private void OnKeyEvent(KeyEvent keyEvent)
@@ -275,7 +309,7 @@ public class WorldState : MonoBehaviour
 
     public bool HasKeyEventHappend(KeyEvent keyEvent)
     {
-        return _keyeventToActivated[keyEvent]==1;
+        return _keyeventToActivated[keyEvent] == 1;
     }
 
     public int GetKeyeventState(KeyEvent keyEvent)
@@ -293,6 +327,7 @@ public class WorldState : MonoBehaviour
         float y = mouseCursorSo.MouseCursorImage.height * 0.21f;
         hotSpot = new Vector2(x, y);
         // }
-        if (mouseCursorSo is not null) Cursor.SetCursor(mouseCursorSo.MouseCursorImage, hotSpot, CursorMode.ForceSoftware);
+        if (mouseCursorSo is not null)
+            Cursor.SetCursor(mouseCursorSo.MouseCursorImage, hotSpot, CursorMode.ForceSoftware);
     }
 }
