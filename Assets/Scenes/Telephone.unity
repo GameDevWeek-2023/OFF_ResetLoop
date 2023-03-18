@@ -1227,6 +1227,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8687236719912406416, guid: b68690048d1f81248bf8f400d0748ef7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -516
+      objectReference: {fileID: 0}
     - target: {fileID: 8687236720148497064, guid: b68690048d1f81248bf8f400d0748ef7, type: 3}
       propertyPath: m_Name
       value: Canvas
