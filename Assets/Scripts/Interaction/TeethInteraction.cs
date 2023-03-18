@@ -6,7 +6,7 @@ namespace Interaction
 {
     public class TeethInteraction : ItemInteraction
     {
-        private enum State { NO_WATER=0, WATER=1, COFFEE=2, BOOZE=3, WALKING_STICK=4, ASPERIN=5}
+        private enum State { NO_WATER=0, WATER=1, COFFEE=2, BOOZE=3, WALKING_STICK=4, ASPERIN=5, FLOWERS=6}
 
         [SerializeField]
         private State state;
@@ -94,6 +94,9 @@ namespace Interaction
                 case State.WALKING_STICK:
                     GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileBoozeWalkingStick.text, activeSprite);
                     break;
+                case State.FLOWERS:
+                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileFlowers.text, activeSprite);
+                    break;
                 case State.ASPERIN:
                     GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileAsperin.text, activeSprite);
                     break;
@@ -137,7 +140,7 @@ namespace Interaction
                     ProcessWalkingStick();
                     break;
                 case Item.FLOWERS:
-                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileBoozeWalkingStick.text, activeSprite);
+                    UpdateState(State.FLOWERS, activeSprite);
                     break;
                 case Item.ASPERIN:
                     UpdateState(State.ASPERIN, garryAsperin);
@@ -166,9 +169,12 @@ namespace Interaction
             state = newState;
             activeSprite = newSprite;
             spriteRenderer.sprite = newSprite;
-
-            GameEvents.Instance.OnKeyEventState?.Invoke(new KeyEventState(WorldState.KeyEvent.GARRY, (int) state));
-            Debug.Log("KEY EVENT STATE " + ((int)state));
+            
+            if (state != State.WALKING_STICK && state != State.FLOWERS)
+            {
+                GameEvents.Instance.OnKeyEventState?.Invoke(new KeyEventState(WorldState.KeyEvent.GARRY, (int)state));
+            }
+            
         }
 
         private void OnDestroy()
