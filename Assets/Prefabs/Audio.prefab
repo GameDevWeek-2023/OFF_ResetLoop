@@ -131,7 +131,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: b_call
-    clip: {fileID: 8300000, guid: 77847e1c1436745dab995456f6590aff, type: 3}
+    clip: {fileID: 8300000, guid: 4655b72b06ea24ed79fc2329d7493e13, type: 3}
     volume: 1
     soundGroup: 2
     loop: 0
@@ -196,8 +196,38 @@ MonoBehaviour:
     soundGroup: 2
     loop: 0
     source: {fileID: 0}
-  - name: reset
-    clip: {fileID: 8300000, guid: 62c14f993815a45d59c20ef3dd1912c2, type: 3}
+  - name: resetsound
+    clip: {fileID: 8300000, guid: 708ceb65b964b4a5e9cbea5337d1739c, type: 3}
+    volume: 1
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: gong
+    clip: {fileID: 8300000, guid: 311287cc7bdde485abf07bf67d9c2b36, type: 3}
+    volume: 0.668
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: prereset
+    clip: {fileID: 8300000, guid: 34db251db09c54710a849dc1b3300ec1, type: 3}
+    volume: 1
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: reset_during
+    clip: {fileID: 8300000, guid: f417852988958499d8fd7f83d18d9285, type: 3}
+    volume: 1
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: death
+    clip: {fileID: 8300000, guid: 327d626046290474f81bb04a16b39272, type: 3}
+    volume: 1
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: click
+    clip: {fileID: 8300000, guid: 9288b77c20c464674a2dbd30ecaa7fe6, type: 3}
     volume: 1
     soundGroup: 0
     loop: 0

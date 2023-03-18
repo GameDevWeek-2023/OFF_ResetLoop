@@ -17,13 +17,17 @@ public class GameEvents : MonoBehaviour
     [CanBeNull] public Action<Item> OnInventoryItemSelected;
     [CanBeNull] public Action OnInventoryItemConsumed;
     [CanBeNull] public Action<Position> OnMovePlayerToPosition;
-    [CanBeNull] public Action<WorldState.Scene> OnSceneChange;
+    [CanBeNull] public Action<SceneChange> OnSceneChange;
+    [CanBeNull] public Action<WorldState.Scene> OnRequestSceneChange;
     [CanBeNull] public Action<TelephoneController.Button> OnButtonDialed;
     [CanBeNull] public Action<TelephoneController.CallType> OnCall;
     [CanBeNull] public Action<WorldState.KeyEvent> OnKeyEvent;
+    [CanBeNull] public Action<KeyEventState> OnKeyEventState;
     [CanBeNull] public Action OnWorldReset;
     [CanBeNull] public Action OnFootStep;
+    [CanBeNull] public Action OnItemClicked;
     [CanBeNull] public Action<WorldState.MouseCursor> OnMouseCursorChange;
+    
     
 
     private void Awake()

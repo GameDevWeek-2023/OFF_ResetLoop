@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Interaction;
+using model;
 using ScriptableObjects;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,17 +20,21 @@ public class WorldState : MonoBehaviour
     private Item _currentlySelectedInventoryItem = Item.NULL_ITEM;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private GameObject inventoryPrefab;
+    [SerializeField] private TextMeshProUGUI clockText;
     [SerializeField] private MouseCursorSO[] _mouseCursorArray;
     private InventoryItem[] _inventoryItemScriptableObjects;
     private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
-    private Dictionary<KeyEvent, bool> _keyeventToActivated = new Dictionary<KeyEvent, bool>();
+    private Dictionary<KeyEvent, int> _keyeventToActivated = new Dictionary<KeyEvent, int>();
     private List<KeyEvent> _permanentKeyEvents = new List<KeyEvent>();
     private bool _timeRunning = false;
-    
-    
-    private Scene _currentScene = Scene.Bedroom;
+    private int _totalCycleTimeSeconds = 60;
+    private bool _dialogueOpen = false;
 
-    public Scene CurrentScene => _currentScene;
+    public bool DialogueOpen => _dialogueOpen;
+
+    private SceneChange _currentScene = new SceneChange(Scene.Bedroom, Scene.Bedroom);
+
+    public Scene CurrentScene => _currentScene.NewScene;
 
     public enum MouseCursor
     {
@@ -50,7 +56,8 @@ public class WorldState : MonoBehaviour
         Telephone,
         JonasDebug1,
         JonasDebug2,
-        End
+        End,
+        Reset
     };
 
     public enum KeyEvent
@@ -58,8 +65,13 @@ public class WorldState : MonoBehaviour
         BEGGAR_AWAKE,
         BEER_TAKEN,
         DOG_AVAIABLE,
-        KIOSK_OWNER_GONE, 
-        BEGGAR_SAVED
+        KIOSK_OWNER_GONE,
+        BEGGAR_SAVED,
+        GARRY,
+        ASPERIN, 
+        LANCELOT_FLYING_HOME,
+        SUICIDE,
+        MURDER
     }
 
     public Item CurrentlySelectedInventoryItem => _currentlySelectedInventoryItem;
@@ -86,7 +98,7 @@ public class WorldState : MonoBehaviour
 
         foreach (KeyEvent keyEvent in Enum.GetValues(typeof(KeyEvent)))
         {
-            _keyeventToActivated.Add(keyEvent, false);
+            _keyeventToActivated.Add(keyEvent, 0);
         }
 
         _mouseCursorArray = Resources.LoadAll<MouseCursorSO>("MouseCursor");
@@ -97,37 +109,51 @@ public class WorldState : MonoBehaviour
     private void Start()
     {
         GameEvents.Instance.OnItemFound += OnItemFound;
-        GameEvents.Instance.OnDialogueStart += delegate { StopTime(); };
-        GameEvents.Instance.OnDialogueClosed += StartTime;
+        GameEvents.Instance.OnDialogueStart += delegate
+        {
+            _dialogueOpen = true; StopTime(); 
+        };
+        GameEvents.Instance.OnDialogueClosed += delegate
+        {
+            _dialogueOpen = false; StartTime();
+        };
         GameEvents.Instance.OnInventoryItemSelected += delegate(Item item)
         {
             Debug.Log("Item selected: " + item);
             _currentlySelectedInventoryItem = item;
         };
-        GameEvents.Instance.OnInventoryItemConsumed += delegate { _currentlySelectedInventoryItem = Item.NULL_ITEM; };
+        GameEvents.Instance.OnInventoryItemConsumed += delegate
+        {
+            Debug.Log("Inventory Item Consumed");
+            _currentlySelectedInventoryItem = Item.NULL_ITEM;
+        };
         GameEvents.Instance.OnItemRemoved += OnItemRemoved;
         GameEvents.Instance.OnSceneChange += OnSceneChange;
+        GameEvents.Instance.OnRequestSceneChange += OnRequestSceneChange;
         GameEvents.Instance.OnKeyEvent += OnKeyEvent;
+        GameEvents.Instance.OnKeyEventState += OnKeyEventState;
         GameEvents.Instance.OnMouseCursorChange += OnMouseCursorChange;
         GameEvents.Instance.OnWorldReset += OnWorldReset;
+        GameEvents.Instance.OnTimeChanged += delegate { UpdateGuiClock(); }; 
         SceneManager.sceneLoaded += OnSceneLoaded;
-
+        // _time = 47;
         StartTime();
-
-        //TODO Debugging
-        GameEvents.Instance.OnItemFound(Item.MONEY);
-        GameEvents.Instance.OnItemFound(Item.MONEY_RICH);
-        GameEvents.Instance.OnItemFound(Item.FLOWERS);
     }
 
-
-    public void OnSceneChange(Scene scene)
+    private void OnRequestSceneChange(Scene newScene)
     {
+        GameEvents.Instance.OnSceneChange(new SceneChange(_currentScene.NewScene, newScene));
+    }
+
+    public void OnSceneChange(SceneChange sceneChange)
+    {
+        Scene scene = sceneChange.NewScene;
         switch (scene)
         {
-            case Scene.Bedroom:
             case Scene.Street:
+            case Scene.Bedroom:
             case Scene.Telephone:
+            case Scene.Reset:
             case Scene.End:
             case Scene.JonasDebug1:
             case Scene.JonasDebug2:
@@ -136,17 +162,17 @@ public class WorldState : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
         }
-        _currentScene = scene;
+        
+        _currentScene = sceneChange;
     }
 
     public void OnWorldReset()
     {
-        Debug.Log("RESET");
         _time = 0;
-        OnSceneChange(Scene.Bedroom);
+        OnRequestSceneChange(Scene.Reset);
         _inventory.Clear();
         _everythingEverywhereAllAtOnce.Clear();
-        List< KeyEvent > keyEventList = _keyeventToActivated.Keys.ToList();
+        List<KeyEvent> keyEventList = _keyeventToActivated.Keys.ToList();
 
         foreach (KeyEvent keyEvent in keyEventList)
         {
@@ -154,13 +180,28 @@ public class WorldState : MonoBehaviour
             {
                 continue;
             }
-            _keyeventToActivated[keyEvent] = false;
+
+            _keyeventToActivated[keyEvent] = 0;
         }
+
+        Invoke(nameof(LoadBedRoomScene), 3f);
+    }
+
+    private void LoadBedRoomScene()
+    {
+        GameEvents.Instance.OnRequestSceneChange(Scene.Bedroom);
+        _time = 0;
     }
 
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
     {
         inventoryPanel = GameObject.Find("InventoryPanel");
+        GameObject clock = GameObject.Find("clock");
+        if (clock != null)
+        {
+            clockText = clock.GetComponent<TextMeshProUGUI>();
+        }
+        UpdateGuiClock();
         GameObject[] findGameObjectsWithTag = GameObject.FindGameObjectsWithTag("SimpleItemPickup");
         foreach (GameObject simpleItemPickupGO in findGameObjectsWithTag)
         {
@@ -176,6 +217,23 @@ public class WorldState : MonoBehaviour
         {
             StartTime();
         }
+
+        if (_currentScene.OldScene == Scene.Telephone && _currentScene.NewScene == Scene.Street)
+        {
+            GameObject knut = GameObject.Find("Knut");
+            GameObject afterTelephonePosition = GameObject.Find("Telefon_Booth_Position");
+            knut.transform.position = afterTelephonePosition.transform.position;
+            Vector3 transformPosition = Camera.main.transform.position;
+            Camera.main.transform.position = new Vector3(13.3f, transformPosition.y, transformPosition.z);
+        }
+
+        if (_currentScene.OldScene == Scene.Street && _currentScene.NewScene == Scene.Bedroom)
+        {
+            GameObject knut = GameObject.Find("Knut");
+            GameObject afterTelephonePosition = GameObject.Find("From_Street_Position");
+            knut.transform.position = afterTelephonePosition.transform.position;
+        }
+        _dialogueOpen = false;
     }
 
     public bool ItemExists(Item item)
@@ -197,9 +255,12 @@ public class WorldState : MonoBehaviour
 
     private void OnItemFound(Item item)
     {
-        _inventory.Add(item);
-        _everythingEverywhereAllAtOnce.Add(item);
-        AddInventoryItemToGui(item);
+        if (!_inventory.Contains(item))
+        {
+            _inventory.Add(item);
+            _everythingEverywhereAllAtOnce.Add(item);
+            AddInventoryItemToGui(item);
+        }
     }
 
     private void OnItemRemoved(Item item)
@@ -215,6 +276,28 @@ public class WorldState : MonoBehaviour
             AddInventoryItemToGui(item);
         }
     }
+
+    private void UpdateGuiClock()
+    {
+        if (clockText != null)
+        {
+            int startHour = 9;
+            int endHour = 18;
+            int totalNumberHours = endHour - startHour;
+            float conversionFactor = (float) totalNumberHours / _totalCycleTimeSeconds;
+            int hour = (int) Math.Floor(_time * conversionFactor) + startHour;
+            float rest = _time * conversionFactor - (int) Math.Floor(_time * conversionFactor);
+            Debug.Log("Rest:" + rest);
+            string minute = "00";
+            if (rest > 0.5)
+            {
+                minute = "30";
+            }
+
+            clockText.text = hour.ToString("D2") + ":" + minute;
+        }
+    }
+
 
     private void AddInventoryItemToGui(Item item)
     {
@@ -241,7 +324,7 @@ public class WorldState : MonoBehaviour
     {
         _time++;
         Debug.Log(_time);
-        if (_time == 60)
+        if (_time == _totalCycleTimeSeconds)
         {
             GameEvents.Instance.OnWorldReset?.Invoke();
         }
@@ -249,15 +332,29 @@ public class WorldState : MonoBehaviour
         {
             GameEvents.Instance.OnTimeChanged?.Invoke(_time);
         }
-
     }
 
     private void OnKeyEvent(KeyEvent keyEvent)
     {
-        _keyeventToActivated[keyEvent] = true;
+        _keyeventToActivated[keyEvent] = 1;
+
+        if(keyEvent == KeyEvent.LANCELOT_FLYING_HOME)
+        {
+            StopTime();
+        }
+    }
+
+    private void OnKeyEventState(KeyEventState keyEventState)
+    {
+        _keyeventToActivated[keyEventState.keyEvent] = keyEventState.state;
     }
 
     public bool HasKeyEventHappend(KeyEvent keyEvent)
+    {
+        return _keyeventToActivated[keyEvent] == 1;
+    }
+
+    public int GetKeyeventState(KeyEvent keyEvent)
     {
         return _keyeventToActivated[keyEvent];
     }
@@ -272,6 +369,7 @@ public class WorldState : MonoBehaviour
         float y = mouseCursorSo.MouseCursorImage.height * 0.21f;
         hotSpot = new Vector2(x, y);
         // }
-        if (mouseCursorSo is not null) Cursor.SetCursor(mouseCursorSo.MouseCursorImage, hotSpot, CursorMode.ForceSoftware);
+        if (mouseCursorSo is not null)
+            Cursor.SetCursor(mouseCursorSo.MouseCursorImage, hotSpot, CursorMode.ForceSoftware);
     }
 }

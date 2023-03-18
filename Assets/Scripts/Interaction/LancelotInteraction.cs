@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,6 +43,7 @@ public class LancelotInteraction : ItemInteraction
     [SerializeField] private GameObject house;
     [SerializeField] private GameObject aperin;
 
+    [SerializeField] private Transform posStart;
     [SerializeField] private Transform posKnut;
     [SerializeField] private Transform posBeggar;
     [SerializeField] private Transform posKioskSeller;
@@ -61,6 +63,32 @@ public class LancelotInteraction : ItemInteraction
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
 
+        gameObject.transform.position = posStart.position;
+
+        GameEvents.Instance.OnWorldReset += OnWorldReset;
+
+        GoToPosition(NavigationGoal.BEGGER);
+
+        if (WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.ASPERIN))
+        {
+            Instantiate(prefabAsperin, posHomeKnut.position, Quaternion.identity);
+            transform.position = posStash.position;
+            GoToPosition(NavigationGoal.STASH);
+        }
+        else if (WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.LANCELOT_FLYING_HOME))
+        {
+            transform.position = posStash.position;
+            SetToy(Toy.FlYING_HOUSE);
+            GoToPosition(NavigationGoal.KNUT);
+        }
+
+    }
+
+    //will never happen, since he starts in the bedroom
+    private void OnWorldReset()
+    {
+        SetToy(Toy.NONE);
+        gameObject.transform.position = posStart.position;
         GoToPosition(NavigationGoal.BEGGER);
     }
 
@@ -82,7 +110,7 @@ public class LancelotInteraction : ItemInteraction
             {
                 Instantiate(prefabAsperin, posHomeKnut.position, Quaternion.identity);
                 SetToy(Toy.NONE);
-                GoToPosition(NavigationGoal.KIOSK);
+                GoToPosition(NavigationGoal.STASH);
             }
             else
             {
@@ -149,13 +177,14 @@ public class LancelotInteraction : ItemInteraction
         switch (item)
         {
             case Item.BALLS:
-                
                 SetToy(Toy.BALL);
                 GoToPosition(NavigationGoal.STASH);
+                GameEvents.Instance.OnKeyEvent?.Invoke(WorldState.KeyEvent.ASPERIN);
                 break;
             case Item.WALKING_STICK_CRUSHED:
                 SetToy(Toy.STICK);
                 GoToPosition(NavigationGoal.STASH);
+                GameEvents.Instance.OnKeyEvent?.Invoke(WorldState.KeyEvent.LANCELOT_FLYING_HOME);
                 break;
         }
     }
@@ -221,5 +250,10 @@ public class LancelotInteraction : ItemInteraction
                
                 break;
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.Instance.OnWorldReset -= OnWorldReset;
     }
 }

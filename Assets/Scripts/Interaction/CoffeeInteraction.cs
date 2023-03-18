@@ -21,4 +21,9 @@ public class CoffeeInteraction : SimpleItemPickupInteraction
             RemoveFromInventory(Item.MONEY);
         }
     }
+
+    private void OnDestroy()
+    {
+        GameEvents.Instance.OnDialogueTag -= OnDialogueTag;
+    }
 }

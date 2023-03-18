@@ -1,11 +1,12 @@
 using Dialog;
+using System;
 using UnityEngine;
 
 namespace Interaction
 {
     public class TeethInteraction : ItemInteraction
     {
-        private enum State { NO_WATER, WATER, COFFEE, BOOZE, WALKING_STICK}
+        private enum State { NO_WATER=0, WATER=1, COFFEE=2, BOOZE=3, WALKING_STICK=4, ASPERIN=5, FLOWERS=6}
 
         [SerializeField]
         private State state;
@@ -16,6 +17,8 @@ namespace Interaction
         [SerializeField] private TextAsset dialogFileCoffee;
         [SerializeField] private TextAsset dialogFileBooze;
         [SerializeField] private TextAsset dialogFileBoozeWalkingStick;
+        [SerializeField] private TextAsset dialogFileFlowers;
+        [SerializeField] private TextAsset dialogFileAsperin;
 
 
         [Header("Sprites")]
@@ -23,15 +26,50 @@ namespace Interaction
         [SerializeField] private Sprite garryWater;
         [SerializeField] private Sprite garryCoffee;
         [SerializeField] private Sprite garryBooze;
+        [SerializeField] private Sprite garryAsperin;
+
+        private Sprite activeSprite;
 
         private SpriteRenderer spriteRenderer;
 
         protected override void Start()
         {
             base.Start();
+            
             spriteRenderer = GetComponent<SpriteRenderer>();
+            
+            GameEvents.Instance.OnWorldReset += OnWorldReset;
+
+            //Init
+            state = (State) WorldState.Instance.GetKeyeventState(WorldState.KeyEvent.GARRY);
+
+            switch (state)
+            {
+                case State.NO_WATER:
+                    activeSprite = garryNoWater;
+                    break;
+                case State.WATER:
+                    activeSprite = garryWater;
+                    break;
+                case State.COFFEE:
+                    activeSprite = garryCoffee;
+                    break;
+                case State.BOOZE:
+                    activeSprite = garryBooze;
+                    break;
+                case State.ASPERIN:
+                    activeSprite = garryAsperin;
+                    break;
+            }
+            spriteRenderer.sprite = activeSprite;
+
+        }
+
+        private void OnWorldReset()
+        {
             UpdateState(State.NO_WATER, garryNoWater);
         }
+
         public override void SpecificMouseDownBehaviour()
         {
             StartDialog();
@@ -42,19 +80,25 @@ namespace Interaction
             switch (state)
             {
                 case State.NO_WATER:
-                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileEmpty.text, garryWater);
+                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileEmpty.text, activeSprite);
                     break;
                 case State.WATER:
-                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileWater.text, garryWater);
+                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileWater.text, activeSprite);
                     break;
                 case State.COFFEE:
-                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileCoffee.text, garryCoffee);
+                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileCoffee.text, activeSprite);
                     break;
                 case State.BOOZE:
-                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileBooze.text, garryBooze);
+                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileBooze.text, activeSprite);
                     break;
                 case State.WALKING_STICK:
-                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileBoozeWalkingStick.text, garryBooze);
+                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileBoozeWalkingStick.text, activeSprite);
+                    break;
+                case State.FLOWERS:
+                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileFlowers.text, activeSprite);
+                    break;
+                case State.ASPERIN:
+                    GameEvents.Instance.OnDialogueStart?.Invoke(dialogFileAsperin.text, activeSprite);
                     break;
             }
         }
@@ -95,10 +139,18 @@ namespace Interaction
                 case Item.WALKING_STICK_WITH_BALLS:
                     ProcessWalkingStick();
                     break;
+                case Item.FLOWERS:
+                    UpdateState(State.FLOWERS, activeSprite);
+                    break;
+                case Item.ASPERIN:
+                    UpdateState(State.ASPERIN, garryAsperin);
+                    RemoveFromInventory(Item.ASPERIN);
+                    break;
             }
             StartDialog();
         }
 
+        
         private void ProcessWalkingStick()
         {
             if(state == State.BOOZE)
@@ -115,7 +167,19 @@ namespace Interaction
         private void UpdateState(State newState, Sprite newSprite)
         {
             state = newState;
+            activeSprite = newSprite;
             spriteRenderer.sprite = newSprite;
+            
+            if (state != State.WALKING_STICK && state != State.FLOWERS)
+            {
+                GameEvents.Instance.OnKeyEventState?.Invoke(new KeyEventState(WorldState.KeyEvent.GARRY, (int)state));
+            }
+            
+        }
+
+        private void OnDestroy()
+        {
+            GameEvents.Instance.OnWorldReset -= OnWorldReset;
         }
 
     }

@@ -25,7 +25,7 @@ namespace Interaction
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
-                GameEvents.Instance.OnSceneChange(sceneToGoTo);
+                GameEvents.Instance.OnRequestSceneChange(sceneToGoTo);
             }
         }
     }

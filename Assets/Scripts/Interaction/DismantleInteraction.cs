@@ -5,11 +5,31 @@ using UnityEngine;
 
 public class DismantleInteraction : ItemInteraction
 {
+
+    private bool _dismantleEnabled = false;
+    
     private void Awake()
     {
         base._mouseCursor = WorldState.MouseCursor.DEFAULT;
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        GameEvents.Instance.OnInventoryItemSelected += delegate(Item item) {
+            if (_dismantleEnabled)
+            {
+                OnUsableItemDrop(item);
+                GameEvents.Instance.OnInventoryItemConsumed();
+                _dismantleEnabled = false;
+            }
+        };
+        GameEvents.Instance.OnItemFound += delegate { _dismantleEnabled = false; };
+        GameEvents.Instance.OnSceneChange += delegate { _dismantleEnabled = false; };
+    }
+    
+    
+    
     public override void OnTimeChanged(int time)
     {
 
@@ -34,15 +54,16 @@ public class DismantleInteraction : ItemInteraction
                 AddToInventory(Item.WALKING_STICK_NO_BALLS);
                 AddToInventory(Item.BALLS);
                 break;
+            case Item.VASE_WITH_WATER:
+                RemoveFromInventory(Item.VASE_WITH_WATER);
+                AddToInventory(Item.VASE_CRUSHED);
+                break;
         }
+        
     }
 
     public override void SpecificMouseDownBehaviour()
     {
-       
+        _dismantleEnabled = true;
     }
-
-   
-
-   
 }

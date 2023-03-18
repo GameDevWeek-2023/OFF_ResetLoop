@@ -42,7 +42,7 @@ public class TooltipController : MonoBehaviour
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.x += 2f;
-        mousePosition.y -= 1.5f;
+        mousePosition.y += 1.5f;
         mousePosition.z += Camera.main.nearClipPlane;
         UpdateTooltipGameObject();
         _tooltip.transform.position = mousePosition;

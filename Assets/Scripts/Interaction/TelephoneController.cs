@@ -12,7 +12,7 @@ namespace Interaction
         private string _dialedNumber = "";
         private string stockNumber = "4711";
         private string kioskOwnerNumber = "0815";
-        
+
         public enum Button
         {
             B0,
@@ -47,6 +47,10 @@ namespace Interaction
 
         private void OnButtonDialed(Button buttonAction)
         {
+            if (IsInvoking(nameof(ArtificallyPushDialButton)))
+            {
+                CancelInvoke(nameof(ArtificallyPushDialButton));
+            }
             if (buttonAction == Button.B_CALL)
             {
                 InitiateCall();
@@ -54,10 +58,16 @@ namespace Interaction
             else
             {
                 _dialedNumber += buttonAction.ToString().Replace("B", "");
+                Invoke(nameof(ArtificallyPushDialButton), 2f);
             }
             Debug.Log("Number typed: "+_dialedNumber);
         }
 
+        private void ArtificallyPushDialButton()
+        {
+            GameEvents.Instance.OnButtonDialed(Button.B_CALL);
+        }
+        
         private void InitiateCall()
         {
             CallType callType;
@@ -84,6 +94,14 @@ namespace Interaction
         {
             GameEvents.Instance.OnKeyEvent(WorldState.KeyEvent.KIOSK_OWNER_GONE);
             GameEvents.Instance.OnDialogueStart?.Invoke(dialogKioskOwner.text, spriteKioskOwner);
+        }
+
+        private void OnDestroy()
+        {
+            if (IsInvoking(nameof(InitiateCall)))
+            {
+                CancelInvoke(nameof(InitiateCall));
+            }
         }
     }
 }
