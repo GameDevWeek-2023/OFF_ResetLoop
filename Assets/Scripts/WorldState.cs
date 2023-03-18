@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Interaction;
-using Newtonsoft.Json.Serialization;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,6 +22,7 @@ public class WorldState : MonoBehaviour
     private InventoryItem[] _inventoryItemScriptableObjects;
     private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
     private Dictionary<KeyEvent, bool> _keyeventToActivated = new Dictionary<KeyEvent, bool>();
+    private List<KeyEvent> _permanentKeyEvents = new List<KeyEvent>();
     private bool _timeRunning = false;
     
     
@@ -49,7 +49,8 @@ public class WorldState : MonoBehaviour
         Street,
         Telephone,
         JonasDebug1,
-        JonasDebug2
+        JonasDebug2,
+        End
     };
 
     public enum KeyEvent
@@ -90,6 +91,7 @@ public class WorldState : MonoBehaviour
 
         _mouseCursorArray = Resources.LoadAll<MouseCursorSO>("MouseCursor");
         OnMouseCursorChange(MouseCursor.DEFAULT);
+        _permanentKeyEvents.Add(KeyEvent.BEGGAR_SAVED);
     }
 
     private void Start()
@@ -111,6 +113,11 @@ public class WorldState : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         StartTime();
+
+        //TODO Debugging
+        GameEvents.Instance.OnItemFound(Item.MONEY);
+        GameEvents.Instance.OnItemFound(Item.MONEY_RICH);
+        GameEvents.Instance.OnItemFound(Item.FLOWERS);
     }
 
 
@@ -121,6 +128,7 @@ public class WorldState : MonoBehaviour
             case Scene.Bedroom:
             case Scene.Street:
             case Scene.Telephone:
+            case Scene.End:
             case Scene.JonasDebug1:
             case Scene.JonasDebug2:
                 SceneManager.LoadScene(scene.ToString());
@@ -128,7 +136,6 @@ public class WorldState : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
         }
-
         _currentScene = scene;
     }
 
@@ -139,6 +146,16 @@ public class WorldState : MonoBehaviour
         OnSceneChange(Scene.Bedroom);
         _inventory.Clear();
         _everythingEverywhereAllAtOnce.Clear();
+        List< KeyEvent > keyEventList = _keyeventToActivated.Keys.ToList();
+
+        foreach (KeyEvent keyEvent in keyEventList)
+        {
+            if (_permanentKeyEvents.Contains(keyEvent))
+            {
+                continue;
+            }
+            _keyeventToActivated[keyEvent] = false;
+        }
     }
 
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
@@ -255,6 +272,6 @@ public class WorldState : MonoBehaviour
         float y = mouseCursorSo.MouseCursorImage.height * 0.21f;
         hotSpot = new Vector2(x, y);
         // }
-        if (mouseCursorSo is not null) Cursor.SetCursor(mouseCursorSo.MouseCursorImage, hotSpot, CursorMode.Auto);
+        if (mouseCursorSo is not null) Cursor.SetCursor(mouseCursorSo.MouseCursorImage, hotSpot, CursorMode.ForceSoftware);
     }
 }

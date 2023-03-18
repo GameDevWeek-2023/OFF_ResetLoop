@@ -79,6 +79,7 @@ public class AudioManager : MonoBehaviour
         GameEvents.Instance.OnCall += OnCall;
         GameEvents.Instance.OnButtonDialed += OnButtonDialed;
         GameEvents.Instance.OnFootStep += OnFootstep;
+        GameEvents.Instance.OnWorldReset += () => Play("reset");
         _musicManager.Play();
         OnSceneChange(WorldState.Instance.CurrentScene);
     }
@@ -106,6 +107,8 @@ public class AudioManager : MonoBehaviour
                 Play("cityambience", WorldState.Instance.Time);
                 break;
             case WorldState.Scene.Telephone:
+                break;
+            case WorldState.Scene.End:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);

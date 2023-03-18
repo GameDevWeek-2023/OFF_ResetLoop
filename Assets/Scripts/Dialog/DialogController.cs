@@ -58,6 +58,8 @@ public class DialogController : MonoBehaviour
 
             value.message = content.First.ToString();
 
+            ParseMessageForTag(value);
+
             value.options = new List<DialogOption>();
 
             foreach (JObject c in content.Children<JObject>())
@@ -73,7 +75,7 @@ public class DialogController : MonoBehaviour
                         option.nextDialogPartKey = c["linkPath"].ToString();
                     }
 
-                    ParseOptionTextForDropItem(option);
+                    ParseOptionForTag(option);
 
                     value.options.Add(option);
                 }
@@ -88,22 +90,40 @@ public class DialogController : MonoBehaviour
         }
     }
 
-    private void ParseOptionTextForDropItem(DialogOption option)
+    private void ParseOptionForTag(DialogOption option)
     {
         if (option.optionText.Contains("{"))
         {
             int index = option.optionText.IndexOf("{");
 
-            option.dropItem = option.optionText.Substring(index + 1).Replace("}", "").Trim();
+            option.tag = option.optionText.Substring(index + 1).Replace("}", "").Trim();
 
             option.optionText = option.optionText.Substring(0, index).Trim();
+        }     
+    }
+
+    private void ParseMessageForTag(DialogPart dialogPart)
+    {
+        if (dialogPart.message.Contains("{"))
+        {
+            int index = dialogPart.message.IndexOf("{");
+
+            dialogPart.tag = dialogPart.message.Substring(index + 1).Replace("}", "").Trim();
+
+            dialogPart.message = dialogPart.message.Substring(0, index).Trim();
         }
     }
+
 
     private void UpdateUI(string key)
     { 
         DialogPart dialogPart = dialog[key];
         messageText.text = dialogPart.message;
+
+        if(dialogPart.tag != null)
+        {
+            GameEvents.Instance.OnDialogueTag?.Invoke(dialogPart.tag);
+        }
         
         for (int i = 0; i < optionButtons.Length; i++)
         {
@@ -122,9 +142,9 @@ public class DialogController : MonoBehaviour
                     button.onClick.AddListener(() => OnButtonClicked(option.nextDialogPartKey));
                 }
 
-                if (option.dropItem != null)
+                if (option.tag != null)
                 {
-                    button.onClick.AddListener(() => DropItem(option.dropItem));
+                    button.onClick.AddListener(() => CreateDialogTagAction(option.tag));
                 }
 
                 optionButtons[i].gameObject.SetActive(true);
@@ -151,15 +171,15 @@ public class DialogController : MonoBehaviour
         UpdateUI(activeKey);
     }
 
-    public void DropItem(string item)
-    {
-        Debug.Log($"Drop: {item}");
-    }
-
     public void CloseDialog()
     {
         dialogPanel.SetActive(false);
         GameEvents.Instance.OnDialogueClosed?.Invoke();
+    }
+
+    public void CreateDialogTagAction(string tag)
+    {
+        GameEvents.Instance.OnDialogueTag?.Invoke(tag);
     }
 
     public void OnDestroy()

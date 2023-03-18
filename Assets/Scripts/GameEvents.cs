@@ -13,6 +13,7 @@ public class GameEvents : MonoBehaviour
     [CanBeNull] public Action<Item> OnItemRemoved;
     [CanBeNull] public Action<string, Sprite> OnDialogueStart;
     [CanBeNull] public Action OnDialogueClosed;
+    [CanBeNull] public Action<string> OnDialogueTag;
     [CanBeNull] public Action<Item> OnInventoryItemSelected;
     [CanBeNull] public Action OnInventoryItemConsumed;
     [CanBeNull] public Action<Position> OnMovePlayerToPosition;

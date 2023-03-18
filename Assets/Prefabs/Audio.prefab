@@ -196,7 +196,17 @@ MonoBehaviour:
     soundGroup: 2
     loop: 0
     source: {fileID: 0}
-  musicTracks: []
+  - name: reset
+    clip: {fileID: 8300000, guid: 62c14f993815a45d59c20ef3dd1912c2, type: 3}
+    volume: 1
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  musicTracks:
+  - clip: {fileID: 8300000, guid: b99d129b534d64ff8b866ab7926b75c5, type: 3}
+    volume: 1
+    MusicScene: 0
+    source: {fileID: 0}
   soundeffectOutput: {fileID: 2523414357410959982, guid: bdba992000bb54c8f99f59286c81d70a, type: 2}
   musicOutput: {fileID: 4036349486229800731, guid: bdba992000bb54c8f99f59286c81d70a, type: 2}
   ambienceOutput: {fileID: 8076789775596360120, guid: bdba992000bb54c8f99f59286c81d70a, type: 2}
