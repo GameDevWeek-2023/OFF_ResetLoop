@@ -123,7 +123,7 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnWorldReset += OnWorldReset;
         GameEvents.Instance.OnTimeChanged += delegate { UpdateGuiClock(); }; 
         SceneManager.sceneLoaded += OnSceneLoaded;
-        _time = 47;
+        // _time = 47;
         StartTime();
     }
 
