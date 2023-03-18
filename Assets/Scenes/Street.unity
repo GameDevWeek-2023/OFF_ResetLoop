@@ -1293,11 +1293,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4849905195831047772, guid: 0ba4b3a7bdd2e824292660986b0d645a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.94
+      value: 27.54
       objectReference: {fileID: 0}
     - target: {fileID: 4849905195831047772, guid: 0ba4b3a7bdd2e824292660986b0d645a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.36
+      value: -3.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ba4b3a7bdd2e824292660986b0d645a, type: 3}
@@ -2761,6 +2761,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4049152669609562414, guid: 2afd2ef2e46b323478a54fe5cdf6f953, type: 3}
+      propertyPath: m_Height
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4049152669609562414, guid: 2afd2ef2e46b323478a54fe5cdf6f953, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4049152670298003937, guid: 2afd2ef2e46b323478a54fe5cdf6f953, type: 3}
       propertyPath: m_LocalPosition.y
       value: 5.2
@@ -3026,12 +3034,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7286185649013512649, guid: 742d909b3e7334116bcf2633022c23cb, type: 3}
+      propertyPath: m_Height
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7286185649013512649, guid: 742d909b3e7334116bcf2633022c23cb, type: 3}
       propertyPath: m_Radius
-      value: 0.32
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7286185649013512649, guid: 742d909b3e7334116bcf2633022c23cb, type: 3}
       propertyPath: m_BaseOffset
-      value: 1.92
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7286185649013512649, guid: 742d909b3e7334116bcf2633022c23cb, type: 3}
       propertyPath: m_AgentTypeID

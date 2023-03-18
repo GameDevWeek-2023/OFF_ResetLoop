@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -61,6 +62,30 @@ public class LancelotInteraction : ItemInteraction
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
 
+        GameEvents.Instance.OnWorldReset += OnWorldReset;
+
+        GoToPosition(NavigationGoal.BEGGER);
+
+        if (WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.ASPERIN))
+        {
+            Instantiate(prefabAsperin, posHomeKnut.position, Quaternion.identity);
+            transform.position = posKioskSeller.position;
+            GoToPosition(NavigationGoal.KIOSK);
+        }
+        else if (WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.LANCELOT_FLYING_HOME))
+        {
+            transform.position = posStash.position;
+            SetToy(Toy.FlYING_HOUSE);
+            GoToPosition(NavigationGoal.KNUT);
+        }
+
+    }
+
+    //will never happen, since he starts in the bedroom
+    private void OnWorldReset()
+    {
+        SetToy(Toy.NONE);
+        transform.position = new Vector3(3.8f, -2.6f, 0);
         GoToPosition(NavigationGoal.BEGGER);
     }
 
@@ -149,13 +174,14 @@ public class LancelotInteraction : ItemInteraction
         switch (item)
         {
             case Item.BALLS:
-                
                 SetToy(Toy.BALL);
                 GoToPosition(NavigationGoal.STASH);
+                GameEvents.Instance.OnKeyEvent?.Invoke(WorldState.KeyEvent.ASPERIN);
                 break;
             case Item.WALKING_STICK_CRUSHED:
                 SetToy(Toy.STICK);
                 GoToPosition(NavigationGoal.STASH);
+                GameEvents.Instance.OnKeyEvent?.Invoke(WorldState.KeyEvent.LANCELOT_FLYING_HOME);
                 break;
         }
     }
@@ -221,5 +247,10 @@ public class LancelotInteraction : ItemInteraction
                
                 break;
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.Instance.OnWorldReset -= OnWorldReset;
     }
 }

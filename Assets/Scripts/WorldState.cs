@@ -60,7 +60,9 @@ public class WorldState : MonoBehaviour
         DOG_AVAIABLE,
         KIOSK_OWNER_GONE, 
         BEGGAR_SAVED,
-        GARRY
+        GARRY,
+        ASPERIN, 
+        LANCELOT_FLYING_HOME
     }
 
     public Item CurrentlySelectedInventoryItem => _currentlySelectedInventoryItem;
@@ -113,6 +115,9 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnMouseCursorChange += OnMouseCursorChange;
         GameEvents.Instance.OnWorldReset += OnWorldReset;
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        GameEvents.Instance.OnItemFound(Item.WALKING_STICK_CRUSHED);
+        GameEvents.Instance.OnItemFound(Item.ALCOHOL);
 
         StartTime();
     }
@@ -251,6 +256,11 @@ public class WorldState : MonoBehaviour
     private void OnKeyEvent(KeyEvent keyEvent)
     {
         _keyeventToActivated[keyEvent] = 1;
+
+        if(keyEvent == KeyEvent.LANCELOT_FLYING_HOME)
+        {
+            StopTime();
+        }
     }
 
     private void OnKeyEventState(KeyEventState keyEventState)
