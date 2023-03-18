@@ -106,7 +106,7 @@ public class AudioManager : MonoBehaviour
     private void PlayCycleEndSound()
     {
         resetSoundActive = true;
-        Play("resetsound", 0f, false);
+        Play("prereset", 0f, false);
     }
 
     public void OnSceneChange(SceneChange sceneChange)
@@ -145,6 +145,7 @@ public class AudioManager : MonoBehaviour
                 resetSoundTimePosition = 0f;
                 break;
             case WorldState.Scene.Reset:
+                Play("reset_during",0f, false);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
@@ -293,7 +294,7 @@ public class AudioManager : MonoBehaviour
     {
         if (resetSoundActive)
         {
-            PauseSound("resetsound");
+            PauseSound("prereset");
         }
     }
 
@@ -301,7 +302,7 @@ public class AudioManager : MonoBehaviour
     {
         if (resetSoundActive)
         {
-            Play("resetsound", resetSoundTimePosition, false);
+            Play("prereset", resetSoundTimePosition, false);
         }
     }
 }

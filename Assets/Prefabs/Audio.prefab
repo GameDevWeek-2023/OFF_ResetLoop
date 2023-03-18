@@ -204,6 +204,18 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: gong
     clip: {fileID: 8300000, guid: 311287cc7bdde485abf07bf67d9c2b36, type: 3}
+    volume: 0.668
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: prereset
+    clip: {fileID: 8300000, guid: 34db251db09c54710a849dc1b3300ec1, type: 3}
+    volume: 1
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: reset_during
+    clip: {fileID: 8300000, guid: f417852988958499d8fd7f83d18d9285, type: 3}
     volume: 1
     soundGroup: 0
     loop: 0
