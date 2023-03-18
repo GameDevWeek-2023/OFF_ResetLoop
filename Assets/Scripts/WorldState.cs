@@ -218,6 +218,7 @@ public class WorldState : MonoBehaviour
         {
             GameObject knut = GameObject.Find("Knut");
             GameObject afterTelephonePosition = GameObject.Find("From_Street_Position");
+            knut.transform.position = afterTelephonePosition.transform.position;
         }
     }
 
