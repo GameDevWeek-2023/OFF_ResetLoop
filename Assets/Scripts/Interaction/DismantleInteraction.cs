@@ -34,6 +34,10 @@ public class DismantleInteraction : ItemInteraction
                 AddToInventory(Item.WALKING_STICK_NO_BALLS);
                 AddToInventory(Item.BALLS);
                 break;
+            case Item.VASE_WITH_WATER:
+                RemoveFromInventory(Item.VASE_WITH_WATER);
+                AddToInventory(Item.VASE_CRUSHED);
+                break;
         }
     }
 

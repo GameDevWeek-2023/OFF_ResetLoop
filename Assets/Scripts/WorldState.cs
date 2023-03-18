@@ -63,7 +63,9 @@ public class WorldState : MonoBehaviour
         BEGGAR_SAVED,
         GARRY,
         ASPERIN, 
-        LANCELOT_FLYING_HOME
+        LANCELOT_FLYING_HOME,
+        SUICIDE,
+        MURDER
     }
 
     public Item CurrentlySelectedInventoryItem => _currentlySelectedInventoryItem;
@@ -116,10 +118,6 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnMouseCursorChange += OnMouseCursorChange;
         GameEvents.Instance.OnWorldReset += OnWorldReset;
         SceneManager.sceneLoaded += OnSceneLoaded;
-
-        GameEvents.Instance.OnItemFound(Item.WALKING_STICK_CRUSHED);
-        GameEvents.Instance.OnItemFound(Item.ALCOHOL);
-
         StartTime();
     }
 
