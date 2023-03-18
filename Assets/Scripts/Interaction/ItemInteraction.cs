@@ -26,7 +26,8 @@ public abstract class ItemInteraction : MonoBehaviour
         KIO_COFFEE,
         TEL_PHONE,
         TEL_PHONEBOOK,
-        TEL_MONEY
+        TEL_MONEY,
+        KNUT
     }
 
     // STR_NEWSPAPER, STR_HOMELESS, STR_ALCOHOL, STR_BUSINESSMAN, STR_DOG,
