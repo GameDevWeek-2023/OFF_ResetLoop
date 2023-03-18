@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Interaction;
+using model;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -23,6 +24,7 @@ public class AudioManager : MonoBehaviour
     private List<string> _onlyInThisSceneSounds = new List<string>();
 
     private Dictionary<string, string[]> _randomSoundCache = new Dictionary<string, string[]>();
+
     public enum SoundGroup
     {
         Soundeffect,
@@ -85,8 +87,14 @@ public class AudioManager : MonoBehaviour
         GameEvents.Instance.OnWorldReset += OnWorldReset;
         GameEvents.Instance.OnDialogueStart += delegate { OnDialogOpened(); };
         GameEvents.Instance.OnDialogueClosed += OnDialogClosed;
-        GameEvents.Instance.OnTimeChanged += delegate(int time) { if(time == 50) { PlayCycleEndSound(); } };
-        OnSceneChange(WorldState.Instance.CurrentScene);
+        GameEvents.Instance.OnTimeChanged += delegate(int time)
+        {
+            if (time == 50)
+            {
+                PlayCycleEndSound();
+            }
+        };
+        OnSceneChange(new SceneChange(WorldState.Instance.CurrentScene, WorldState.Instance.CurrentScene));
     }
 
     private void OnWorldReset()
@@ -98,21 +106,23 @@ public class AudioManager : MonoBehaviour
     private void PlayCycleEndSound()
     {
         resetSoundActive = true;
-        Play("resetsound");
+        Play("resetsound", 0f, false);
     }
-    
-    public void OnSceneChange(WorldState.Scene scene)
+
+    public void OnSceneChange(SceneChange sceneChange)
     {
+        WorldState.Scene scene = sceneChange.NewScene;
         foreach (string onlyInThisSceneSound in _onlyInThisSceneSounds)
         {
             StopSound(onlyInThisSceneSound);
         }
+
         _onlyInThisSceneSounds.Clear();
         if (scene != WorldState.Scene.Telephone && !firstEnterBedRoomThisCycle)
         {
             Play("door");
         }
-        
+
         switch (scene)
         {
             case WorldState.Scene.Bedroom:
@@ -123,6 +133,7 @@ public class AudioManager : MonoBehaviour
                     firstEnterBedRoomThisCycle = false;
                     _musicManager.Play();
                 }
+
                 break;
             case WorldState.Scene.Street:
                 Play("cityambience", WorldState.Instance.Time);
@@ -132,6 +143,8 @@ public class AudioManager : MonoBehaviour
             case WorldState.Scene.End:
                 resetSoundActive = false; // its still playing but variable isn't needed at that point
                 resetSoundTimePosition = 0f;
+                break;
+            case WorldState.Scene.Reset:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
@@ -200,10 +213,9 @@ public class AudioManager : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        
     }
-    
-    public void Play(string name, float startTime = 0f)
+
+    public void Play(string name, float startTime = 0f, bool stopWhenLeavingScene = true)
     {
         if (!mute)
         {
@@ -216,7 +228,10 @@ public class AudioManager : MonoBehaviour
             {
                 soundToPlay.source.time = startTime;
                 soundToPlay.source.Play();
-                _onlyInThisSceneSounds.Add(name);
+                if (stopWhenLeavingScene)
+                {
+                    _onlyInThisSceneSounds.Add(name);
+                }
             }
         }
     }
@@ -237,7 +252,7 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-    
+
     public void StopSound(string name)
     {
         Sound soundToPlay = Array.Find(sounds, sound => sound.name == name);
@@ -261,9 +276,9 @@ public class AudioManager : MonoBehaviour
         if (!_randomSoundCache.ContainsKey(startString))
         {
             _randomSoundCache[startString] = sounds.Where(sound => sound.name.StartsWith(startString))
-                .Select(sound => sound.name).
-                ToArray();
+                .Select(sound => sound.name).ToArray();
         }
+
         playRandomSound(_randomSoundCache[startString]);
     }
 
@@ -281,13 +296,12 @@ public class AudioManager : MonoBehaviour
             PauseSound("resetsound");
         }
     }
-    
+
     private void OnDialogClosed()
     {
         if (resetSoundActive)
         {
-            Play("resetsound", resetSoundTimePosition);
+            Play("resetsound", resetSoundTimePosition, false);
         }
     }
-    
 }

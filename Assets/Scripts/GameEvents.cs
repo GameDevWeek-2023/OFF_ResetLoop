@@ -17,7 +17,8 @@ public class GameEvents : MonoBehaviour
     [CanBeNull] public Action<Item> OnInventoryItemSelected;
     [CanBeNull] public Action OnInventoryItemConsumed;
     [CanBeNull] public Action<Position> OnMovePlayerToPosition;
-    [CanBeNull] public Action<WorldState.Scene> OnSceneChange;
+    [CanBeNull] public Action<SceneChange> OnSceneChange;
+    [CanBeNull] public Action<WorldState.Scene> OnRequestSceneChange;
     [CanBeNull] public Action<TelephoneController.Button> OnButtonDialed;
     [CanBeNull] public Action<TelephoneController.CallType> OnCall;
     [CanBeNull] public Action<WorldState.KeyEvent> OnKeyEvent;

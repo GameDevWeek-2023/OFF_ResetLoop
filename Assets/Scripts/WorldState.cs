@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Interaction;
+using model;
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
@@ -113,6 +114,7 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnInventoryItemConsumed += delegate { _currentlySelectedInventoryItem = Item.NULL_ITEM; };
         GameEvents.Instance.OnItemRemoved += OnItemRemoved;
         GameEvents.Instance.OnSceneChange += OnSceneChange;
+        GameEvents.Instance.OnRequestSceneChange += OnRequestSceneChange;
         GameEvents.Instance.OnKeyEvent += OnKeyEvent;
         GameEvents.Instance.OnKeyEventState += OnKeyEventState;
         GameEvents.Instance.OnMouseCursorChange += OnMouseCursorChange;
@@ -126,8 +128,14 @@ public class WorldState : MonoBehaviour
         StartTime();
     }
 
-    public void OnSceneChange(Scene scene)
+    private void OnRequestSceneChange(Scene newScene)
     {
+        GameEvents.Instance.OnSceneChange(new SceneChange(_currentScene, newScene));
+    }
+
+    public void OnSceneChange(SceneChange sceneChange)
+    {
+        Scene scene = sceneChange.NewScene;
         switch (scene)
         {
             case Scene.Bedroom:
@@ -149,7 +157,7 @@ public class WorldState : MonoBehaviour
     public void OnWorldReset()
     {
         _time = 0;
-        OnSceneChange(Scene.Reset);
+        OnRequestSceneChange(Scene.Reset);
         _inventory.Clear();
         _everythingEverywhereAllAtOnce.Clear();
         List<KeyEvent> keyEventList = _keyeventToActivated.Keys.ToList();
@@ -169,7 +177,7 @@ public class WorldState : MonoBehaviour
 
     private void LoadBedRoomScene()
     {
-        GameEvents.Instance.OnSceneChange(Scene.Bedroom);
+        GameEvents.Instance.OnRequestSceneChange(Scene.Bedroom);
         _time = 0;
     }
 
