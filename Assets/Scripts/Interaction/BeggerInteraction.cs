@@ -68,6 +68,9 @@ public class BeggerInteraction : ItemInteraction
             beerInteraction.ActivateBeer();
             RemoveFromInventory(Item.MONEY_RICH);
             GameEvents.Instance.OnKeyEvent?.Invoke(WorldState.KeyEvent.BEGGAR_SAVED);
+        } else if(item == Item.VASE_CRUSHED)
+        {
+            KillBegger();
         }
     }
 
@@ -107,6 +110,12 @@ public class BeggerInteraction : ItemInteraction
 
         beerInteraction.DeactivateBeer();
         beer.SetActive(false);
+    }
+
+    private void KillBegger()
+    {
+        Debug.Log("KILL BEGGER");
+        GameEvents.Instance.OnKeyEvent?.Invoke(WorldState.KeyEvent.MURDER);
     }
 
     public override void OnTimeChanged(int time)
