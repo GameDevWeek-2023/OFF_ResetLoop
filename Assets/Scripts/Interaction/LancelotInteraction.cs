@@ -43,6 +43,7 @@ public class LancelotInteraction : ItemInteraction
     [SerializeField] private GameObject house;
     [SerializeField] private GameObject aperin;
 
+    [SerializeField] private Transform posStart;
     [SerializeField] private Transform posKnut;
     [SerializeField] private Transform posBeggar;
     [SerializeField] private Transform posKioskSeller;
@@ -62,6 +63,8 @@ public class LancelotInteraction : ItemInteraction
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
 
+        gameObject.transform.position = posStart.position;
+
         GameEvents.Instance.OnWorldReset += OnWorldReset;
 
         GoToPosition(NavigationGoal.BEGGER);
@@ -69,8 +72,8 @@ public class LancelotInteraction : ItemInteraction
         if (WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.ASPERIN))
         {
             Instantiate(prefabAsperin, posHomeKnut.position, Quaternion.identity);
-            transform.position = posKioskSeller.position;
-            GoToPosition(NavigationGoal.KIOSK);
+            transform.position = posStash.position;
+            GoToPosition(NavigationGoal.STASH);
         }
         else if (WorldState.Instance.HasKeyEventHappend(WorldState.KeyEvent.LANCELOT_FLYING_HOME))
         {
@@ -85,7 +88,7 @@ public class LancelotInteraction : ItemInteraction
     private void OnWorldReset()
     {
         SetToy(Toy.NONE);
-        transform.position = new Vector3(3.8f, -2.6f, 0);
+        gameObject.transform.position = posStart.position;
         GoToPosition(NavigationGoal.BEGGER);
     }
 
@@ -107,7 +110,7 @@ public class LancelotInteraction : ItemInteraction
             {
                 Instantiate(prefabAsperin, posHomeKnut.position, Quaternion.identity);
                 SetToy(Toy.NONE);
-                GoToPosition(NavigationGoal.KIOSK);
+                GoToPosition(NavigationGoal.STASH);
             }
             else
             {
