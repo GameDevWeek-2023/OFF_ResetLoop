@@ -2534,6 +2534,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4900000, guid: 73635033a1c405843bd2b2ff5f7e3e59, type: 3}
     - target: {fileID: 2432445270560815248, guid: 1601bf55e1360194b82996795b57efa3, type: 3}
+      propertyPath: dialogFileAsperin
+      value: 
+      objectReference: {fileID: 4900000, guid: 26db3d275c752b5418450758eba27ff5, type: 3}
+    - target: {fileID: 2432445270560815248, guid: 1601bf55e1360194b82996795b57efa3, type: 3}
       propertyPath: dialogFileFlowers
       value: 
       objectReference: {fileID: 4900000, guid: 8707282bb1bc9014bbfef98ea5f864b1, type: 3}
