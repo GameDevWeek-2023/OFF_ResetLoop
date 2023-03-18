@@ -226,6 +226,12 @@ MonoBehaviour:
     soundGroup: 0
     loop: 0
     source: {fileID: 0}
+  - name: click
+    clip: {fileID: 8300000, guid: 9288b77c20c464674a2dbd30ecaa7fe6, type: 3}
+    volume: 1
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
   musicTracks:
   - clip: {fileID: 8300000, guid: b99d129b534d64ff8b866ab7926b75c5, type: 3}
     volume: 1
