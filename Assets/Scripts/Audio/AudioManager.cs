@@ -34,6 +34,9 @@ public class AudioManager : MonoBehaviour
 
     private bool mute = false;
     private bool firstCall = true;
+    private bool firstEnterBedRoomThisCycle = true;
+    private bool resetSoundActive = false;
+    private float resetSoundTimePosition;
 
     private void Awake()
     {
@@ -79,11 +82,25 @@ public class AudioManager : MonoBehaviour
         GameEvents.Instance.OnCall += OnCall;
         GameEvents.Instance.OnButtonDialed += OnButtonDialed;
         GameEvents.Instance.OnFootStep += OnFootstep;
-        GameEvents.Instance.OnWorldReset += () => Play("reset");
-        _musicManager.Play();
+        GameEvents.Instance.OnWorldReset += OnWorldReset;
+        GameEvents.Instance.OnDialogueStart += delegate { OnDialogOpened(); };
+        GameEvents.Instance.OnDialogueClosed += OnDialogClosed;
+        GameEvents.Instance.OnTimeChanged += delegate(int time) { if(time == 50) { PlayCycleEndSound(); } };
         OnSceneChange(WorldState.Instance.CurrentScene);
     }
 
+    private void OnWorldReset()
+    {
+        firstEnterBedRoomThisCycle = true;
+        _musicManager.Stop();
+    }
+
+    private void PlayCycleEndSound()
+    {
+        resetSoundActive = true;
+        Play("resetsound");
+    }
+    
     public void OnSceneChange(WorldState.Scene scene)
     {
         foreach (string onlyInThisSceneSound in _onlyInThisSceneSounds)
@@ -91,17 +108,21 @@ public class AudioManager : MonoBehaviour
             StopSound(onlyInThisSceneSound);
         }
         _onlyInThisSceneSounds.Clear();
-        if (scene != WorldState.Scene.Telephone && !firstCall)
+        if (scene != WorldState.Scene.Telephone && !firstEnterBedRoomThisCycle)
         {
             Play("door");
         }
-
-        firstCall = false;
-
+        
         switch (scene)
         {
             case WorldState.Scene.Bedroom:
                 Play("clock");
+                if (firstEnterBedRoomThisCycle)
+                {
+                    Play("gong");
+                    firstEnterBedRoomThisCycle = false;
+                    _musicManager.Play();
+                }
                 break;
             case WorldState.Scene.Street:
                 Play("cityambience", WorldState.Instance.Time);
@@ -109,6 +130,8 @@ public class AudioManager : MonoBehaviour
             case WorldState.Scene.Telephone:
                 break;
             case WorldState.Scene.End:
+                resetSoundActive = false; // its still playing but variable isn't needed at that point
+                resetSoundTimePosition = 0f;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
@@ -198,6 +221,23 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PauseSound(string name)
+    {
+        Sound soundToPlay = Array.Find(sounds, sound => sound.name == name);
+        if (soundToPlay == null)
+        {
+            Debug.LogWarning("Sound " + name + " not found");
+        }
+        else
+        {
+            if (soundToPlay.source.isPlaying)
+            {
+                soundToPlay.source.Pause();
+                resetSoundTimePosition = soundToPlay.source.time;
+            }
+        }
+    }
+    
     public void StopSound(string name)
     {
         Sound soundToPlay = Array.Find(sounds, sound => sound.name == name);
@@ -233,4 +273,21 @@ public class AudioManager : MonoBehaviour
         string sound = selection[selectedId];
         Play(sound);
     }
+
+    private void OnDialogOpened()
+    {
+        if (resetSoundActive)
+        {
+            PauseSound("resetsound");
+        }
+    }
+    
+    private void OnDialogClosed()
+    {
+        if (resetSoundActive)
+        {
+            Play("resetsound", resetSoundTimePosition);
+        }
+    }
+    
 }

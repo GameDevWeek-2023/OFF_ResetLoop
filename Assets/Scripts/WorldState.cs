@@ -11,7 +11,7 @@ using static ItemInteraction;
 public class WorldState : MonoBehaviour
 {
     public static WorldState Instance;
-    private int _time = 0;
+    private int _time = 48;
 
     private List<Item> _inventory = new List<Item>();
     private HashSet<Item> _everythingEverywhereAllAtOnce = new HashSet<Item>();
@@ -24,8 +24,8 @@ public class WorldState : MonoBehaviour
     private Dictionary<KeyEvent, bool> _keyeventToActivated = new Dictionary<KeyEvent, bool>();
     private List<KeyEvent> _permanentKeyEvents = new List<KeyEvent>();
     private bool _timeRunning = false;
-    
-    
+
+
     private Scene _currentScene = Scene.Bedroom;
 
     public Scene CurrentScene => _currentScene;
@@ -50,7 +50,8 @@ public class WorldState : MonoBehaviour
         Telephone,
         JonasDebug1,
         JonasDebug2,
-        End
+        End,
+        Reset
     };
 
     public enum KeyEvent
@@ -58,7 +59,7 @@ public class WorldState : MonoBehaviour
         BEGGAR_AWAKE,
         BEER_TAKEN,
         DOG_AVAIABLE,
-        KIOSK_OWNER_GONE, 
+        KIOSK_OWNER_GONE,
         BEGGAR_SAVED
     }
 
@@ -125,6 +126,7 @@ public class WorldState : MonoBehaviour
     {
         switch (scene)
         {
+            case Scene.Reset:
             case Scene.Bedroom:
             case Scene.Street:
             case Scene.Telephone:
@@ -136,17 +138,17 @@ public class WorldState : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
         }
+
         _currentScene = scene;
     }
 
     public void OnWorldReset()
     {
-        Debug.Log("RESET");
         _time = 0;
-        OnSceneChange(Scene.Bedroom);
+        OnSceneChange(Scene.Reset);
         _inventory.Clear();
         _everythingEverywhereAllAtOnce.Clear();
-        List< KeyEvent > keyEventList = _keyeventToActivated.Keys.ToList();
+        List<KeyEvent> keyEventList = _keyeventToActivated.Keys.ToList();
 
         foreach (KeyEvent keyEvent in keyEventList)
         {
@@ -154,10 +156,17 @@ public class WorldState : MonoBehaviour
             {
                 continue;
             }
+
             _keyeventToActivated[keyEvent] = false;
         }
+        Invoke(nameof(LoadBedRoomScene), 3f);
     }
 
+    private void LoadBedRoomScene()
+    {
+        GameEvents.Instance.OnSceneChange(Scene.Bedroom);
+    }
+    
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
     {
         inventoryPanel = GameObject.Find("InventoryPanel");
@@ -249,7 +258,6 @@ public class WorldState : MonoBehaviour
         {
             GameEvents.Instance.OnTimeChanged?.Invoke(_time);
         }
-
     }
 
     private void OnKeyEvent(KeyEvent keyEvent)
@@ -272,6 +280,7 @@ public class WorldState : MonoBehaviour
         float y = mouseCursorSo.MouseCursorImage.height * 0.21f;
         hotSpot = new Vector2(x, y);
         // }
-        if (mouseCursorSo is not null) Cursor.SetCursor(mouseCursorSo.MouseCursorImage, hotSpot, CursorMode.ForceSoftware);
+        if (mouseCursorSo is not null)
+            Cursor.SetCursor(mouseCursorSo.MouseCursorImage, hotSpot, CursorMode.ForceSoftware);
     }
 }
