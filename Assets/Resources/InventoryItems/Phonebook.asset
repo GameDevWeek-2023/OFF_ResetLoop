@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: 17
   dismantledItems: 
-  itemsprite: {fileID: -684126306, guid: b902e2c212a37074bba15748298fbf51, type: 3}
+  itemsprite: {fileID: 21300000, guid: 18f93c3ac287fc148b80fa1d219806b9, type: 3}
   itemDescription: "Telefonbuch mit wichtigen Nummern:\nWetter: 1234, Uhrzeit: 3333,
     Aktienverkauf: 4711. Telefontaste dr\xFCcken!"
