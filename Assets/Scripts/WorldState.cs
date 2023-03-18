@@ -117,7 +117,7 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnKeyEventState += OnKeyEventState;
         GameEvents.Instance.OnMouseCursorChange += OnMouseCursorChange;
         GameEvents.Instance.OnWorldReset += OnWorldReset;
-        GameEvents.Instance.OnTimeChanged += UpdateGuiClock;
+        GameEvents.Instance.OnTimeChanged += delegate { UpdateGuiClock(); }; 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         GameEvents.Instance.OnItemFound(Item.WALKING_STICK_CRUSHED);
@@ -130,19 +130,20 @@ public class WorldState : MonoBehaviour
     {
         switch (scene)
         {
-            case Scene.Reset:
             case Scene.Bedroom:
             case Scene.Street:
             case Scene.Telephone:
+            case Scene.Reset:
             case Scene.End:
             case Scene.JonasDebug1:
             case Scene.JonasDebug2:
                 SceneManager.LoadScene(scene.ToString());
+                UpdateGuiClock();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
         }
-
+        
         _currentScene = scene;
     }
 
@@ -170,12 +171,17 @@ public class WorldState : MonoBehaviour
     private void LoadBedRoomScene()
     {
         GameEvents.Instance.OnSceneChange(Scene.Bedroom);
+        _time = 0;
     }
 
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
     {
         inventoryPanel = GameObject.Find("InventoryPanel");
-        clockText = GameObject.Find("clock").GetComponent<TextMeshProUGUI>();
+        GameObject clock = GameObject.Find("clock");
+        if (clock != null)
+        {
+            clockText = clock.GetComponent<TextMeshProUGUI>();
+        }
         GameObject[] findGameObjectsWithTag = GameObject.FindGameObjectsWithTag("SimpleItemPickup");
         foreach (GameObject simpleItemPickupGO in findGameObjectsWithTag)
         {
@@ -231,22 +237,25 @@ public class WorldState : MonoBehaviour
         }
     }
 
-    private void UpdateGuiClock(int time)
+    private void UpdateGuiClock()
     {
-        int startHour = 9;
-        int endHour = 18;
-        int totalNumberHours = endHour - startHour;
-        float conversionFactor = (float) totalNumberHours / _totalCycleTimeSeconds;
-        int hour = (int) Math.Floor(time * conversionFactor) + startHour;
-        float rest =  time * conversionFactor - (int) Math.Floor(time * conversionFactor);
-        Debug.Log("Rest:" + rest);
-        string minute = "00";
-        if (rest > 0.5)
+        if (clockText != null)
         {
-            minute = "30";
-        }
+            int startHour = 9;
+            int endHour = 18;
+            int totalNumberHours = endHour - startHour;
+            float conversionFactor = (float) totalNumberHours / _totalCycleTimeSeconds;
+            int hour = (int) Math.Floor(_time * conversionFactor) + startHour;
+            float rest = _time * conversionFactor - (int) Math.Floor(_time * conversionFactor);
+            Debug.Log("Rest:" + rest);
+            string minute = "00";
+            if (rest > 0.5)
+            {
+                minute = "30";
+            }
 
-        clockText.text = hour.ToString("D2") + ":" + minute;
+            clockText.text = hour.ToString("D2") + ":" + minute;
+        }
     }
 
 
