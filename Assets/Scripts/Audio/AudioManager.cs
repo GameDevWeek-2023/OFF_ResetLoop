@@ -88,6 +88,8 @@ public class AudioManager : MonoBehaviour
         GameEvents.Instance.OnDialogueStart += delegate { OnDialogOpened(); };
         GameEvents.Instance.OnDialogueClosed += OnDialogClosed;
         GameEvents.Instance.OnKeyEvent += OnKeyEvent;
+        GameEvents.Instance.OnItemClicked += delegate { Play("click"); };
+        GameEvents.Instance.OnItemFound += delegate { Play("itemfound"); };
         GameEvents.Instance.OnTimeChanged += delegate(int time)
         {
             if (time == 50)

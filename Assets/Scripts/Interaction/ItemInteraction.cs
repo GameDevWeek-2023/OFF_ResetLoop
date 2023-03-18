@@ -124,6 +124,7 @@ public abstract class ItemInteraction : MonoBehaviour
 
             GameEvents.Instance.OnInventoryItemConsumed();
             Debug.Log("Clicked on the UI");
+            GameEvents.Instance.OnItemClicked();
         }
     }
 

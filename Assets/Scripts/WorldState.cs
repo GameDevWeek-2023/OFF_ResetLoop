@@ -28,6 +28,9 @@ public class WorldState : MonoBehaviour
     private List<KeyEvent> _permanentKeyEvents = new List<KeyEvent>();
     private bool _timeRunning = false;
     private int _totalCycleTimeSeconds = 60;
+    private bool _dialogueOpen = false;
+
+    public bool DialogueOpen => _dialogueOpen;
 
     private SceneChange _currentScene = new SceneChange(Scene.Bedroom, Scene.Bedroom);
 
@@ -106,14 +109,24 @@ public class WorldState : MonoBehaviour
     private void Start()
     {
         GameEvents.Instance.OnItemFound += OnItemFound;
-        GameEvents.Instance.OnDialogueStart += delegate { StopTime(); };
-        GameEvents.Instance.OnDialogueClosed += StartTime;
+        GameEvents.Instance.OnDialogueStart += delegate
+        {
+            _dialogueOpen = true; StopTime(); 
+        };
+        GameEvents.Instance.OnDialogueClosed += delegate
+        {
+            _dialogueOpen = false; StartTime();
+        };
         GameEvents.Instance.OnInventoryItemSelected += delegate(Item item)
         {
             Debug.Log("Item selected: " + item);
             _currentlySelectedInventoryItem = item;
         };
-        GameEvents.Instance.OnInventoryItemConsumed += delegate { _currentlySelectedInventoryItem = Item.NULL_ITEM; };
+        GameEvents.Instance.OnInventoryItemConsumed += delegate
+        {
+            Debug.Log("Inventory Item Consumed");
+            _currentlySelectedInventoryItem = Item.NULL_ITEM;
+        };
         GameEvents.Instance.OnItemRemoved += OnItemRemoved;
         GameEvents.Instance.OnSceneChange += OnSceneChange;
         GameEvents.Instance.OnRequestSceneChange += OnRequestSceneChange;
@@ -220,6 +233,7 @@ public class WorldState : MonoBehaviour
             GameObject afterTelephonePosition = GameObject.Find("From_Street_Position");
             knut.transform.position = afterTelephonePosition.transform.position;
         }
+        _dialogueOpen = false;
     }
 
     public bool ItemExists(Item item)
@@ -241,9 +255,12 @@ public class WorldState : MonoBehaviour
 
     private void OnItemFound(Item item)
     {
-        _inventory.Add(item);
-        _everythingEverywhereAllAtOnce.Add(item);
-        AddInventoryItemToGui(item);
+        if (!_inventory.Contains(item))
+        {
+            _inventory.Add(item);
+            _everythingEverywhereAllAtOnce.Add(item);
+            AddInventoryItemToGui(item);
+        }
     }
 
     private void OnItemRemoved(Item item)
