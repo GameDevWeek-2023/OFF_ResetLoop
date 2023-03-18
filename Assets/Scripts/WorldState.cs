@@ -29,9 +29,9 @@ public class WorldState : MonoBehaviour
     private bool _timeRunning = false;
     private int _totalCycleTimeSeconds = 60;
 
-    private Scene _currentScene = Scene.Bedroom;
+    private SceneChange _currentScene = new SceneChange(Scene.Bedroom, Scene.Bedroom);
 
-    public Scene CurrentScene => _currentScene;
+    public Scene CurrentScene => _currentScene.NewScene;
 
     public enum MouseCursor
     {
@@ -129,7 +129,7 @@ public class WorldState : MonoBehaviour
 
     private void OnRequestSceneChange(Scene newScene)
     {
-        GameEvents.Instance.OnSceneChange(new SceneChange(_currentScene, newScene));
+        GameEvents.Instance.OnSceneChange(new SceneChange(_currentScene.NewScene, newScene));
     }
 
     public void OnSceneChange(SceneChange sceneChange)
@@ -137,8 +137,8 @@ public class WorldState : MonoBehaviour
         Scene scene = sceneChange.NewScene;
         switch (scene)
         {
-            case Scene.Bedroom:
             case Scene.Street:
+            case Scene.Bedroom:
             case Scene.Telephone:
             case Scene.Reset:
             case Scene.End:
@@ -150,7 +150,7 @@ public class WorldState : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
         }
         
-        _currentScene = scene;
+        _currentScene = sceneChange;
     }
 
     public void OnWorldReset()
@@ -183,12 +183,12 @@ public class WorldState : MonoBehaviour
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
     {
         inventoryPanel = GameObject.Find("InventoryPanel");
-        UpdateGuiClock();
         GameObject clock = GameObject.Find("clock");
         if (clock != null)
         {
             clockText = clock.GetComponent<TextMeshProUGUI>();
         }
+        UpdateGuiClock();
         GameObject[] findGameObjectsWithTag = GameObject.FindGameObjectsWithTag("SimpleItemPickup");
         foreach (GameObject simpleItemPickupGO in findGameObjectsWithTag)
         {
@@ -203,6 +203,22 @@ public class WorldState : MonoBehaviour
         if (!_timeRunning)
         {
             StartTime();
+        }
+
+        if (_currentScene.OldScene == Scene.Telephone && _currentScene.NewScene == Scene.Street)
+        {
+            GameObject knut = GameObject.Find("Knut");
+            GameObject afterTelephonePosition = GameObject.Find("Telefon_Booth_Position");
+            knut.transform.position = afterTelephonePosition.transform.position;
+            Vector3 transformPosition = Camera.main.transform.position;
+            Camera.main.transform.position = new Vector3(13.3f, transformPosition.y, transformPosition.z);
+        }
+
+        if (_currentScene.OldScene == Scene.Street && _currentScene.NewScene == Scene.Bedroom)
+        {
+            GameObject knut = GameObject.Find("Knut");
+            GameObject afterTelephonePosition = GameObject.Find("From_Street_Position");
+            knut.transform.position = afterTelephonePosition.transform.position;
         }
     }
 
