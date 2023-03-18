@@ -40,4 +40,11 @@ public class NewspaperListener : MonoBehaviour
             animator.SetTrigger("Fly");
         }
     }
+
+
+    private void OnDestroy()
+    {
+        GameEvents.Instance.OnKeyEvent -= OnKeyEvent;
+        GameEvents.Instance.OnWorldReset -= OnWorldReset;
+    }
 }
