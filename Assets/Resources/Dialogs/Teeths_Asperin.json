@@ -1,0 +1,141 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Sabrina",
+            "libraryVisible": false,
+            "playPoint": "ichWussteDassDuE",
+            "textSize": 0
+        },
+        "initial": "uhDasTutGutAlleM",
+        "optionMirroring": true,
+        "stitches": {
+            "dieMachtDerVerdr": {
+                "content": [
+                    "Die Macht der Verdrängung! Alkohol hilft dabei. Bring mir auch welchen mit!"
+                ]
+            },
+            "dieSindNurPsycho": {
+                "content": [
+                    "Die sind nur psychosomatisch.",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "okayDuBistTotDei",
+                        "notIfConditions": null,
+                        "option": "Wie meinst du das?"
+                    }
+                ]
+            },
+            "duHastDeinenBRUD": {
+                "content": [
+                    "Du hast deinen BRUDER aus der Firma gedrängt, so dass er jetzt obdachlos auf der Straße steht!",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "dieMachtDerVerdr",
+                        "notIfConditions": null,
+                        "option": "So was würde ich nie tun!"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "wennDuMeinstBlei",
+                        "notIfConditions": null,
+                        "option": "Er hat es verdient!"
+                    }
+                ]
+            },
+            "feiglingAmBesten": {
+                "content": [
+                    "Feigling. Am besten du betrinkst dich und gibst mir auch was ab."
+                ]
+            },
+            "feiglingAmBesten1": {
+                "content": [
+                    "Feigling! Am besten du betrinkst dich... und gibst mir was ab."
+                ]
+            },
+            "ichBernehmeKeine": {
+                "content": [
+                    "Ich übernehme keine Haftung für Risiken und Nebenwirkungen.",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "okayDuBistTotDei",
+                        "notIfConditions": null,
+                        "option": "Komm zum Punkt!"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "feiglingAmBesten1",
+                        "notIfConditions": null,
+                        "option": "Dann lieber nicht."
+                    }
+                ]
+            },
+            "ichWussteDassDuE": {
+                "content": [
+                    "Ich wusste, dass du es nicht wahrhaben willst. Bring mir Alkohol, damit ich es auch verdrängen kann."
+                ]
+            },
+            "okayDuBistTotDei": {
+                "content": [
+                    "Okay. Du bist tot! Dein Geist ist an diese Welt gebunden, bis du Sühne getan hast.",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "ichWussteDassDuE",
+                        "notIfConditions": null,
+                        "option": "So ein Quatsch!"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "duHastDeinenBRUD",
+                        "notIfConditions": null,
+                        "option": "Wofür sollte ich Sühne tun?"
+                    }
+                ]
+            },
+            "uhDasTutGutAlleM": {
+                "content": [
+                    "Uh, das tut gut. Alle meine imaginären Schmerzen sind jetzt weg.",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "willstDuDasWirkl",
+                        "notIfConditions": null,
+                        "option": "Gib mir doch einfach mal sinnvolle Infos!"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "dieSindNurPsycho",
+                        "notIfConditions": null,
+                        "option": "Was ist mit meinen Schmerzen?!"
+                    },
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            },
+            "wennDuMeinstBlei": {
+                "content": [
+                    "Wenn du meinst. Bleib dabei und bring mir Alkohol."
+                ]
+            },
+            "willstDuDasWirkl": {
+                "content": [
+                    "Willst du das wirklich?",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "ichBernehmeKeine",
+                        "notIfConditions": null,
+                        "option": "Ja"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "feiglingAmBesten",
+                        "notIfConditions": null,
+                        "option": "Nein"
+                    }
+                ]
+            }
+        }
+    },
+    "title": "Garry Asperin",
+    "url_key": 153278
+}
