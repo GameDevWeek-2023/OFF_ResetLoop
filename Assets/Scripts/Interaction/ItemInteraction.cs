@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Collider2D))]
 public abstract class ItemInteraction : MonoBehaviour
@@ -25,7 +26,8 @@ public abstract class ItemInteraction : MonoBehaviour
         KIO_COFFEE,
         TEL_PHONE,
         TEL_PHONEBOOK,
-        TEL_MONEY
+        TEL_MONEY,
+        KNUT
     }
 
     // STR_NEWSPAPER, STR_HOMELESS, STR_ALCOHOL, STR_BUSINESSMAN, STR_DOG,
@@ -106,19 +108,23 @@ public abstract class ItemInteraction : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Item currentlySelectedInventoryItem = WorldState.Instance.CurrentlySelectedInventoryItem;
-        if (currentlySelectedInventoryItem == Item.NULL_ITEM)
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log("Null item selected");
-            SpecificMouseDownBehaviour();
-        }
-        else
-        {
-            Debug.Log(" item selected" + currentlySelectedInventoryItem);
-            OnItemDrop(currentlySelectedInventoryItem);
-        }
+            Item currentlySelectedInventoryItem = WorldState.Instance.CurrentlySelectedInventoryItem;
+            if (currentlySelectedInventoryItem == Item.NULL_ITEM)
+            {
+                Debug.Log("Null item selected");
+                SpecificMouseDownBehaviour();
+            }
+            else
+            {
+                Debug.Log(" item selected" + currentlySelectedInventoryItem);
+                OnItemDrop(currentlySelectedInventoryItem);
+            }
 
-        GameEvents.Instance.OnInventoryItemConsumed();
+            GameEvents.Instance.OnInventoryItemConsumed();
+            Debug.Log("Clicked on the UI");
+        }
     }
 
     public void AddToInventory(Item item)

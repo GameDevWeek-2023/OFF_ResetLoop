@@ -13,14 +13,16 @@ namespace Interaction
         [SerializeField] private TextAsset dialogHighMoney;
         [SerializeField] private TextAsset dialogNoStock;
         private SpriteRenderer _spriteRenderer;
+        private Action<TelephoneController.CallType> _instanceOnCall;
 
         protected override void Start()
         {
             base.Start();
-            GameEvents.Instance.OnCall += delegate(TelephoneController.CallType callType)
+            _instanceOnCall = delegate(TelephoneController.CallType callType)
             {
                 if (callType == TelephoneController.CallType.STOCK) OnStockCall();
             };
+            GameEvents.Instance.OnCall += _instanceOnCall;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteRenderer.enabled = false;
         }
@@ -50,5 +52,11 @@ namespace Interaction
                 GameEvents.Instance.OnDialogueStart(dialogNoStock.text, phoneSprite);
             }
         }
+
+        private void OnDisable()
+        {
+            GameEvents.Instance.OnCall -= _instanceOnCall;
+        }
+        
     }
 }

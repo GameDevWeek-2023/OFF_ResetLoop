@@ -15,5 +15,5 @@ MonoBehaviour:
   item: 7
   dismantledItems: 
   itemsprite: {fileID: 875121969, guid: 40d8fdf2308fd3a41a3fbfab77474171, type: 3}
-  itemDescription: "Der kl\xE4gliche Rest des Gehstocks, den das Gebiss zerkleinert
-    hat. Eine gute Gr\xF6\xDFe f\xFCr den Hund."
+  itemDescription: "Der kl\xE4gliche Rest des Gehstocks, zerkleinert durch das Gebiss.
+    Ein perfektes St\xF6ckchen f\xFCr den Hund."

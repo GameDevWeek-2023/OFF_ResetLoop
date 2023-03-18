@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Interaction;
+using model;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -23,6 +24,7 @@ public class AudioManager : MonoBehaviour
     private List<string> _onlyInThisSceneSounds = new List<string>();
 
     private Dictionary<string, string[]> _randomSoundCache = new Dictionary<string, string[]>();
+
     public enum SoundGroup
     {
         Soundeffect,
@@ -34,6 +36,9 @@ public class AudioManager : MonoBehaviour
 
     private bool mute = false;
     private bool firstCall = true;
+    private bool firstEnterBedRoomThisCycle = true;
+    private bool resetSoundActive = false;
+    private float resetSoundTimePosition;
 
     private void Awake()
     {
@@ -79,33 +84,69 @@ public class AudioManager : MonoBehaviour
         GameEvents.Instance.OnCall += OnCall;
         GameEvents.Instance.OnButtonDialed += OnButtonDialed;
         GameEvents.Instance.OnFootStep += OnFootstep;
-        _musicManager.Play();
-        OnSceneChange(WorldState.Instance.CurrentScene);
+        GameEvents.Instance.OnWorldReset += OnWorldReset;
+        GameEvents.Instance.OnDialogueStart += delegate { OnDialogOpened(); };
+        GameEvents.Instance.OnDialogueClosed += OnDialogClosed;
+        GameEvents.Instance.OnKeyEvent += OnKeyEvent;
+        GameEvents.Instance.OnTimeChanged += delegate(int time)
+        {
+            if (time == 50)
+            {
+                PlayCycleEndSound();
+            }
+        };
+        OnSceneChange(new SceneChange(WorldState.Instance.CurrentScene, WorldState.Instance.CurrentScene));
     }
 
-    public void OnSceneChange(WorldState.Scene scene)
+    private void OnWorldReset()
     {
+        firstEnterBedRoomThisCycle = true;
+        _musicManager.Stop();
+    }
+
+    private void PlayCycleEndSound()
+    {
+        resetSoundActive = true;
+        Play("prereset", 0f, false);
+    }
+
+    public void OnSceneChange(SceneChange sceneChange)
+    {
+        WorldState.Scene scene = sceneChange.NewScene;
         foreach (string onlyInThisSceneSound in _onlyInThisSceneSounds)
         {
             StopSound(onlyInThisSceneSound);
         }
+
         _onlyInThisSceneSounds.Clear();
-        if (scene != WorldState.Scene.Telephone && !firstCall)
+        if (scene != WorldState.Scene.Telephone && !firstEnterBedRoomThisCycle)
         {
             Play("door");
         }
-
-        firstCall = false;
 
         switch (scene)
         {
             case WorldState.Scene.Bedroom:
                 Play("clock");
+                if (firstEnterBedRoomThisCycle)
+                {
+                    Play("gong");
+                    firstEnterBedRoomThisCycle = false;
+                    _musicManager.Play();
+                }
+
                 break;
             case WorldState.Scene.Street:
                 Play("cityambience", WorldState.Instance.Time);
                 break;
             case WorldState.Scene.Telephone:
+                break;
+            case WorldState.Scene.End:
+                resetSoundActive = false; // its still playing but variable isn't needed at that point
+                resetSoundTimePosition = 0f;
+                break;
+            case WorldState.Scene.Reset:
+                Play("reset_during", 0f, false);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
@@ -174,10 +215,9 @@ public class AudioManager : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        
     }
-    
-    public void Play(string name, float startTime = 0f)
+
+    public void Play(string name, float startTime = 0f, bool stopWhenLeavingScene = true)
     {
         if (!mute)
         {
@@ -190,7 +230,27 @@ public class AudioManager : MonoBehaviour
             {
                 soundToPlay.source.time = startTime;
                 soundToPlay.source.Play();
-                _onlyInThisSceneSounds.Add(name);
+                if (stopWhenLeavingScene)
+                {
+                    _onlyInThisSceneSounds.Add(name);
+                }
+            }
+        }
+    }
+
+    public void PauseSound(string name)
+    {
+        Sound soundToPlay = Array.Find(sounds, sound => sound.name == name);
+        if (soundToPlay == null)
+        {
+            Debug.LogWarning("Sound " + name + " not found");
+        }
+        else
+        {
+            if (soundToPlay.source.isPlaying)
+            {
+                soundToPlay.source.Pause();
+                resetSoundTimePosition = soundToPlay.source.time;
             }
         }
     }
@@ -218,9 +278,9 @@ public class AudioManager : MonoBehaviour
         if (!_randomSoundCache.ContainsKey(startString))
         {
             _randomSoundCache[startString] = sounds.Where(sound => sound.name.StartsWith(startString))
-                .Select(sound => sound.name).
-                ToArray();
+                .Select(sound => sound.name).ToArray();
         }
+
         playRandomSound(_randomSoundCache[startString]);
     }
 
@@ -229,5 +289,33 @@ public class AudioManager : MonoBehaviour
         int selectedId = Random.Range(0, selection.Length);
         string sound = selection[selectedId];
         Play(sound);
+    }
+
+    private void OnDialogOpened()
+    {
+        if (resetSoundActive)
+        {
+            PauseSound("prereset");
+        }
+    }
+
+    private void OnDialogClosed()
+    {
+        if (resetSoundActive)
+        {
+            Play("prereset", resetSoundTimePosition, false);
+        }
+    }
+
+    private void OnKeyEvent(WorldState.KeyEvent keyEvent)
+    {
+        switch (keyEvent)
+        {
+            case WorldState.KeyEvent.MURDER:
+            case WorldState.KeyEvent.SUICIDE:
+                _musicManager.Stop();
+                Play("death");
+                break;
+        }
     }
 }

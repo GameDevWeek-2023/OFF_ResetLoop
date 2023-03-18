@@ -23,7 +23,7 @@
                         "ifConditions": null,
                         "linkPath": "wennInteressiert",
                         "notIfConditions": null,
-                        "option": "Das Gebiss redet mit mir? Puh, das letzte Glas gestern war nicht gut!"
+                        "option": "Puh, die Halluzination ist hartnäckig!"
                     },
                     {
                         "ifConditions": null,
@@ -49,7 +49,7 @@
             },
             "wennInteressiert": {
                 "content": [
-                    "Wenn interessiert das?! Halt die Klappe, ich möchte weiterschlafen!",
+                    "Die Halluzination würde gerne weiterschlafen!",
                     {
                         "ifConditions": null,
                         "linkPath": "vielZuFrhUndIchH",

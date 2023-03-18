@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Interaction
 {
@@ -22,7 +23,10 @@ namespace Interaction
         
         private void OnMouseDown()
         {
-            GameEvents.Instance.OnSceneChange(sceneToGoTo);
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                GameEvents.Instance.OnRequestSceneChange(sceneToGoTo);
+            }
         }
     }
 }

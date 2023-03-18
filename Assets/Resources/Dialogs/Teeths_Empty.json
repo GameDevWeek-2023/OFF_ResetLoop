@@ -1,0 +1,53 @@
+{
+    "data": {
+        "allowCheckpoints": false,
+        "editorData": {
+            "authorName": "Sabrina",
+            "libraryVisible": false,
+            "playPoint": "irgendwerMussJaM",
+            "textSize": 0
+        },
+        "initial": "rchelhustMeinHal",
+        "optionMirroring": true,
+        "stitches": {
+            "irgendwerMussJaM": {
+                "content": [
+                    "Irgendwer muss ja mit dir reden!"
+                ]
+            },
+            "rchelhustMeinHal": {
+                "content": [
+                    "*röchel**hust* Mein Hals ist ganz trocken. Ich brauche dringend etwas zu trinken.",
+                    {
+                        "ifConditions": null,
+                        "linkPath": "irgendwerMussJaM",
+                        "notIfConditions": null,
+                        "option": "Ein Gebiss redet mit mir?"
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": null,
+                        "notIfConditions": null,
+                        "option": "[Gebiss ignorieren] "
+                    },
+                    {
+                        "ifConditions": null,
+                        "linkPath": "undDavonWillstDu",
+                        "notIfConditions": null,
+                        "option": "Das ist eine kognitive Verzerrung meiner Wahrnehmung."
+                    },
+                    {
+                        "pageNum": 1
+                    }
+                ]
+            },
+            "undDavonWillstDu": {
+                "content": [
+                    "Und davon willst du die kognitive Verzerrung überzeugen?"
+                ]
+            }
+        }
+    },
+    "title": "Garry empty Glas",
+    "url_key": 153264
+}

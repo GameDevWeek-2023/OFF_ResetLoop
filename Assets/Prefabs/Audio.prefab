@@ -196,7 +196,41 @@ MonoBehaviour:
     soundGroup: 2
     loop: 0
     source: {fileID: 0}
-  musicTracks: []
+  - name: resetsound
+    clip: {fileID: 8300000, guid: 708ceb65b964b4a5e9cbea5337d1739c, type: 3}
+    volume: 1
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: gong
+    clip: {fileID: 8300000, guid: 311287cc7bdde485abf07bf67d9c2b36, type: 3}
+    volume: 0.668
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: prereset
+    clip: {fileID: 8300000, guid: 34db251db09c54710a849dc1b3300ec1, type: 3}
+    volume: 1
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: reset_during
+    clip: {fileID: 8300000, guid: f417852988958499d8fd7f83d18d9285, type: 3}
+    volume: 1
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: death
+    clip: {fileID: 8300000, guid: 327d626046290474f81bb04a16b39272, type: 3}
+    volume: 1
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  musicTracks:
+  - clip: {fileID: 8300000, guid: b99d129b534d64ff8b866ab7926b75c5, type: 3}
+    volume: 1
+    MusicScene: 0
+    source: {fileID: 0}
   soundeffectOutput: {fileID: 2523414357410959982, guid: bdba992000bb54c8f99f59286c81d70a, type: 2}
   musicOutput: {fileID: 4036349486229800731, guid: bdba992000bb54c8f99f59286c81d70a, type: 2}
   ambienceOutput: {fileID: 8076789775596360120, guid: bdba992000bb54c8f99f59286c81d70a, type: 2}
