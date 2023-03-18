@@ -87,6 +87,7 @@ public class AudioManager : MonoBehaviour
         GameEvents.Instance.OnWorldReset += OnWorldReset;
         GameEvents.Instance.OnDialogueStart += delegate { OnDialogOpened(); };
         GameEvents.Instance.OnDialogueClosed += OnDialogClosed;
+        GameEvents.Instance.OnKeyEvent += OnKeyEvent;
         GameEvents.Instance.OnTimeChanged += delegate(int time)
         {
             if (time == 50)
@@ -145,7 +146,7 @@ public class AudioManager : MonoBehaviour
                 resetSoundTimePosition = 0f;
                 break;
             case WorldState.Scene.Reset:
-                Play("reset_during",0f, false);
+                Play("reset_during", 0f, false);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
@@ -303,6 +304,18 @@ public class AudioManager : MonoBehaviour
         if (resetSoundActive)
         {
             Play("prereset", resetSoundTimePosition, false);
+        }
+    }
+
+    private void OnKeyEvent(WorldState.KeyEvent keyEvent)
+    {
+        switch (keyEvent)
+        {
+            case WorldState.KeyEvent.MURDER:
+            case WorldState.KeyEvent.SUICIDE:
+                _musicManager.Stop();
+                Play("death");
+                break;
         }
     }
 }

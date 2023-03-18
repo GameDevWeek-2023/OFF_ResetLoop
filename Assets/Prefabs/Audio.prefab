@@ -220,6 +220,12 @@ MonoBehaviour:
     soundGroup: 0
     loop: 0
     source: {fileID: 0}
+  - name: death
+    clip: {fileID: 8300000, guid: 327d626046290474f81bb04a16b39272, type: 3}
+    volume: 1
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
   musicTracks:
   - clip: {fileID: 8300000, guid: b99d129b534d64ff8b866ab7926b75c5, type: 3}
     volume: 1
