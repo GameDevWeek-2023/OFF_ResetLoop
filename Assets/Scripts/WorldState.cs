@@ -11,7 +11,7 @@ using static ItemInteraction;
 public class WorldState : MonoBehaviour
 {
     public static WorldState Instance;
-    private int _time = 48;
+    private int _time = 0;
 
     private List<Item> _inventory = new List<Item>();
     private HashSet<Item> _everythingEverywhereAllAtOnce = new HashSet<Item>();
@@ -21,11 +21,11 @@ public class WorldState : MonoBehaviour
     [SerializeField] private MouseCursorSO[] _mouseCursorArray;
     private InventoryItem[] _inventoryItemScriptableObjects;
     private Dictionary<Item, InventoryItem> _itemToScriptableObject = new Dictionary<Item, InventoryItem>();
-    private Dictionary<KeyEvent, bool> _keyeventToActivated = new Dictionary<KeyEvent, bool>();
+    private Dictionary<KeyEvent, int> _keyeventToActivated = new Dictionary<KeyEvent, int>();
     private List<KeyEvent> _permanentKeyEvents = new List<KeyEvent>();
     private bool _timeRunning = false;
-
-
+    
+    
     private Scene _currentScene = Scene.Bedroom;
 
     public Scene CurrentScene => _currentScene;
@@ -59,8 +59,9 @@ public class WorldState : MonoBehaviour
         BEGGAR_AWAKE,
         BEER_TAKEN,
         DOG_AVAIABLE,
-        KIOSK_OWNER_GONE,
-        BEGGAR_SAVED
+        KIOSK_OWNER_GONE, 
+        BEGGAR_SAVED,
+        GARRY
     }
 
     public Item CurrentlySelectedInventoryItem => _currentlySelectedInventoryItem;
@@ -87,7 +88,7 @@ public class WorldState : MonoBehaviour
 
         foreach (KeyEvent keyEvent in Enum.GetValues(typeof(KeyEvent)))
         {
-            _keyeventToActivated.Add(keyEvent, false);
+            _keyeventToActivated.Add(keyEvent, 0);
         }
 
         _mouseCursorArray = Resources.LoadAll<MouseCursorSO>("MouseCursor");
@@ -109,18 +110,13 @@ public class WorldState : MonoBehaviour
         GameEvents.Instance.OnItemRemoved += OnItemRemoved;
         GameEvents.Instance.OnSceneChange += OnSceneChange;
         GameEvents.Instance.OnKeyEvent += OnKeyEvent;
+        GameEvents.Instance.OnKeyEventState += OnKeyEventState;
         GameEvents.Instance.OnMouseCursorChange += OnMouseCursorChange;
         GameEvents.Instance.OnWorldReset += OnWorldReset;
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         StartTime();
-
-        //TODO Debugging
-        GameEvents.Instance.OnItemFound(Item.MONEY);
-        GameEvents.Instance.OnItemFound(Item.MONEY_RICH);
-        GameEvents.Instance.OnItemFound(Item.FLOWERS);
     }
-
 
     public void OnSceneChange(Scene scene)
     {
@@ -138,7 +134,6 @@ public class WorldState : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
         }
-
         _currentScene = scene;
     }
 
@@ -156,8 +151,7 @@ public class WorldState : MonoBehaviour
             {
                 continue;
             }
-
-            _keyeventToActivated[keyEvent] = false;
+            _keyeventToActivated[keyEvent] = 0;
         }
         Invoke(nameof(LoadBedRoomScene), 3f);
     }
@@ -166,7 +160,7 @@ public class WorldState : MonoBehaviour
     {
         GameEvents.Instance.OnSceneChange(Scene.Bedroom);
     }
-    
+
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)
     {
         inventoryPanel = GameObject.Find("InventoryPanel");
@@ -258,14 +252,25 @@ public class WorldState : MonoBehaviour
         {
             GameEvents.Instance.OnTimeChanged?.Invoke(_time);
         }
+
     }
 
     private void OnKeyEvent(KeyEvent keyEvent)
     {
-        _keyeventToActivated[keyEvent] = true;
+        _keyeventToActivated[keyEvent] = 1;
+    }
+
+    private void OnKeyEventState(KeyEventState keyEventState)
+    {
+        _keyeventToActivated[keyEventState.keyEvent] = keyEventState.state;
     }
 
     public bool HasKeyEventHappend(KeyEvent keyEvent)
+    {
+        return _keyeventToActivated[keyEvent]==1;
+    }
+
+    public int GetKeyeventState(KeyEvent keyEvent)
     {
         return _keyeventToActivated[keyEvent];
     }
@@ -280,7 +285,6 @@ public class WorldState : MonoBehaviour
         float y = mouseCursorSo.MouseCursorImage.height * 0.21f;
         hotSpot = new Vector2(x, y);
         // }
-        if (mouseCursorSo is not null)
-            Cursor.SetCursor(mouseCursorSo.MouseCursorImage, hotSpot, CursorMode.ForceSoftware);
+        if (mouseCursorSo is not null) Cursor.SetCursor(mouseCursorSo.MouseCursorImage, hotSpot, CursorMode.ForceSoftware);
     }
 }
