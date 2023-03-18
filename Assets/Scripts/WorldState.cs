@@ -50,7 +50,8 @@ public class WorldState : MonoBehaviour
         Telephone,
         JonasDebug1,
         JonasDebug2,
-        End
+        End,
+        Reset
     };
 
     public enum KeyEvent
@@ -126,6 +127,7 @@ public class WorldState : MonoBehaviour
     {
         switch (scene)
         {
+            case Scene.Reset:
             case Scene.Bedroom:
             case Scene.Street:
             case Scene.Telephone:
@@ -142,12 +144,11 @@ public class WorldState : MonoBehaviour
 
     public void OnWorldReset()
     {
-        Debug.Log("RESET");
         _time = 0;
-        OnSceneChange(Scene.Bedroom);
+        OnSceneChange(Scene.Reset);
         _inventory.Clear();
         _everythingEverywhereAllAtOnce.Clear();
-        List< KeyEvent > keyEventList = _keyeventToActivated.Keys.ToList();
+        List<KeyEvent> keyEventList = _keyeventToActivated.Keys.ToList();
 
         foreach (KeyEvent keyEvent in keyEventList)
         {
@@ -157,6 +158,12 @@ public class WorldState : MonoBehaviour
             }
             _keyeventToActivated[keyEvent] = 0;
         }
+        Invoke(nameof(LoadBedRoomScene), 3f);
+    }
+
+    private void LoadBedRoomScene()
+    {
+        GameEvents.Instance.OnSceneChange(Scene.Bedroom);
     }
 
     public void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode sceneMode)

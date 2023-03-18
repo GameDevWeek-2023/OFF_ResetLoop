@@ -196,8 +196,14 @@ MonoBehaviour:
     soundGroup: 2
     loop: 0
     source: {fileID: 0}
-  - name: reset
-    clip: {fileID: 8300000, guid: 62c14f993815a45d59c20ef3dd1912c2, type: 3}
+  - name: resetsound
+    clip: {fileID: 8300000, guid: 708ceb65b964b4a5e9cbea5337d1739c, type: 3}
+    volume: 1
+    soundGroup: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: gong
+    clip: {fileID: 8300000, guid: 311287cc7bdde485abf07bf67d9c2b36, type: 3}
     volume: 1
     soundGroup: 0
     loop: 0
