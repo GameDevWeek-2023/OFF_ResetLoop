@@ -71,7 +71,8 @@ public class WorldState : MonoBehaviour
         ASPERIN, 
         LANCELOT_FLYING_HOME,
         SUICIDE,
-        MURDER
+        MURDER,
+        MONEY_DROPPED
     }
 
     public Item CurrentlySelectedInventoryItem => _currentlySelectedInventoryItem;
@@ -115,7 +116,11 @@ public class WorldState : MonoBehaviour
         };
         GameEvents.Instance.OnDialogueClosed += delegate
         {
-            _dialogueOpen = false; StartTime();
+            _dialogueOpen = false;
+            if (!HasKeyEventHappend(KeyEvent.LANCELOT_FLYING_HOME))
+            {
+                StartTime();
+            }
         };
         GameEvents.Instance.OnInventoryItemSelected += delegate(Item item)
         {
@@ -213,7 +218,7 @@ public class WorldState : MonoBehaviour
         }
 
         LoadFullInventory();
-        if (!_timeRunning)
+        if (!_timeRunning || !HasKeyEventHappend(KeyEvent.LANCELOT_FLYING_HOME))
         {
             StartTime();
         }
