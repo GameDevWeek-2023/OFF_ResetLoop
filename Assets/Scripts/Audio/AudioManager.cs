@@ -149,6 +149,8 @@ public class AudioManager : MonoBehaviour
                 break;
             case WorldState.Scene.Reset:
                 Play("reset_during", 0f, false);
+                resetSoundActive = false; // its still playing but variable isn't needed at that point
+                resetSoundTimePosition = 0f;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(scene), scene, null);
