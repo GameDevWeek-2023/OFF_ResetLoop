@@ -218,9 +218,12 @@ public class WorldState : MonoBehaviour
         }
 
         LoadFullInventory();
-        if (!_timeRunning || !HasKeyEventHappend(KeyEvent.LANCELOT_FLYING_HOME))
+        if (!_timeRunning)
         {
-            StartTime();
+            if (!HasKeyEventHappend(KeyEvent.LANCELOT_FLYING_HOME))
+            {
+                StartTime();
+            }
         }
 
         if (_currentScene.OldScene == Scene.Telephone && _currentScene.NewScene == Scene.Street)
