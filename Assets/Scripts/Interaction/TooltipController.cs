@@ -17,9 +17,7 @@ public class TooltipController : MonoBehaviour
         {
             Instance = this;
         }
-       
         UpdateTooltipGameObject();
-
     }
 
     private void Update()
