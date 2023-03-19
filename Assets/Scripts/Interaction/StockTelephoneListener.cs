@@ -15,6 +15,9 @@ namespace Interaction
         private SpriteRenderer _spriteRenderer;
         private Action<TelephoneController.CallType> _instanceOnCall;
 
+        private enum State { NO_MONEY = 0, LITTLE_MONEY = 1, MUCH_MONEY = 2 }
+        private State state;
+
         protected override void Start()
         {
             base.Start();
@@ -25,6 +28,24 @@ namespace Interaction
             GameEvents.Instance.OnCall += _instanceOnCall;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteRenderer.enabled = false;
+
+
+            state = (State) WorldState.Instance.GetKeyeventState(WorldState.KeyEvent.GARRY);
+
+            switch (state)
+            {
+                case State.LITTLE_MONEY:
+                    _spriteRenderer.sprite = lowMoneySprite;
+                    _spriteRenderer.enabled = true;
+                    clickable = true;
+                    break;
+                case State.MUCH_MONEY:
+                    _spriteRenderer.sprite = highMoneySprite;
+                    _spriteRenderer.enabled = true;
+                    clickable = true;
+                    break;
+            }
+            
         }
 
         private void OnStockCall()
@@ -37,12 +58,14 @@ namespace Interaction
                     item = Item.MONEY;
                     spriteRenderer.sprite = lowMoneySprite;
                     GameEvents.Instance.OnDialogueStart(dialogLowMoney.text, phoneSprite);
+                    GameEvents.Instance.OnKeyEventState?.Invoke(new KeyEventState(WorldState.KeyEvent.GARRY, (int)State.LITTLE_MONEY));
                 }
                 else
                 {
                     item = Item.MONEY_RICH;
                     spriteRenderer.sprite = highMoneySprite;
                     GameEvents.Instance.OnDialogueStart(dialogHighMoney.text, phoneSprite);
+                    GameEvents.Instance.OnKeyEventState?.Invoke(new KeyEventState(WorldState.KeyEvent.GARRY, (int)State.MUCH_MONEY));
                 }
                 clickable = true;
                 spriteRenderer.enabled = true;
