@@ -882,7 +882,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.9968553, g: 0.9980782, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.20966668, g: 0.28050002, b: 0.34, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2056,6 +2056,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6491749428920138957, guid: b68690048d1f81248bf8f400d0748ef7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8687236720148497064, guid: b68690048d1f81248bf8f400d0748ef7, type: 3}
       propertyPath: m_Name
       value: Canvas
